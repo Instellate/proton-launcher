@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Proton Launcher
+Exec=proton-launcher
+Icon=kde
+Type=Application
+Terminal=false
+Categories=Games

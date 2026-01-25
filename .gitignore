@@ -1,0 +1,9 @@
+# Build files
+cmake-build-*
+build
+build-*
+
+# IDE Configs
+.idea
+.cache
+.qmlls.ini

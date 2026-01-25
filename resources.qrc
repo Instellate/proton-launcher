@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>resources/migrations/2026-01-25-10-45-initial.sql</file>
+    </qresource>
+</RCC>
