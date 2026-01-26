@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="48"
+   height="48"
+   viewBox="0 0 48 48"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="proton-launcher.svg"
+   inkscape:version="1.4.3 (0d15f75042, 2025-12-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="16.229167"
+     inkscape:cx="24"
+     inkscape:cy="24"
+     inkscape:window-width="1920"
+     inkscape:window-height="1008"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1" />
+  <defs
+     id="defs1" />
+  <g
+     id="layer1">
+    <path
+       id="text1"
+       style="font-size:49.1272px;font-family:'Adwaita Sans';-inkscape-font-specification:'Adwaita Sans';writing-mode:lr-tb;direction:ltr;vector-effect:non-scaling-stroke;fill:#000000;stroke:none;stroke-width:4.09394;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:5;-inkscape-stroke:hairline"
+       d="M 6.6679688 7.0273438 L 6.6679688 11.300781 L 11.53125 11.300781 L 7.2578125 15.476562 L 7.2578125 40.972656 L 12.121094 40.972656 L 12.121094 28.25 L 17.648438 28.25 L 17.648438 23.974609 L 15.707031 23.974609 L 12.121094 27.660156 L 12.121094 11.300781 L 17.648438 11.300781 L 17.648438 7.0273438 L 6.6679688 7.0273438 z M 25.564453 8.3847656 L 25.564453 26.892578 L 28.480469 23.974609 L 28.480469 11.300781 L 25.564453 8.3847656 z " />
+    <path
+       style="font-size:45.2002px;font-family:Iceberg;-inkscape-font-specification:Iceberg;stroke:none;stroke-width:4.09394;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:5"
+       d="M 39.806551,40.973438 H 19.173139 V 7.0265619 h 4.86359 V 36.699374 h 10.906232 v -4.224937 l 4.86359,-4.814462 z"
+       id="text2"
+       aria-label="L" />
+  </g>
+</svg>

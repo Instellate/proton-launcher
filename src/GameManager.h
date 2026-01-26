@@ -23,22 +23,42 @@
 class GameManager final : public QObject {
     Q_OBJECT
     Q_PROPERTY(QList<GameInfo *> games READ games NOTIFY gamesChanged)
+    Q_PROPERTY(QVariant currentGameRunning READ currentGameRunning NOTIFY currentGameRunningChanged)
+    Q_PROPERTY(QString consoleLogs READ consoleLogs NOTIFY consoleLogsChanged)
     QML_ELEMENT
     QML_SINGLETON
 
     QList<GameInfo *> _games;
+    QVariant _currentGameRunning;
+    QProcess *_gameProcess;
+    QString _consoleLogs;
 
 public:
     explicit GameManager(QObject *parent = nullptr);
 
     ~GameManager() override;
 
-    Q_INVOKABLE QList<GameInfo *> games();
+    [[nodiscard]] QList<GameInfo *> games() const;
+    [[nodiscard]] QVariant currentGameRunning() const;
+    [[nodiscard]] QString consoleLogs() const;
+
+    Q_INVOKABLE void startGame(GameInfo *info);
 
     Q_INVOKABLE void addGame(const QString &name, const QUrl &executableLocation, bool moveGame);
+
+    Q_INVOKABLE void stopGame();
 
     Q_INVOKABLE QVariantMap getProtonInstallations();
 
 Q_SIGNALS:
     void gamesChanged();
+
+    void currentGameRunningChanged();
+
+    void consoleLogsChanged();
+
+private Q_SLOTS:
+    void gameProcessFinished();
+
+    void readChannelAvailable();
 };

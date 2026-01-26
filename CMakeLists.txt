@@ -110,5 +110,8 @@ target_include_directories(proton-launcher PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/s
 
 install(TARGETS proton-launcher ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 install(PROGRAMS xyz.instellate.proton-launcher.desktop DESTINATION ${KDE_INSTALL_APPDIR})
+install(FILES 
+    icons/xyz.instellate.proton-launcher.svg 
+    DESTINATION ${KDE_INSTALL_FULL_DATADIR}/icons/hicolor/scalable/apps/)
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)

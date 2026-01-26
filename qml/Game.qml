@@ -57,13 +57,15 @@ Kirigami.Page {
 
             GameInfoCard {
                 title: i18nc("@label", "Last Played")
-                description: "Aug 23, 2024"
+                description: Qt.formatDateTime(root.game.lastPlayed) === "" ? i18n("Never played") : Qt.formatDateTime(root.game.lastPlayed, "MMM, d, yyyy")
                 iconSource: "clock"
+
+                Component.onCompleted: console.log(root.game.lastPlayed)
             }
 
             GameInfoCard {
                 title: i18nc("@label", "Amount played")
-                description: "7.7 hours"
+                description: `${Math.ceil(root.game.playTime / 60 / 60 * 10) / 10} hours`
             }
         }
 
@@ -83,6 +85,35 @@ Kirigami.Page {
             Controls.Frame {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
+
+                Flickable {
+                    clip: true
+                    anchors.fill: parent
+
+                    Controls.ScrollBar.vertical: Controls.ScrollBar {}
+                    Controls.ScrollBar.horizontal: Controls.ScrollBar {}
+
+                    contentWidth: consoleText.width
+                    contentHeight: consoleText.height
+                    contentY: contentHeight - height
+                    contentX: contentWidth - width
+
+                    property bool atBottom: contentY >= (contentHeight - height - 1)
+                    property bool lessThan: contentHeight <= height + 1
+
+                    onContentHeightChanged: {
+                        if (lessThan) {
+                            contentY = contentHeight - height;
+                        } else if (atBottom) {
+                            contentY = contentHeight - height;
+                        }
+                    }
+
+                    Controls.Label {
+                        id: consoleText
+                        text: GameManager.consoleLogs
+                    }
+                }
             }
         }
     }
@@ -93,6 +124,24 @@ Kirigami.Page {
 
         text: i18nc("@action", "Play")
         icon.source: "media-playback-start"
+        enabled: GameManager.currentGameRunning == null
+
+        onClicked: {
+            GameManager.startGame(root.game);
+        }
+    }
+
+    Controls.Button {
+        y: Kirigami.Units.gridUnit * root.bannerLength - height - Kirigami.Units.gridUnit * 0.5
+        x: Kirigami.Units.gridUnit * 0.5
+
+        text: i18nc("@action", "Quit")
+        icon.source: "gtk-stop"
+        visible: GameManager.currentGameRunning == root.game.id
+
+        onClicked: {
+            GameManager.stopGame();
+        }
     }
 
     GameSettings {
