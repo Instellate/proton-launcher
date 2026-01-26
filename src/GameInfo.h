@@ -29,6 +29,7 @@ class GameInfo : public QObject {
     Q_PROPERTY(QVariant protonPath READ protonPath WRITE setProtonPath NOTIFY protonPathChanged)
     Q_PROPERTY(qint64 playTime READ playTime WRITE setPlayTime NOTIFY playTimeChanged)
     Q_PROPERTY(QDateTime lastPlayed READ lastPlayed WRITE setLastPlayed NOTIFY lastPlayedChanged)
+    Q_PROPERTY(QString consoleLog READ consoleLog NOTIFY consoleLogChanged)
     QML_ELEMENT
 
     QString _id;
@@ -42,6 +43,7 @@ class GameInfo : public QObject {
     QDateTime _lastPlayed;
 
     bool _updated = false;
+    QString _consoleLog{};
 
     friend class GameManager;
 
@@ -62,6 +64,8 @@ public:
     qint64 playTime() const;
     QDateTime lastPlayed() const;
 
+    QString consoleLog() const;
+
     void setName(const QString &newName);
     void setExecutableLocation(const QString &location);
     void setPrefixLocation(const QString &location);
@@ -81,4 +85,5 @@ Q_SIGNALS:
     void protonPathChanged();
     void playTimeChanged();
     void lastPlayedChanged();
+    void consoleLogChanged();
 };

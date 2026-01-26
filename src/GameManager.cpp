@@ -82,21 +82,22 @@ QList<GameInfo *> GameManager::games() const {
 }
 
 QVariant GameManager::currentGameRunning() const {
-    return this->_currentGameRunning;
-}
+    if (this->_currentGameRunning) {
+        return this->_currentGameRunning->_id;
+    }
 
-QString GameManager::consoleLogs() const {
-    return this->_consoleLogs;
+    return {};
 }
 
 void GameManager::startGame(GameInfo *info) {
-    if (!this->_currentGameRunning.isNull()) {
+    if (this->_currentGameRunning) {
         qFatal() << "Game already running"; // TODO: Not crash
     }
 
     if (!info) {
         qFatal() << "Got null game info";
     }
+    info->_consoleLog = QString();
 
     QDir steamDir = QStandardPaths::writableLocation(QStandardPaths::HomeLocation);
     steamDir.cd(QStringLiteral(".steam"));
@@ -144,7 +145,8 @@ void GameManager::startGame(GameInfo *info) {
     this->_gameProcess->start(bashLocation, arguments);
     qInfo() << "Started game" << info->_name;
 
-    this->_currentGameRunning = info->_id;
+    this->_currentGameRunning = info;
+
     Q_EMIT currentGameRunningChanged();
 
     info->setLastPlayed(QDateTime::currentDateTime());
@@ -266,13 +268,13 @@ void GameManager::gameProcessFinished() {
     const QString output = QString::fromUtf8(this->_gameProcess->readAllStandardOutput());
     const QString error = QString::fromUtf8(this->_gameProcess->readAllStandardError());
 
-    this->_consoleLogs += output;
-    this->_consoleLogs += error;
-    Q_EMIT consoleLogsChanged();
+    this->_currentGameRunning->_consoleLog += output;
+    this->_currentGameRunning->_consoleLog += error;
+    Q_EMIT this->_currentGameRunning->consoleLogChanged();
 
     delete this->_gameProcess;
     this->_gameProcess = nullptr;
-    this->_currentGameRunning = QVariant();
+    this->_currentGameRunning = nullptr;
     Q_EMIT currentGameRunningChanged();
 }
 
@@ -285,8 +287,7 @@ void GameManager::readChannelAvailable() {
     const QString output = QString::fromUtf8(this->_gameProcess->readAllStandardOutput());
     const QString error = QString::fromUtf8(this->_gameProcess->readAllStandardError());
 
-    this->_consoleLogs += output;
-    this->_consoleLogs += error;
-
-    Q_EMIT consoleLogsChanged();
+    this->_currentGameRunning->_consoleLog += output;
+    this->_currentGameRunning->_consoleLog += error;
+    Q_EMIT this->_currentGameRunning->consoleLogChanged();
 }

@@ -98,6 +98,10 @@ QDateTime GameInfo::lastPlayed() const {
     return this->_lastPlayed;
 }
 
+QString GameInfo::consoleLog() const {
+    return this->_consoleLog;
+}
+
 void GameInfo::setName(const QString &newName) {
     this->_name = newName;
     this->_updated = true;

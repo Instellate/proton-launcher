@@ -96,7 +96,6 @@ Kirigami.Page {
                     contentWidth: consoleText.width
                     contentHeight: consoleText.height
                     contentY: contentHeight - height
-                    contentX: contentWidth - width
 
                     property bool atBottom: contentY >= (contentHeight - height - 1)
                     property bool lessThan: contentHeight <= height + 1
@@ -111,7 +110,7 @@ Kirigami.Page {
 
                     Controls.Label {
                         id: consoleText
-                        text: GameManager.consoleLogs
+                        text: root.game.consoleLog
                     }
                 }
             }
