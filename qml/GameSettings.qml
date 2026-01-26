@@ -13,16 +13,31 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>
 
+pragma ComponentBehavior: Bound
+
+import QtQuick
 import org.kde.kirigamiaddons.settings as KSettings
+import org.kde.kirigamiaddons.formcard as FormCard
 
 KSettings.ConfigurationView {
     id: root
+ 
+    required property GameInfo game
 
     modules: [
         KSettings.ConfigurationModule {
-            moduleId: "General"
-            page: () => Qt.createComponent("xyz.instellate.protonLauncher", "GeneralSettings")
+            moduleId: "launch"
             text: i18nc("@action:button", "General")
+            icon.name: "media-playback-start"
+            page: () => Qt.createComponent("xyz.instellate.protonLauncher", "GameSettingsGeneralPage")
+            initialProperties: () => ({ game: root.game })
+        },
+        KSettings.ConfigurationModule {
+            moduleId: "location"
+            text: i18nc("@action:button", "Location")
+            icon.name: "tag-folder"
+            page: () => Qt.createComponent("xyz.instellate.protonLauncher", "GameSettingsLocationPage")
+            initialProperties: () => ({ game: root.game })
         }
     ]
 }

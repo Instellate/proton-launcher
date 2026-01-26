@@ -82,10 +82,14 @@ ecm_target_qml_sources(proton-launcher
         qml/Main.qml
         qml/Library.qml
         qml/Game.qml
+        qml/GameInfoCard.qml
+        qml/GameSettings.qml
+        qml/GameSettingsGeneralPage.qml
+        qml/GameSettingsLocationPage.qml
         qml/AddGameDialog.qml
         qml/Recent.qml
-        qml/settings/SettingsView.qml
-        qml/settings/GeneralSettings.qml
+        qml/Settings.qml
+        qml/SettingsGeneralPage.qml
 )
 
 target_link_libraries(proton-launcher

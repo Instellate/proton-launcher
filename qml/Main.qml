@@ -58,7 +58,7 @@ StatefulApp.StatefulWindow {
     }
 
     application: ProtonLauncherApp {
-        configurationView: SettingsView {}
+        configurationView: Settings {}
     }
 
     pageStack.initialPage: [Qt.createComponent("xyz.instellate.protonLauncher", "Library"), Qt.createComponent("xyz.instellate.protonLauncher", "Recent")]

@@ -18,15 +18,15 @@
 #include <QObject>
 #include <QtQmlIntegration>
 
-class QSqlQuery;
-
 class GameInfo : public QObject {
     Q_OBJECT
-    Q_PROPERTY(QString id READ id WRITE setId NOTIFY idChanged)
+    Q_PROPERTY(QString id READ id NOTIFY idChanged)
     Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
     Q_PROPERTY(QString executableLocation READ executableLocation WRITE setExecutableLocation NOTIFY executableLocationChanged)
     Q_PROPERTY(QString prefixLocation READ prefixLocation WRITE setPrefixLocation NOTIFY prefixLocationChanged)
     Q_PROPERTY(QVariant bannerLocation READ bannerLocation WRITE setBannerLocation NOTIFY bannerLocationChanged)
+    Q_PROPERTY(QVariant launchArguments READ launchArguments WRITE setLaunchArguments NOTIFY launchArgumentsChanged)
+    Q_PROPERTY(QVariant protonPath READ protonPath WRITE setProtonPath NOTIFY protonPathChanged)
     Q_PROPERTY(qint64 playTime READ playTime WRITE setPlayTime NOTIFY playTimeChanged)
     Q_PROPERTY(QDateTime lastPlayed READ lastPlayed WRITE setLastPlayed NOTIFY lastPlayedChanged)
     QML_ELEMENT
@@ -36,13 +36,16 @@ class GameInfo : public QObject {
     QString _executableLocation;
     QString _prefixLocation;
     QVariant _bannerLocation;
-    QString _launchArguments;
+    QVariant _launchArguments;
+    QVariant _protonPath;
     qint64 _playTime = 0;
     QDateTime _lastPlayed;
 
+    bool _updated = false;
+
     friend class GameManager;
 
-    explicit GameInfo(QObject *parent, const QSqlQuery &query);
+    explicit GameInfo(QObject *parent, const class QSqlQuery &query);
 public:
     explicit GameInfo(QObject *parent = nullptr) : QObject(parent) {
     }
@@ -54,16 +57,17 @@ public:
     QString executableLocation() const;
     QString prefixLocation() const;
     QVariant bannerLocation() const;
-    QString launchArguments() const;
+    QVariant launchArguments() const;
+    QVariant protonPath() const;
     qint64 playTime() const;
     QDateTime lastPlayed() const;
 
-    void setId(const QString &newId);
     void setName(const QString &newName);
     void setExecutableLocation(const QString &location);
     void setPrefixLocation(const QString &location);
     void setBannerLocation(const QVariant &location);
-    void setLaunchArguments(const QString &arguments);
+    void setLaunchArguments(const QVariant &arguments);
+    void setProtonPath(const QVariant &path);
     void setPlayTime(qint64 time);
     void setLastPlayed(const QDateTime &date);
 
@@ -74,6 +78,7 @@ Q_SIGNALS:
     void prefixLocationChanged();
     void bannerLocationChanged();
     void launchArgumentsChanged();
+    void protonPathChanged();
     void playTimeChanged();
     void lastPlayedChanged();
 };

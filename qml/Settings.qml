@@ -13,32 +13,16 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>
 
-#pragma once
+import org.kde.kirigamiaddons.settings as KSettings
 
-#include <QObject>
-#include <QtQmlIntegration>
+KSettings.ConfigurationView {
+    id: root
 
-#include "GameInfo.h"
-
-class GameManager final : public QObject {
-    Q_OBJECT
-    Q_PROPERTY(QList<GameInfo *> games READ games NOTIFY gamesChanged)
-    QML_ELEMENT
-    QML_SINGLETON
-
-    QList<GameInfo *> _games;
-
-public:
-    explicit GameManager(QObject *parent = nullptr);
-
-    ~GameManager() override;
-
-    Q_INVOKABLE QList<GameInfo *> games();
-
-    Q_INVOKABLE void addGame(const QString &name, const QUrl &executableLocation, bool moveGame);
-
-    Q_INVOKABLE QVariantMap getProtonInstallations();
-
-Q_SIGNALS:
-    void gamesChanged();
-};
+    modules: [
+        KSettings.ConfigurationModule {
+            moduleId: "General"
+            page: () => Qt.createComponent("xyz.instellate.protonLauncher", "SettingsGeneralPage")
+            text: i18nc("@action:button", "General")
+        }
+    ]
+}

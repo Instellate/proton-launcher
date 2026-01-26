@@ -29,7 +29,6 @@ Kirigami.Page {
     property var addGame: addGameComponent.createObject(root)
 
     function openPage(page: Component, properties) {
-        console.log(applicationWindow().pageStack.depth);
         if (applicationWindow().pageStack.depth > 1) {
             applicationWindow().pageStack.pop();
         }
@@ -62,14 +61,6 @@ Kirigami.Page {
 
         model: ListModel {
             id: itemModel
-
-            Component.onCompleted: {
-                for (const game of GameManager.games) {
-                    itemModel.append({
-                        game
-                    });
-                }
-            }
         }
 
         delegate: Delegates.RoundedItemDelegate {
@@ -118,6 +109,15 @@ Kirigami.Page {
         }
     }
 
+    SortFilterProxyModel {
+        model: itemModel
+        sorters: [
+            RoleSorter {
+                roleName: "name"
+            }
+        ]
+    }
+
     Connections {
         target: GameManager
 
@@ -128,6 +128,14 @@ Kirigami.Page {
                     game
                 });
             }
+        }
+    }
+
+    Component.onCompleted: {
+        for (const game of GameManager.games) {
+            itemModel.append({
+                game
+            });
         }
     }
 }

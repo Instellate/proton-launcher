@@ -4,8 +4,9 @@ CREATE TABLE games
     name                TEXT    NOT NULL,
     executable_location TEXT    NOT NULL,
     prefix_location     TEXT    NOT NULL,
-    banner_location     TEXT             DEFAULT null,
-    launch_arguments    TEXT    NOT NULL DEFAULT '',
+    banner_location     TEXT             DEFAULT NULL,
+    launch_arguments    TEXT             DEFAULT NULL,
+    proton_path         TEXT             DEFAULT NULL,
     play_time           BIGINT  NOT NULL DEFAULT 0,
-    last_played         DATEIME NOT NULL DEFAULT 0,
-);
+    last_played         DATEIME          DEFAULT NULL
+)

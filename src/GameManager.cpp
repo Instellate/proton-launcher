@@ -16,14 +16,53 @@
 #include "GameManager.h"
 
 #include <QSqlDatabase>
+#include <QSqlError>
 #include <QSqlQuery>
+#include <qobject.h>
 
 GameManager::GameManager(QObject *parent) : QObject(parent) {
     auto database = QSqlDatabase::database();
-    QSqlQuery query(QStringLiteral("SELECT * FROM games"));
+    QSqlQuery query(QStringLiteral("SELECT * FROM games ORDER BY last_played DESC"));
 
     while (query.next()) {
         this->_games.emplace_back(new GameInfo(this, query));
+    }
+
+    gamesChanged();
+}
+
+GameManager::~GameManager() {
+    for (const GameInfo *game: this->_games) {
+        if (!game->_updated) {
+            continue;
+        }
+        qDebug() << "Updating game" << game->_name;
+
+        QSqlQuery query;
+        query.prepare(QStringLiteral(
+                "UPDATE games "
+                "SET name = :name,"
+                "executable_location = :exec,"
+                "prefix_location = :prefix,"
+                "banner_location = :banner,"
+                "launch_arguments = :args,"
+                "proton_path = :proton,"
+                "play_time  = :play_time,"
+                "last_played = :last_played "
+                "WHERE id = :id"));
+
+        query.bindValue(QStringLiteral(":id"), game->_id);
+        query.bindValue(QStringLiteral(":name"), game->_name);
+        query.bindValue(QStringLiteral(":exec"), game->_executableLocation);
+        query.bindValue(QStringLiteral(":prefix"), game->_prefixLocation);
+        query.bindValue(QStringLiteral(":banner"), game->_bannerLocation);
+        query.bindValue(QStringLiteral(":args"), game->_launchArguments);
+        query.bindValue(QStringLiteral(":proton"), game->_protonPath);
+        query.bindValue(QStringLiteral(":play_time"), game->_playTime);
+        query.bindValue(QStringLiteral(":last_played"), game->_lastPlayed);
+
+        query.exec();
+        qDebug() << query.lastError();
     }
 }
 
@@ -94,4 +133,37 @@ void GameManager::addGame(
 
     this->_games.emplace_back(gameInfo);
     gamesChanged();
+}
+
+QVariantMap GameManager::getProtonInstallations() {
+    QVariantMap proton;
+
+    QDir steam = QStandardPaths::writableLocation(QStandardPaths::HomeLocation);
+    steam.cd(QStringLiteral(".steam"));
+    steam.cd(QStringLiteral("steam"));
+
+    QDir compatTools = steam.filePath(QStringLiteral("compatibilitytools.d"));
+    for (const QFileInfo &possibleInstall: compatTools.entryInfoList(QDir::Dirs)) {
+        QFileInfo protonFile(QDir(possibleInstall.filePath()).filePath(QStringLiteral("proton")));
+
+        if (!protonFile.exists() || !protonFile.isExecutable()) {
+            continue;
+        }
+
+        proton.insert(possibleInstall.fileName(), protonFile.filePath());
+    }
+
+    QDir steamCommon = steam.filePath(QStringLiteral("steamapps"));
+    steamCommon.cd(QStringLiteral("common"));
+
+    for (const QFileInfo &possibleInstall: steamCommon.entryInfoList(QDir::Dirs)) {
+        QFileInfo protonFile(QDir(possibleInstall.filePath()).filePath(QStringLiteral("proton")));
+        if (!protonFile.exists() || !protonFile.isExecutable()) {
+            continue;
+        }
+
+        proton.insert(possibleInstall.fileName(), protonFile.filePath());
+    }
+
+    return proton;
 }
