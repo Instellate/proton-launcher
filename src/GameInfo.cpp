@@ -266,12 +266,6 @@ void GameInfo::start() {
     const QString bashLocation = QStandardPaths::findExecutable(QStringLiteral("bash"));
     qDebug() << "Bash location:" << bashLocation;
 
-    this->_gameProcess = new QProcess(this);
-    QProcessEnvironment environment = QProcessEnvironment::systemEnvironment();
-    environment.insert(QStringLiteral("STEAM_COMPAT_DATA_PATH"), this->_prefixLocation);
-    environment.insert(QStringLiteral("STEAM_COMPAT_CLIENT_INSTALL_PATH"), steamDir.path());
-    environment.insert(QStringLiteral("SteamAppId"), this->_id);
-
     QString protonExecutable;
     if (!this->_protonPath.isNull()) {
         protonExecutable = this->_protonPath.toString();
@@ -280,6 +274,22 @@ void GameInfo::start() {
     } else {
         protonExecutable = GameManager::getProtonInstallations().first().toString();
     }
+    QString protonPath = QFileInfo(protonExecutable).absolutePath();
+
+    this->_gameProcess = new QProcess(this);
+    QProcessEnvironment environment = QProcessEnvironment::systemEnvironment();
+    environment.insert(QStringLiteral("WINEPREFIX"), this->_prefixLocation);
+    environment.insert(QStringLiteral("STEAM_COMPAT_DATA_PATH"), this->_prefixLocation);
+    environment.insert(QStringLiteral("STEAM_COMPAT_APP_ID"), this->_id);
+    environment.insert(QStringLiteral("STEAM_COMPAT_CLIENT_INSTALL_PATH"), QStringLiteral(""));
+    environment.insert(
+            QStringLiteral("STEAM_COMPAT_SHADER_PATH"),
+            QDir(this->_prefixLocation).filePath(QStringLiteral("shadercache")));
+    environment.insert(
+            QStringLiteral("STEAM_COMPAT_INSTALL_PATH"),
+            QFileInfo(this->_executableLocation).absolutePath());
+    environment.insert(QStringLiteral("STEAM_COMPAT_TOOL_PATHS"), protonPath); // TODO: Install the Steam Linux Runtime and link to that
+    environment.insert(QStringLiteral("STEAM_COMPAT_MOUNTS"), this->_prefixLocation);
 
     const QString executable = this->_executableLocation;
 

@@ -4,9 +4,9 @@ This uses KDE components and has only been tested on KDE, it might not work acro
 
 ## Build
 
-Install dependencies on arch:
+Install dependencies on arch
 ```sh
-$ sudo pacman -S --needed gcc cmake ninja qt6-base kirigami kirigami-addons kconfig ki18n kcoreaddons kiconthemes kcrash
+$ sudo pacman -S --needed gcc cmake ninja extra-cmake-modules qt6-base qqc2-desktop-style kirigami kirigami-addons kconfig ki18n kcoreaddons kiconthemes kcrash
 ```
 
 Building and installation

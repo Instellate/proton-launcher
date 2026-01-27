@@ -55,7 +55,6 @@ find_package(KF6 REQUIRED COMPONENTS
     IconThemes
     Config
     Crash
-    KCMUtils
 )
 
 ecm_find_qmlmodule(org.kde.kirigami REQUIRED)
