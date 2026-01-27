@@ -18,6 +18,7 @@
 #include <QSqlDatabase>
 #include <QSqlError>
 #include <QSqlQuery>
+#include <QThreadPool>
 #include <chrono>
 
 #include "GameManager.h"
@@ -241,9 +242,30 @@ void GameInfo::start() {
 
 // ReSharper disable once CppMemberFunctionMayBeConst
 void GameInfo::stop() {
-    // TODO: Properly close down the game
-    // Seems like Proton spawns the wine server as a forked child process or something?
-    this->_gameProcess->close();
+    QThreadPool::globalInstance()->start([this] {
+        QDir protonPath = this->_gameProcess->arguments().at(3);
+        protonPath.cdUp();
+        protonPath.cd(QStringLiteral("files"));
+        protonPath.cd(QStringLiteral("bin"));
+
+        const QDir prefixPath = this->_prefixLocation;
+
+        QProcess wineServerProcess;
+        QProcessEnvironment environment = QProcessEnvironment::systemEnvironment();
+        environment.insert(
+                QStringLiteral("WINEPREFIX"), prefixPath.filePath(QStringLiteral("pfx")));
+
+        QStringList arguments;
+        arguments << QStringLiteral("-k");
+
+        QProcess process;
+        process.setProgram(protonPath.filePath(QStringLiteral("wineserver")));
+        process.setArguments(arguments);
+        process.setProcessEnvironment(environment);
+        process.start();
+
+        process.waitForFinished();
+    });
 }
 
 void GameInfo::gameProcessFinished() {
@@ -263,9 +285,8 @@ void GameInfo::gameProcessFinished() {
     // played
     std::chrono::seconds timePlayed = std::chrono::duration_cast<std::chrono::seconds>(
             QDateTime::currentDateTime() - this->_lastPlayed.toDateTime());
-    this->_playTime += timePlayed.count();
+    this->setPlayTime(timePlayed.count() + this->_playTime);
     qDebug() << "Play time:" << timePlayed;
-    Q_EMIT playTimeChanged();
 }
 
 void GameInfo::readChannelAvailable() {
