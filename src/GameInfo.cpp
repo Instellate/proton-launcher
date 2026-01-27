@@ -63,6 +63,9 @@ GameInfo::GameInfo(QObject *parent, const QString &id) : QObject(parent) {
     this->_name = query.value(NAME_COLUMN).toString();
     this->_executableLocation = query.value(EXECUTABLE_LOCATION_COLUMN).toString();
     this->_prefixLocation = query.value(PREFIX_LOCATION_COLUMN).toString();
+
+    query.value(BANNER_LOCATION_COLUMN).isNull();
+
     this->_bannerLocation = query.value(BANNER_LOCATION_COLUMN);
     this->_launchArguments = query.value(LAUNCH_ARGUMENTS_COLUMN);
     this->_protonPath = query.value(PROTON_PATH_COLUMN);
@@ -269,10 +272,13 @@ void GameInfo::start() {
     QString protonExecutable;
     if (!this->_protonPath.isNull()) {
         protonExecutable = this->_protonPath.toString();
+        qDebug() << "Using game specific proton version:" << protonExecutable;
     } else if (!Config::defaultProtonVersion().isEmpty()) {
-        protonExecutable = this->_protonPath.toString();
+        protonExecutable = Config::defaultProtonVersion();
+        qDebug() << "Using user default proton version:" << protonExecutable;
     } else {
         protonExecutable = GameManager::getProtonInstallations().first().toString();
+        qDebug() << "Using whatever proton version we can find:" << protonExecutable;
     }
     QString protonPath = QFileInfo(protonExecutable).absolutePath();
 
@@ -294,7 +300,6 @@ void GameInfo::start() {
     const QString executable = this->_executableLocation;
 
     QString command = QStringLiteral("\"${1}\" waitforexitandrun \"${2}\"");
-    qDebug() << "Command:" << command;
 
     if (!this->_launchArguments.isNull()) {
         command = this->_launchArguments.toString().replace(QStringLiteral("%command%"), command);
@@ -303,6 +308,7 @@ void GameInfo::start() {
     QStringList arguments;
     arguments << QStringLiteral("-c") << command << QStringLiteral("_") << protonExecutable
               << executable;
+    qDebug() << "Command:" << arguments;
 
     connect(this->_gameProcess, &QProcess::finished, this, &GameInfo::gameProcessFinished);
     connect(this->_gameProcess,
