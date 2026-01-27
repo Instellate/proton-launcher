@@ -30,13 +30,50 @@ KSettings.ConfigurationView {
 
     readonly property Component general: FormCard.FormCardPage {
         FormCard.FormHeader {
-            title: "Something"
+            title: "Proton"
         }
 
         FormCard.FormCard {
-            FormCard.FormTextFieldDelegate {
-                label: "Test"
+            FormCard.FormComboBoxDelegate {
+                text: i18nc("@label", "Default Proton version")
+                textRole: "name"
+                valueRole: "value"
+                model: proxyModel
+
+                onActivated: {
+                    Config.defaultProtonVersion = currentValue;
+                }
+
+                Component.onCompleted: {
+                    const protonInstalls = GameManager.getProtonInstallations();
+
+                    for (const name in protonInstalls) {
+                        const path = protonInstalls[name];
+                        protonVersionsModel.append({
+                            name,
+                            value: path
+                        });
+
+                        if (path === Config.defaultProtonVersion) {
+                            this.currentValue = path;
+                        }
+                    }
+                }
             }
+        }
+
+        ListModel {
+            id: protonVersionsModel
+        }
+
+        SortFilterProxyModel {
+            id: proxyModel
+            model: protonVersionsModel
+            sorters: [
+                RoleSorter {
+                    roleName: "name"
+                }
+            ]
         }
     }
 }

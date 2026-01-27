@@ -16,17 +16,19 @@
 pragma ComponentBehavior: Bound
 
 import QtQuick
+import QtQuick.Layouts
 import QtQuick.Controls as Controls
 import org.kde.kirigami as Kirigami
 import "utils.js" as Utils
 
-Kirigami.Page {
+Kirigami.ScrollablePage {
     id: root
     title: i18nc("@title", "Recently Played Games")
 
     Flow {
         spacing: Kirigami.Units.largeSpacing
         width: parent.width
+        height: parent.height
 
         Repeater {
             model: proxyModel
@@ -45,6 +47,12 @@ Kirigami.Page {
                     titleAlignment: Qt.AlignLeft | Qt.AlignBottom
                 }
 
+                onClicked: {
+                    Utils.openPage(Qt.createComponent("xyz.instellate.protonLauncher", "Game"), {
+                        game
+                    });
+                }
+
                 actions: [
                     Kirigami.Action {
                         visible: !card.game.isRunning
@@ -60,19 +68,13 @@ Kirigami.Page {
                     }
                 ]
 
-                contentItem: Row {
-                    spacing: Kirigami.Units.largeSpacing
+                contentItem: Item {
+                    implicitHeight: row.implicitHeight
 
                     Row {
+                        id: row
+                        anchors.left: parent.left
                         anchors.leftMargin: Kirigami.Units.largeSpacing
-
-                        Kirigami.Icon {
-                            source: "clock"
-                            anchors.rightMargin: Kirigami.Units.smallSpacing
-                            anchors.verticalCenter: parent.verticalCenter
-                            implicitWidth: Kirigami.Units.iconSizes.large
-                            implicitHeight: Kirigami.Units.iconSizes.large
-                        }
 
                         Column {
                             spacing: 0
@@ -91,7 +93,8 @@ Kirigami.Page {
                     }
 
                     Row {
-                        leftPadding: Kirigami.Units.largeSpacing
+                        anchors.right: parent.right
+                        anchors.rightMargin: Kirigami.Units.largeSpacing
 
                         Rectangle {
                             implicitHeight: Kirigami.Units.iconSizes.large
@@ -104,13 +107,14 @@ Kirigami.Page {
                             anchors.verticalCenter: parent.verticalCenter
 
                             Controls.Label {
-                                text: i18nc("@label", "Last  Played")
+                                text: i18nc("@label", "Amount Played")
                                 elide: Text.ElideRight
                             }
 
                             Controls.Label {
                                 text: Utils.formatDuration(card.game.playTime)
                                 color: Kirigami.Theme.disabledTextColor
+                                anchors.right: parent.right
                             }
                         }
                     }

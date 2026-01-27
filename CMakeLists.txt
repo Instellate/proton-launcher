@@ -55,6 +55,7 @@ find_package(KF6 REQUIRED COMPONENTS
     IconThemes
     Config
     Crash
+    KCMUtils
 )
 
 ecm_find_qmlmodule(org.kde.kirigami REQUIRED)
@@ -62,6 +63,7 @@ ecm_find_qmlmodule(org.kde.kirigamiaddons.formcard REQUIRED)
 ecm_find_qmlmodule(org.kde.kirigamiaddons.settings REQUIRED)
 ecm_find_qmlmodule(org.kde.kirigamiaddons.delegates REQUIRED)
 ecm_find_qmlmodule(org.kde.kirigamiaddons.statefulapp REQUIRED)
+ecm_find_qmlmodule(org.kde.kirigamiaddons.components REQUIRED)
 
 ki18n_install(po)
 
@@ -92,6 +94,17 @@ ecm_target_qml_sources(proton-launcher
         qml/Recent.qml
         qml/Settings.qml
         qml/utils.js
+)
+
+kconfig_target_kcfg_file(proton-launcher
+    FILE config.kcfg
+    CLASS_NAME Config
+    MUTATORS
+    DEFAULT_VALUE_GETTERS
+    SINGLETON
+    GENERATE_PROPERTIES
+    GENERATE_MOC
+    QML_REGISTRATION
 )
 
 target_link_libraries(proton-launcher

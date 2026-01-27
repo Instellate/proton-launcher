@@ -31,7 +31,7 @@ Kirigami.Page {
 
     actions: [
         Kirigami.Action {
-            text: i18nc("@action:settings", "Settings")
+            text: i18nc("@action:settings", "Configure")
             icon.name: "configure"
             onTriggered: settings.open()
         }
@@ -63,7 +63,7 @@ Kirigami.Page {
             }
 
             GameInfoCard {
-                title: i18nc("@label", "Amount played")
+                title: i18nc("@label", "Amount Played")
                 description: Utils.formatDuration(root.game.playTime)
             }
         }

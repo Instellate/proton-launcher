@@ -29,6 +29,7 @@ class GameInfo : public QObject {
     Q_PROPERTY(QVariant protonPath READ protonPath WRITE setProtonPath NOTIFY protonPathChanged)
     Q_PROPERTY(qint64 playTime READ playTime WRITE setPlayTime NOTIFY playTimeChanged)
     Q_PROPERTY(QVariant lastPlayed READ lastPlayed WRITE setLastPlayed NOTIFY lastPlayedChanged)
+    Q_PROPERTY(QVariant iconLocation READ iconLocation WRITE setIconLocation NOTIFY iconLocationChanged)
 
     Q_PROPERTY(QString consoleLog READ consoleLog NOTIFY consoleLogChanged)
     Q_PROPERTY(bool isRunning READ isRunning NOTIFY isRunningChanged)
@@ -43,6 +44,7 @@ class GameInfo : public QObject {
     QVariant _protonPath;
     qint64 _playTime = 0;
     QVariant _lastPlayed;
+    QVariant _iconLocation;
 
     // Variables that should not be saved in the database
     bool _updated = false;
@@ -68,6 +70,7 @@ public:
     QVariant protonPath() const;
     qint64 playTime() const;
     QVariant lastPlayed() const;
+    QVariant iconLocation() const;
 
     QString consoleLog() const;
     bool isRunning() const;
@@ -75,11 +78,12 @@ public:
     void setName(const QString &newName);
     void setExecutableLocation(const QString &location);
     void setPrefixLocation(const QString &location);
-    void setBannerLocation(const QVariant &location);
+    void setBannerLocation(const QVariant &banner);
     void setLaunchArguments(const QVariant &arguments);
     void setProtonPath(const QVariant &path);
     void setPlayTime(qint64 time);
     void setLastPlayed(const QVariant &date);
+    void setIconLocation(const QVariant &icon);
 
     Q_INVOKABLE void start();
     Q_INVOKABLE void stop();
@@ -94,6 +98,7 @@ Q_SIGNALS:
     void protonPathChanged();
     void playTimeChanged();
     void lastPlayedChanged();
+    void iconLocationChanged();
 
     void consoleLogChanged();
     void isRunningChanged();

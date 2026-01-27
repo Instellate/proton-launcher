@@ -20,27 +20,17 @@ import QtQuick.Layouts
 import QtQuick.Controls as Controls
 import org.kde.kirigami as Kirigami
 import org.kde.kirigamiaddons.delegates as Delegates
+import org.kde.kirigamiaddons.components as Components
+import "utils.js" as Utils
 
-Kirigami.Page {
+Kirigami.ScrollablePage {
     id: root
     title: i18nc("@title", "Library")
 
     property Component addGameComponent: Qt.createComponent("xyz.instellate.protonLauncher", "AddGameDialog")
     property var addGame: addGameComponent.createObject(root)
 
-    function openPage(page: Component, properties) {
-        if (applicationWindow().pageStack.depth > 1) {
-            applicationWindow().pageStack.pop();
-        }
-        applicationWindow().pageStack.push(page, properties);
-    }
-
     actions: [
-        Kirigami.Action {
-            text: i18nc("@action:add-game", "Add Game")
-            icon.name: "list-add"
-            onTriggered: root.addGame.open()
-        },
         Kirigami.Action {
             id: openRecent
             text: i18nc("@action:opren-recent", "Recent")
@@ -50,8 +40,13 @@ Kirigami.Page {
             onTriggered: {
                 itemView.currentIndex = -1;
                 openRecent.checked = true;
-                root.openPage(Qt.createComponent("xyz.instellate.protonLauncher", "Recent"));
+                Utils.openPage(Qt.createComponent("xyz.instellate.protonLauncher", "Recent"));
             }
+        },
+        Kirigami.Action {
+            text: i18nc("@action:add-game", "Add Game")
+            icon.name: "list-add"
+            onTriggered: root.addGame.open()
         }
     ]
 
@@ -69,7 +64,22 @@ Kirigami.Page {
             required property int index
 
             contentItem: RowLayout {
+                spacing: Kirigami.Units.largeSpacing
+                Layout.leftMargin: Kirigami.Units.largeSpacing
+
+                Components.Avatar {
+                    source: itemDelegate.game.iconLocation ? "file://" + itemDelegate.game.iconLocation : null // qmllint disable
+                    imageMode: Components.Avatar.AdaptiveImageOrInitals
+                    initialsMode: Components.Avatar.UseInitials
+
+                    name: itemDelegate.game.name 
+                    implicitWidth: Kirigami.Units.iconSizes.small
+                    implicitHeight: Kirigami.Units.iconSizes.small
+                }
+
                 Controls.Label {
+                    Layout.fillWidth: true
+                    Layout.alignment: Qt.AlignLeft
                     text: itemDelegate.game.name
                 }
             }
@@ -81,7 +91,7 @@ Kirigami.Page {
 
                 openRecent.checked = false;
                 ListView.view.currentIndex = index;
-                root.openPage(Qt.createComponent("xyz.instellate.protonLauncher", "Game"), {
+                Utils.openPage(Qt.createComponent("xyz.instellate.protonLauncher", "Game"), {
                     game
                 });
             }

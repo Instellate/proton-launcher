@@ -22,6 +22,7 @@
 #include <chrono>
 
 #include "GameManager.h"
+#include "build/config.h"
 
 #define ID_COLUMN QStringLiteral("id")
 #define NAME_COLUMN QStringLiteral("name")
@@ -32,6 +33,7 @@
 #define PROTON_PATH_COLUMN QStringLiteral("proton_path")
 #define PLAY_TIME_COLUMN QStringLiteral("play_time")
 #define LAST_PLAYED_COLUMN QStringLiteral("last_played")
+#define ICON_LOCATION_COLUMN QStringLiteral("icon_location")
 
 GameInfo::GameInfo(QObject *parent, const QSqlQuery &query) : QObject(parent) {
     this->_id = query.value(ID_COLUMN).toString();
@@ -43,6 +45,7 @@ GameInfo::GameInfo(QObject *parent, const QSqlQuery &query) : QObject(parent) {
     this->_protonPath = query.value(PROTON_PATH_COLUMN);
     this->_playTime = query.value(PLAY_TIME_COLUMN).toLongLong();
     this->_lastPlayed = query.value(LAST_PLAYED_COLUMN);
+    this->_iconLocation = query.value(ICON_LOCATION_COLUMN);
 }
 
 GameInfo::GameInfo(QObject *parent, const QString &id) : QObject(parent) {
@@ -65,6 +68,7 @@ GameInfo::GameInfo(QObject *parent, const QString &id) : QObject(parent) {
     this->_protonPath = query.value(PROTON_PATH_COLUMN);
     this->_playTime = query.value(PLAY_TIME_COLUMN).toLongLong();
     this->_lastPlayed = query.value(LAST_PLAYED_COLUMN);
+    this->_iconLocation = query.value(ICON_LOCATION_COLUMN);
 }
 
 QString GameInfo::id() const {
@@ -102,6 +106,10 @@ QVariant GameInfo::lastPlayed() const {
     return this->_lastPlayed;
 }
 
+QVariant GameInfo::iconLocation() const {
+    return this->_iconLocation;
+}
+
 QString GameInfo::consoleLog() const {
     return this->_consoleLog;
 }
@@ -131,16 +139,43 @@ void GameInfo::setPrefixLocation(const QString &location) {
     Q_EMIT prefixLocationChanged();
 }
 
-void GameInfo::setBannerLocation(const QVariant &location) {
-    if (!location.isNull() && location.metaType() != QMetaType::fromType<QString>()) {
+void GameInfo::setBannerLocation(const QVariant &banner) {
+    if (!banner.isNull() && banner.metaType() != QMetaType::fromType<QUrl>()) {
         qFatal() << "Expected string when setting banner location";
     }
 
-    this->_bannerLocation = location;
+    QDir gallery = QStandardPaths::writableLocation(QStandardPaths::HomeLocation);
+    gallery = gallery.filePath(QStringLiteral(".proton-launcher"));
+    gallery = gallery.filePath(QStringLiteral("gallery"));
+
+    if (!gallery.exists(this->_id)) {
+        gallery.mkpath(this->_id);
+    }
+    gallery.cd(this->_id);
+
+    const QStringList oldBanners = gallery.entryList({QStringLiteral("banner.*")});
+    for (const QString &oldBanner: oldBanners) {
+        QFile file(oldBanner);
+        file.remove();
+    }
+
+    if (banner.isNull()) {
+        this->_bannerLocation = QVariant();
+        this->_updated = true;
+        Q_EMIT bannerLocationChanged();
+        return;
+    }
+
+    const QFileInfo fileInfo(banner.toUrl().toLocalFile());
+    const QString galleryPath = gallery.filePath(QStringLiteral("banner.") + fileInfo.suffix());
+    QFile::copy(fileInfo.absoluteFilePath(), galleryPath);
+
+    this->_bannerLocation = galleryPath;
     this->_updated = true;
 
-    bannerLocationChanged();
+    Q_EMIT bannerLocationChanged();
 }
+
 void GameInfo::setLaunchArguments(const QVariant &arguments) {
     if (!arguments.isNull() && arguments.metaType() != QMetaType::fromType<QString>()) {
         qFatal() << "Expected string when setting launch arguments";
@@ -181,6 +216,42 @@ void GameInfo::setLastPlayed(const QVariant &date) {
     Q_EMIT lastPlayedChanged();
 }
 
+void GameInfo::setIconLocation(const QVariant &icon) {
+    if (!icon.isNull() && icon.metaType() != QMetaType::fromType<QUrl>()) {
+        qFatal() << "Expected string when setting launch arguments";
+    }
+
+    QDir gallery = QStandardPaths::writableLocation(QStandardPaths::HomeLocation);
+    gallery = gallery.filePath(QStringLiteral(".proton-launcher"));
+    gallery = gallery.filePath(QStringLiteral("gallery"));
+
+    if (!gallery.exists(this->_id)) {
+        gallery.mkpath(this->_id);
+    }
+    gallery.cd(this->_id);
+
+    const QStringList oldIcons = gallery.entryList({QStringLiteral("icon.*")});
+    for (const QString &oldIcon: oldIcons) {
+        QFile file(oldIcon);
+        file.remove();
+    }
+
+    if (icon.isNull()) {
+        this->_iconLocation = QVariant();
+        this->_updated = true;
+        Q_EMIT iconLocationChanged();
+        return;
+    }
+
+    const QFileInfo fileInfo(icon.toUrl().toLocalFile());
+    const QString galleryPath = gallery.filePath(QStringLiteral("icon.") + fileInfo.suffix());
+    QFile::copy(fileInfo.absoluteFilePath(), galleryPath);
+
+    this->_iconLocation = galleryPath;
+    this->_updated = true;
+    Q_EMIT iconLocationChanged();
+}
+
 void GameInfo::start() {
     if (this->_gameProcess) {
         qFatal() << "Game already running"; // TODO: Not crash
@@ -203,6 +274,8 @@ void GameInfo::start() {
 
     QString protonExecutable;
     if (!this->_protonPath.isNull()) {
+        protonExecutable = this->_protonPath.toString();
+    } else if (!Config::defaultProtonVersion().isEmpty()) {
         protonExecutable = this->_protonPath.toString();
     } else {
         protonExecutable = GameManager::getProtonInstallations().first().toString();

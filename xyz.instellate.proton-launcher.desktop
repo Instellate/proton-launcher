@@ -4,4 +4,4 @@ Exec=proton-launcher
 Icon=xyz.instellate.proton-launcher
 Type=Application
 Terminal=false
-Categories=Games
+Categories=Game

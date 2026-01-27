@@ -62,6 +62,7 @@ StatefulApp.StatefulWindow {
     }
 
     pageStack.initialPage: [Qt.createComponent("xyz.instellate.protonLauncher", "Library"), Qt.createComponent("xyz.instellate.protonLauncher", "Recent")]
+    pageStack.defaultColumnWidth: 14 * Kirigami.Units.gridUnit
 
     Component {
         id: aboutPage
@@ -70,5 +71,9 @@ StatefulApp.StatefulWindow {
             donateUrl: "http://github.com/sponsors/Instellate"
             getInvolvedUrl: "https://github.com/Instellate/proton-launcher"
         }
+    }
+
+    onClosing: {
+        GameManager.saveSettings();
     }
 }

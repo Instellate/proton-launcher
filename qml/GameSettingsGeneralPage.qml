@@ -44,7 +44,16 @@ FormCard.FormCardPage {
             currentFolder: root.game.bannerLocation === null ? StandardPaths.writableLocation(StandardPaths.PicturesLocation) : new URL("file://" + root.game.bannerLocation)
 
             onAccepted: {
-                root.game.bannerLocation = this.selectedFile.toString().replace("file://", "");
+                root.game.bannerLocation = this.selectedFile;
+            }
+        }
+
+        FormCard.FormFileDelegate {
+            label: i18nc("@label", "Game Icon")
+            currentFolder: root.game.iconLocation === null ? StandardPaths.writableLocation(StandardPaths.PicturesLocation) : new URL("file://" + root.game.iconLocation)
+
+            onAccepted: {
+                root.game.iconLocation = this.selectedFile;
             }
         }
     }
@@ -61,11 +70,17 @@ FormCard.FormCardPage {
             model: proxyModel
 
             onActivated: {
-                if (root.game.protonPath === this.currentValue) {
-                    return;
+                if (root.game.protonPath !== this.currentValue) {
+                    root.game.protonPath = this.currentValue;
                 }
+            }
 
-                root.game.protonPath = this.currentValue;
+            Component.onCompleted: {
+                if (root.game.protonPath) {
+                    currentValue = root.game.protonPath;
+                } else {
+                    currentValue = Config.defaultProtonVersion;
+                }
             }
         }
 
@@ -111,10 +126,6 @@ FormCard.FormCardPage {
                 name,
                 value: path
             });
-
-            if (path === root.game.protonPath) {
-                this.currentValue = path;
-            }
         }
     }
 }

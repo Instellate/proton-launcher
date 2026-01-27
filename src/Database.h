@@ -15,8 +15,6 @@
 
 #pragma once
 
-#include <QString>
-
 struct Database {
     static void initialize();    
 };

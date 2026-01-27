@@ -15,19 +15,20 @@
 
 #include <KAboutData>
 #include <KConfig>
+#include <KCrash>
 #include <KIconTheme>
 #include <KLocalizedString>
 #include <KSharedConfig>
-#include <KCrash>
 #include <QApplication>
+#include <QCommandLineParser>
 #include <QIcon>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QQuickStyle>
 #include <QString>
-#include <QCommandLineParser>
 
 #include "Database.h"
+#include "config.h"
 #include "proton-launcher-version.h"
 
 int main(int argc, char *argv[]) {

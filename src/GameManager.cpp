@@ -20,6 +20,8 @@
 #include <QSqlQuery>
 #include <qobject.h>
 
+#include "build/config.h"
+
 QDir getPrefixPath() {
     const QString storageLocation = QStringLiteral(".proton-launcher");
     const QString games = QStringLiteral("games");
@@ -59,7 +61,8 @@ GameManager::~GameManager() {
                 "launch_arguments = :args,"
                 "proton_path = :proton,"
                 "play_time  = :play_time,"
-                "last_played = :last_played "
+                "last_played = :last_played,"
+                "icon_location = :icon "
                 "WHERE id = :id"));
 
         query.bindValue(QStringLiteral(":id"), game->_id);
@@ -71,6 +74,7 @@ GameManager::~GameManager() {
         query.bindValue(QStringLiteral(":proton"), game->_protonPath);
         query.bindValue(QStringLiteral(":play_time"), game->_playTime);
         query.bindValue(QStringLiteral(":last_played"), game->_lastPlayed);
+        query.bindValue(QStringLiteral(":icon"), game->_iconLocation);
 
         query.exec();
         qDebug() << query.lastError();
@@ -191,3 +195,6 @@ QVariantMap GameManager::getProtonInstallations() {
     return proton;
 }
 
+void GameManager::saveSettings() {
+    Config::self()->save();
+}

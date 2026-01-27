@@ -43,6 +43,8 @@ public:
 
     Q_INVOKABLE static QVariantMap getProtonInstallations();
 
+    Q_INVOKABLE static void saveSettings();
+
 Q_SIGNALS:
     void gamesChanged();
 
