@@ -54,6 +54,7 @@ find_package(KF6 REQUIRED COMPONENTS
     QQC2DesktopStyle
     IconThemes
     Config
+    Crash
 )
 
 ecm_find_qmlmodule(org.kde.kirigami REQUIRED)
@@ -61,6 +62,8 @@ ecm_find_qmlmodule(org.kde.kirigamiaddons.formcard REQUIRED)
 ecm_find_qmlmodule(org.kde.kirigamiaddons.settings REQUIRED)
 ecm_find_qmlmodule(org.kde.kirigamiaddons.delegates REQUIRED)
 ecm_find_qmlmodule(org.kde.kirigamiaddons.statefulapp REQUIRED)
+
+ki18n_install(po)
 
 qt_add_resources(PROTON_LAUNCHER_RESOURCES ${CMAKE_CURRENT_SOURCE_DIR}/resources.qrc)
 
@@ -85,11 +88,9 @@ ecm_target_qml_sources(proton-launcher
         qml/GameInfoCard.qml
         qml/GameSettings.qml
         qml/GameSettingsGeneralPage.qml
-        qml/GameSettingsLocationPage.qml
         qml/AddGameDialog.qml
         qml/Recent.qml
         qml/Settings.qml
-        qml/SettingsGeneralPage.qml
 )
 
 target_link_libraries(proton-launcher
@@ -104,9 +105,13 @@ target_link_libraries(proton-launcher
     KF6::CoreAddons
     KF6::IconThemes
     KF6::ConfigGui
+    KF6::Crash
     KirigamiAddonsStatefulApp
 )
+
 target_include_directories(proton-launcher PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
+
+target_compile_options(proton-launcher PRIVATE -Wall -Wextra)
 
 install(TARGETS proton-launcher ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 install(PROGRAMS xyz.instellate.proton-launcher.desktop DESTINATION ${KDE_INSTALL_APPDIR})

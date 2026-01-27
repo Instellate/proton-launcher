@@ -18,6 +18,9 @@
 #include <QSqlDatabase>
 #include <QSqlError>
 #include <QSqlQuery>
+#include <chrono>
+
+#include "GameManager.h"
 
 #define ID_COLUMN QStringLiteral("id")
 #define NAME_COLUMN QStringLiteral("name")
@@ -38,7 +41,7 @@ GameInfo::GameInfo(QObject *parent, const QSqlQuery &query) : QObject(parent) {
     this->_launchArguments = query.value(LAUNCH_ARGUMENTS_COLUMN);
     this->_protonPath = query.value(PROTON_PATH_COLUMN);
     this->_playTime = query.value(PLAY_TIME_COLUMN).toLongLong();
-    this->_lastPlayed = query.value(LAST_PLAYED_COLUMN).toDateTime();
+    this->_lastPlayed = query.value(LAST_PLAYED_COLUMN);
 }
 
 GameInfo::GameInfo(QObject *parent, const QString &id) : QObject(parent) {
@@ -60,7 +63,7 @@ GameInfo::GameInfo(QObject *parent, const QString &id) : QObject(parent) {
     this->_launchArguments = query.value(LAUNCH_ARGUMENTS_COLUMN);
     this->_protonPath = query.value(PROTON_PATH_COLUMN);
     this->_playTime = query.value(PLAY_TIME_COLUMN).toLongLong();
-    this->_lastPlayed = query.value(LAST_PLAYED_COLUMN).toDateTime();
+    this->_lastPlayed = query.value(LAST_PLAYED_COLUMN);
 }
 
 QString GameInfo::id() const {
@@ -94,12 +97,16 @@ qint64 GameInfo::playTime() const {
     return this->_playTime;
 }
 
-QDateTime GameInfo::lastPlayed() const {
+QVariant GameInfo::lastPlayed() const {
     return this->_lastPlayed;
 }
 
 QString GameInfo::consoleLog() const {
     return this->_consoleLog;
+}
+
+bool GameInfo::isRunning() const {
+    return this->_gameProcess != nullptr;
 }
 
 void GameInfo::setName(const QString &newName) {
@@ -162,9 +169,115 @@ void GameInfo::setPlayTime(const qint64 time) {
     Q_EMIT playTimeChanged();
 }
 
-void GameInfo::setLastPlayed(const QDateTime &date) {
+void GameInfo::setLastPlayed(const QVariant &date) {
+    if (!date.isNull() && date.metaType() != QMetaType::fromType<QDateTime>()) {
+        qFatal() << "Expected string when setting launch arguments";
+    }
+
     this->_lastPlayed = date;
     this->_updated = true;
 
     Q_EMIT lastPlayedChanged();
+}
+
+void GameInfo::start() {
+    if (this->_gameProcess) {
+        qFatal() << "Game already running"; // TODO: Not crash
+    }
+
+    this->_consoleLog = QString();
+
+    QDir steamDir = QStandardPaths::writableLocation(QStandardPaths::HomeLocation);
+    steamDir.cd(QStringLiteral(".steam"));
+    steamDir.cd(QStringLiteral("steam"));
+
+    const QString bashLocation = QStandardPaths::findExecutable(QStringLiteral("bash"));
+    qDebug() << "Bash location:" << bashLocation;
+
+    this->_gameProcess = new QProcess(this);
+    QProcessEnvironment environment = QProcessEnvironment::systemEnvironment();
+    environment.insert(QStringLiteral("STEAM_COMPAT_DATA_PATH"), this->_prefixLocation);
+    environment.insert(QStringLiteral("STEAM_COMPAT_CLIENT_INSTALL_PATH"), steamDir.path());
+    environment.insert(QStringLiteral("SteamAppId"), this->_id);
+
+    QString protonExecutable;
+    if (!this->_protonPath.isNull()) {
+        protonExecutable = this->_protonPath.toString();
+    } else {
+        protonExecutable = GameManager::getProtonInstallations().first().toString();
+    }
+
+    const QString executable = this->_executableLocation;
+
+    QString command = QStringLiteral("\"${1}\" waitforexitandrun \"${2}\"");
+    qDebug() << "Command:" << command;
+
+    if (!this->_launchArguments.isNull()) {
+        command = this->_launchArguments.toString().replace(QStringLiteral("%command%"), command);
+    }
+
+    QStringList arguments;
+    arguments << QStringLiteral("-c") << command << QStringLiteral("_") << protonExecutable
+              << executable;
+
+    connect(this->_gameProcess, &QProcess::finished, this, &GameInfo::gameProcessFinished);
+    connect(this->_gameProcess,
+            &QProcess::readyReadStandardOutput,
+            this,
+            &GameInfo::readChannelAvailable);
+    connect(this->_gameProcess,
+            &QProcess::readyReadStandardError,
+            this,
+            &GameInfo::readChannelAvailable);
+
+    this->_gameProcess->setProcessEnvironment(environment);
+    this->_gameProcess->start(bashLocation, arguments);
+    qInfo() << "Started game" << this->_name << "with process id"
+            << this->_gameProcess->processId();
+    Q_EMIT isRunningChanged();
+
+    this->setLastPlayed(QDateTime::currentDateTime());
+}
+
+// ReSharper disable once CppMemberFunctionMayBeConst
+void GameInfo::stop() {
+    // TODO: Properly close down the game
+    // Seems like Proton spawns the wine server as a forked child process or something?
+    this->_gameProcess->close();
+}
+
+void GameInfo::gameProcessFinished() {
+    const QString output = QString::fromUtf8(this->_gameProcess->readAllStandardOutput());
+    const QString error = QString::fromUtf8(this->_gameProcess->readAllStandardError());
+
+    this->_consoleLog += output;
+    this->_consoleLog += error;
+    Q_EMIT consoleLogChanged();
+
+    delete this->_gameProcess;
+    this->_gameProcess = nullptr;
+    Q_EMIT isRunningChanged();
+
+    // _lastPlayed gets updated to now when the game starts
+    // So when the game stops we can get the time played by just subtracting current time from last
+    // played
+    std::chrono::seconds timePlayed = std::chrono::duration_cast<std::chrono::seconds>(
+            QDateTime::currentDateTime() - this->_lastPlayed.toDateTime());
+    this->_playTime += timePlayed.count();
+    qDebug() << "Play time:" << timePlayed;
+    Q_EMIT playTimeChanged();
+}
+
+void GameInfo::readChannelAvailable() {
+    if (!this->_gameProcess) {
+        qWarning() << "Got null game process";
+        return;
+    }
+
+    const QString output = QString::fromUtf8(this->_gameProcess->readAllStandardOutput());
+    const QString error = QString::fromUtf8(this->_gameProcess->readAllStandardError());
+
+    this->_consoleLog += output;
+    this->_consoleLog += error;
+    Q_EMIT consoleLogChanged();
 }

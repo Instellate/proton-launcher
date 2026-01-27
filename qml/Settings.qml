@@ -13,7 +13,9 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>
 
+import QtQml
 import org.kde.kirigamiaddons.settings as KSettings
+import org.kde.kirigamiaddons.formcard as FormCard
 
 KSettings.ConfigurationView {
     id: root
@@ -21,8 +23,20 @@ KSettings.ConfigurationView {
     modules: [
         KSettings.ConfigurationModule {
             moduleId: "General"
-            page: () => Qt.createComponent("xyz.instellate.protonLauncher", "SettingsGeneralPage")
+            page: () => root.general
             text: i18nc("@action:button", "General")
         }
     ]
+
+    readonly property Component general: FormCard.FormCardPage {
+        FormCard.FormHeader {
+            title: "Something"
+        }
+
+        FormCard.FormCard {
+            FormCard.FormTextFieldDelegate {
+                label: "Test"
+            }
+        }
+    }
 }

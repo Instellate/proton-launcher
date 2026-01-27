@@ -14,19 +14,21 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>
 
 #include <KAboutData>
+#include <KConfig>
 #include <KIconTheme>
 #include <KLocalizedString>
-#include <KConfig>
 #include <KSharedConfig>
+#include <KCrash>
 #include <QApplication>
 #include <QIcon>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QQuickStyle>
 #include <QString>
+#include <QCommandLineParser>
 
-#include "proton-launcher-version.h"
 #include "Database.h"
+#include "proton-launcher-version.h"
 
 int main(int argc, char *argv[]) {
     KIconTheme::initTheme();
@@ -58,19 +60,27 @@ int main(int argc, char *argv[]) {
             QStringLiteral("instellate@instellate.xyz"),
             QStringLiteral("https://instellate.xyz"),
             QUrl(QStringLiteral("https://avatars.githubusercontent.com/u/63735043?v=4")));
-    about.setBugAddress(QStringLiteral("https://github.com/Instellate/proton-launcher/issues").toUtf8());
+    about.setBugAddress(
+            QStringLiteral("https://github.com/Instellate/proton-launcher/issues").toUtf8());
 
     KAboutData::setApplicationData(about);
+    QApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("xyz.instellate.proton-launcher")));
 
     Database::initialize();
 
     QQmlApplicationEngine engine;
     engine.rootContext()->setContextObject(new KLocalizedContext{&engine});
-    engine.loadFromModule("xyz.instellate.protonLauncher", "Main");
 
+    KCrash::initialize();
+    QCommandLineParser parser;
+    about.setupCommandLine(&parser);
+    parser.process(app);
+    about.processCommandLine(&parser);
+
+    engine.loadFromModule("xyz.instellate.protonLauncher", "Main");
     if (engine.rootObjects().isEmpty()) {
         return -1;
     }
 
-    return QCoreApplication::exec();
+    return QApplication::exec();
 }

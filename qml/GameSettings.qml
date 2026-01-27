@@ -21,7 +21,7 @@ import org.kde.kirigamiaddons.formcard as FormCard
 
 KSettings.ConfigurationView {
     id: root
- 
+
     required property GameInfo game
 
     modules: [
@@ -36,8 +36,30 @@ KSettings.ConfigurationView {
             moduleId: "location"
             text: i18nc("@action:button", "Location")
             icon.name: "tag-folder"
-            page: () => Qt.createComponent("xyz.instellate.protonLauncher", "GameSettingsLocationPage")
+            page: () => root.location
             initialProperties: () => ({ game: root.game })
         }
     ]
+
+    readonly property Component location: FormCard.FormCardPage {
+        required property GameInfo game
+
+        FormCard.FormHeader {
+            title: i18nc("@title", "Location")
+        }
+
+        FormCard.FormCard {
+            FormCard.FormButtonDelegate {
+                text: i18nc("@action:button", "Prefix Location")
+                description: root.game.prefixLocation
+                onClicked: Qt.openUrlExternally(new URL("file://" + root.game.prefixLocation))
+            }
+
+            FormCard.FormButtonDelegate {
+                text: i18nc("@action:button", "Executable Location")
+                description: root.game.executableLocation
+                onClicked: Qt.openUrlExternally(new URL("file://" + root.game.executableLocation))
+            }
+        }
+    }
 }

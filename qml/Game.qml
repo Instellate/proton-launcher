@@ -28,6 +28,17 @@ Kirigami.Page {
     required property GameInfo game
     readonly property double bannerLength: 17.5
 
+    function formatDuration(seconds: double): string {
+        const minutes = Math.floor(seconds / 60);
+
+        if (minutes > 180) {
+            const hours = Math.floor(minutes / 60);
+            return i18np("1 hour", "%1 hours", hours);
+        } else {
+            return i18np("1 minute", "%1 minutes", minutes);
+        }
+    }
+
     actions: [
         Kirigami.Action {
             text: i18nc("@action:settings", "Settings")
@@ -57,15 +68,13 @@ Kirigami.Page {
 
             GameInfoCard {
                 title: i18nc("@label", "Last Played")
-                description: Qt.formatDateTime(root.game.lastPlayed) === "" ? i18n("Never played") : Qt.formatDateTime(root.game.lastPlayed, "MMM, d, yyyy")
+                description: !root.game.lastPlayed ? i18n("Never played") : Qt.formatDateTime(root.game.lastPlayed, "MMM, d, yyyy")
                 iconSource: "clock"
-
-                Component.onCompleted: console.log(root.game.lastPlayed)
             }
 
             GameInfoCard {
                 title: i18nc("@label", "Amount played")
-                description: `${Math.ceil(root.game.playTime / 60 / 60 * 10) / 10} hours`
+                description: root.formatDuration(root.game.playTime)
             }
         }
 
@@ -123,10 +132,10 @@ Kirigami.Page {
 
         text: i18nc("@action", "Play")
         icon.source: "media-playback-start"
-        enabled: GameManager.currentGameRunning == null
+        enabled: !game.isRunning
 
         onClicked: {
-            GameManager.startGame(root.game);
+            game.start();
         }
     }
 
@@ -136,10 +145,10 @@ Kirigami.Page {
 
         text: i18nc("@action", "Quit")
         icon.source: "gtk-stop"
-        visible: GameManager.currentGameRunning == root.game.id
+        visible: game.isRunning
 
         onClicked: {
-            GameManager.stopGame();
+            game.stop();
         }
     }
 

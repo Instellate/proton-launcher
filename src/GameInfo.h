@@ -28,8 +28,10 @@ class GameInfo : public QObject {
     Q_PROPERTY(QVariant launchArguments READ launchArguments WRITE setLaunchArguments NOTIFY launchArgumentsChanged)
     Q_PROPERTY(QVariant protonPath READ protonPath WRITE setProtonPath NOTIFY protonPathChanged)
     Q_PROPERTY(qint64 playTime READ playTime WRITE setPlayTime NOTIFY playTimeChanged)
-    Q_PROPERTY(QDateTime lastPlayed READ lastPlayed WRITE setLastPlayed NOTIFY lastPlayedChanged)
+    Q_PROPERTY(QVariant lastPlayed READ lastPlayed WRITE setLastPlayed NOTIFY lastPlayedChanged)
+
     Q_PROPERTY(QString consoleLog READ consoleLog NOTIFY consoleLogChanged)
+    Q_PROPERTY(bool isRunning READ isRunning NOTIFY isRunningChanged)
     QML_ELEMENT
 
     QString _id;
@@ -40,14 +42,17 @@ class GameInfo : public QObject {
     QVariant _launchArguments;
     QVariant _protonPath;
     qint64 _playTime = 0;
-    QDateTime _lastPlayed;
+    QVariant _lastPlayed;
 
+    // Variables that should not be saved in the database
     bool _updated = false;
     QString _consoleLog{};
+    QProcess *_gameProcess = nullptr;
 
     friend class GameManager;
 
     explicit GameInfo(QObject *parent, const class QSqlQuery &query);
+
 public:
     explicit GameInfo(QObject *parent = nullptr) : QObject(parent) {
     }
@@ -62,9 +67,10 @@ public:
     QVariant launchArguments() const;
     QVariant protonPath() const;
     qint64 playTime() const;
-    QDateTime lastPlayed() const;
+    QVariant lastPlayed() const;
 
     QString consoleLog() const;
+    bool isRunning() const;
 
     void setName(const QString &newName);
     void setExecutableLocation(const QString &location);
@@ -73,7 +79,10 @@ public:
     void setLaunchArguments(const QVariant &arguments);
     void setProtonPath(const QVariant &path);
     void setPlayTime(qint64 time);
-    void setLastPlayed(const QDateTime &date);
+    void setLastPlayed(const QVariant &date);
+
+    Q_INVOKABLE void start();
+    Q_INVOKABLE void stop();
 
 Q_SIGNALS:
     void idChanged();
@@ -85,5 +94,12 @@ Q_SIGNALS:
     void protonPathChanged();
     void playTimeChanged();
     void lastPlayedChanged();
+
     void consoleLogChanged();
+    void isRunningChanged();
+
+private Q_SLOTS:
+    void gameProcessFinished();
+
+    void readChannelAvailable();
 };

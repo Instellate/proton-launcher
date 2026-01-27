@@ -39,21 +39,12 @@ public:
     [[nodiscard]] QList<GameInfo *> games() const;
     [[nodiscard]] QVariant currentGameRunning() const;
 
-    Q_INVOKABLE void startGame(GameInfo *info);
-
     Q_INVOKABLE void addGame(const QString &name, const QUrl &executableLocation, bool moveGame);
 
-    Q_INVOKABLE void stopGame();
-
-    Q_INVOKABLE QVariantMap getProtonInstallations();
+    Q_INVOKABLE static QVariantMap getProtonInstallations();
 
 Q_SIGNALS:
     void gamesChanged();
 
     void currentGameRunningChanged();
-
-private Q_SLOTS:
-    void gameProcessFinished();
-
-    void readChannelAvailable();
 };
