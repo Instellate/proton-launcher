@@ -17,7 +17,6 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls as Controls
 import org.kde.kirigami as Kirigami
-import org.kde.kirigamiaddons.formcard as FormCard
 import "utils.js" as Utils
 
 Kirigami.Page {
@@ -47,6 +46,7 @@ Kirigami.Page {
             fillMode: Image.PreserveAspectCrop
             clip: true
             smooth: true
+            asynchronous: true
 
             Layout.fillWidth: true
             Layout.preferredHeight: Kirigami.Units.gridUnit * root.bannerLength

@@ -16,7 +16,6 @@
 pragma ComponentBehavior: Bound
 
 import QtQuick
-import QtQuick.Layouts
 import QtQuick.Controls as Controls
 import org.kde.kirigami as Kirigami
 import "utils.js" as Utils
@@ -48,8 +47,8 @@ Kirigami.ScrollablePage {
                 }
 
                 onClicked: {
-                    Utils.openPage(Qt.createComponent("xyz.instellate.protonLauncher", "Game"), {
-                        game
+                    Utils.openPage(Qt.resolvedUrl("Game.qml"), {
+                        game: card.game
                     });
                 }
 

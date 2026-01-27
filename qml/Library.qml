@@ -40,7 +40,7 @@ Kirigami.ScrollablePage {
             onTriggered: {
                 itemView.currentIndex = -1;
                 openRecent.checked = true;
-                Utils.openPage(Qt.createComponent("xyz.instellate.protonLauncher", "Recent"));
+                Utils.openPage(Qt.resolvedUrl("Recent.qml"));
             }
         },
         Kirigami.Action {
@@ -72,7 +72,7 @@ Kirigami.ScrollablePage {
                     imageMode: Components.Avatar.AdaptiveImageOrInitals
                     initialsMode: Components.Avatar.UseInitials
 
-                    name: itemDelegate.game.name 
+                    name: itemDelegate.game.name
                     implicitWidth: Kirigami.Units.iconSizes.small
                     implicitHeight: Kirigami.Units.iconSizes.small
                 }
@@ -91,8 +91,8 @@ Kirigami.ScrollablePage {
 
                 openRecent.checked = false;
                 ListView.view.currentIndex = index;
-                Utils.openPage(Qt.createComponent("xyz.instellate.protonLauncher", "Game"), {
-                    game
+                Utils.openPage(Qt.resolvedUrl("Game.qml"), {
+                    game: itemDelegate.game
                 });
             }
         }

@@ -61,7 +61,7 @@ StatefulApp.StatefulWindow {
         configurationView: Settings {}
     }
 
-    pageStack.initialPage: [Qt.createComponent("xyz.instellate.protonLauncher", "Library"), Qt.createComponent("xyz.instellate.protonLauncher", "Recent")]
+    pageStack.initialPage: [Qt.resolvedUrl("Library.qml"), Qt.resolvedUrl("Recent.qml")]
     pageStack.defaultColumnWidth: 14 * Kirigami.Units.gridUnit
 
     Component {
