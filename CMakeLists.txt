@@ -91,6 +91,7 @@ ecm_target_qml_sources(proton-launcher
         qml/AddGameDialog.qml
         qml/Recent.qml
         qml/Settings.qml
+        qml/utils.js
 )
 
 target_link_libraries(proton-launcher

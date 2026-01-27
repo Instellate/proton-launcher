@@ -283,7 +283,7 @@ void GameInfo::gameProcessFinished() {
     // _lastPlayed gets updated to now when the game starts
     // So when the game stops we can get the time played by just subtracting current time from last
     // played
-    std::chrono::seconds timePlayed = std::chrono::duration_cast<std::chrono::seconds>(
+    const auto timePlayed = std::chrono::duration_cast<std::chrono::seconds>(
             QDateTime::currentDateTime() - this->_lastPlayed.toDateTime());
     this->setPlayTime(timePlayed.count() + this->_playTime);
     qDebug() << "Play time:" << timePlayed;

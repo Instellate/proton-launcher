@@ -59,9 +59,7 @@ Kirigami.Page {
         id: itemView
         reuseItems: true
 
-        model: ListModel {
-            id: itemModel
-        }
+        model: proxyModel
 
         delegate: Delegates.RoundedItemDelegate {
             id: itemDelegate
@@ -109,7 +107,13 @@ Kirigami.Page {
         }
     }
 
+    ListModel {
+        id: itemModel
+    }
+
     SortFilterProxyModel {
+        id: proxyModel
+
         model: itemModel
         sorters: [
             RoleSorter {
@@ -125,7 +129,8 @@ Kirigami.Page {
             itemModel.clear();
             for (const game of GameManager.games) {
                 itemModel.append({
-                    game
+                    game,
+                    name: game.name
                 });
             }
         }
@@ -134,7 +139,8 @@ Kirigami.Page {
     Component.onCompleted: {
         for (const game of GameManager.games) {
             itemModel.append({
-                game
+                game,
+                name: game.name
             });
         }
     }

@@ -18,6 +18,7 @@ import QtQuick.Layouts
 import QtQuick.Controls as Controls
 import org.kde.kirigami as Kirigami
 import org.kde.kirigamiaddons.formcard as FormCard
+import "utils.js" as Utils
 
 Kirigami.Page {
     id: root
@@ -27,17 +28,6 @@ Kirigami.Page {
 
     required property GameInfo game
     readonly property double bannerLength: 17.5
-
-    function formatDuration(seconds: double): string {
-        const minutes = Math.floor(seconds / 60);
-
-        if (minutes > 180) {
-            const hours = Math.floor(minutes / 60);
-            return i18np("1 hour", "%1 hours", hours);
-        } else {
-            return i18np("1 minute", "%1 minutes", minutes);
-        }
-    }
 
     actions: [
         Kirigami.Action {
@@ -74,7 +64,7 @@ Kirigami.Page {
 
             GameInfoCard {
                 title: i18nc("@label", "Amount played")
-                description: root.formatDuration(root.game.playTime)
+                description: Utils.formatDuration(root.game.playTime)
             }
         }
 
@@ -143,7 +133,7 @@ Kirigami.Page {
         y: Kirigami.Units.gridUnit * root.bannerLength - height - Kirigami.Units.gridUnit * 0.5
         x: Kirigami.Units.gridUnit * 0.5
 
-        text: i18nc("@action", "Quit")
+        text: i18nc("@action", "Stop")
         icon.source: "gtk-stop"
         visible: game.isRunning
 

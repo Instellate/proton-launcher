@@ -58,10 +58,7 @@ FormCard.FormCardPage {
             text: i18nc("@label", "Proton Version")
             textRole: "name"
             valueRole: "value"
-
-            model: ListModel {
-                id: protonVersionsModel
-            }
+            model: proxyModel
 
             onActivated: {
                 if (root.game.protonPath === this.currentValue) {
@@ -70,31 +67,6 @@ FormCard.FormCardPage {
 
                 root.game.protonPath = this.currentValue;
             }
-
-            Component.onCompleted: {
-                const protonInstalls = GameManager.getProtonInstallations();
-
-                for (const name in protonInstalls) {
-                    const path = protonInstalls[name];
-                    protonVersionsModel.append({
-                        name,
-                        value: path
-                    });
-
-                    if (path === root.game.protonPath) {
-                        this.currentValue = path;
-                    }
-                }
-            }
-        }
-
-        SortFilterProxyModel {
-            model: protonVersionsModel
-            sorters: [
-                RoleSorter {
-                    roleName: "name"
-                }
-            ]
         }
 
         FormCard.FormTextFieldDelegate {
@@ -112,7 +84,36 @@ FormCard.FormCardPage {
                 } else {
                     root.game.launchArguments = this.text;
                 }
+            }
+        }
+    }
 
+    ListModel {
+        id: protonVersionsModel
+    }
+
+    SortFilterProxyModel {
+        id: proxyModel
+        model: protonVersionsModel
+        sorters: [
+            RoleSorter {
+                roleName: "name"
+            }
+        ]
+    }
+
+    Component.onCompleted: {
+        const protonInstalls = GameManager.getProtonInstallations();
+
+        for (const name in protonInstalls) {
+            const path = protonInstalls[name];
+            protonVersionsModel.append({
+                name,
+                value: path
+            });
+
+            if (path === root.game.protonPath) {
+                this.currentValue = path;
             }
         }
     }
