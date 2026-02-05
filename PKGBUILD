@@ -21,6 +21,6 @@ build() {
 }
 
 package() {
-    DESTDIR="${srcdir}" cmake --install "${srcdir}/build"
+    DESTDIR="${pkgdir}" cmake --install "${srcdir}/build"
     install -Dm644 "${srcdir}/${pkgname}/LICENSE" "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
 }
