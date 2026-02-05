@@ -22,7 +22,7 @@
 #include <chrono>
 
 #include "GameManager.h"
-#include "build/config.h"
+#include "config.h"
 
 #define ID_COLUMN QStringLiteral("id")
 #define NAME_COLUMN QStringLiteral("name")

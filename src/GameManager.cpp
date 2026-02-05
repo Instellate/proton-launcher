@@ -20,7 +20,7 @@
 #include <QSqlQuery>
 #include <qobject.h>
 
-#include "build/config.h"
+#include "config.h"
 
 QDir getPrefixPath() {
     const QString storageLocation = QStringLiteral(".proton-launcher");
