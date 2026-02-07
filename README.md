@@ -2,6 +2,10 @@
 A simplistic UI program to launch your Windows games on linux through proton.  
 This uses KDE components and has only been tested on KDE, it might not work across other Desktop Environments.
 
+Desktop Environments that it works on outside of KDE:
+- GNOME
+- Niri
+
 ## Building and installing
 
 Arch

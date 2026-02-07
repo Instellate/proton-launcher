@@ -63,9 +63,6 @@ GameInfo::GameInfo(QObject *parent, const QString &id) : QObject(parent) {
     this->_name = query.value(NAME_COLUMN).toString();
     this->_executableLocation = query.value(EXECUTABLE_LOCATION_COLUMN).toString();
     this->_prefixLocation = query.value(PREFIX_LOCATION_COLUMN).toString();
-
-    query.value(BANNER_LOCATION_COLUMN).isNull();
-
     this->_bannerLocation = query.value(BANNER_LOCATION_COLUMN);
     this->_launchArguments = query.value(LAUNCH_ARGUMENTS_COLUMN);
     this->_protonPath = query.value(PROTON_PATH_COLUMN);

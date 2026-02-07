@@ -16,6 +16,7 @@
 import QtQml
 import QtCore
 import org.kde.kirigamiaddons.formcard as FormCard
+import "utils.js" as Utils
 
 FormCard.FormCardPage {
     id: root
@@ -99,6 +100,22 @@ FormCard.FormCardPage {
                 } else {
                     root.game.launchArguments = this.text;
                 }
+            }
+        }
+    }
+
+    FormCard.FormHeader {
+        title: i18nc("@title", "Danger Zone")
+    }
+
+    FormCard.FormCard {
+        FormCard.FormButtonDelegate {
+            text: i18nc("@label", "Remove Game")
+
+            onClicked: {
+                Utils.openPage(Qt.resolvedUrl("Recent.qml"));
+                GameManager.removeGame(root.game.id);
+                root.open()
             }
         }
     }

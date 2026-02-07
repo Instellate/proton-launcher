@@ -39,7 +39,7 @@ FormCard.FormCardDialog {
 
     FormCard.FormSwitchDelegate {
         id: moveGameField
-        checked: true
+        checked: false
         text: i18nc("@label:checkbox", "Move game folder to library")
     }
 

@@ -125,7 +125,7 @@ Kirigami.Page {
         enabled: !game.isRunning
 
         onClicked: {
-            game.start();
+            root.game.start();
         }
     }
 
@@ -135,10 +135,10 @@ Kirigami.Page {
 
         text: i18nc("@action", "Stop")
         icon.source: "gtk-stop"
-        visible: game.isRunning
+        visible: root.game.isRunning
 
         onClicked: {
-            game.stop();
+            root.game.stop();
         }
     }
 

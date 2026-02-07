@@ -198,3 +198,31 @@ QVariantMap GameManager::getProtonInstallations() {
 void GameManager::saveSettings() {
     Config::self()->save();
 }
+
+void GameManager::removeGame(const QString &gameId) {
+    qsizetype size = 0;
+    const GameInfo *game = nullptr;
+
+    for (const GameInfo *possibleGame : this->_games) {
+        if (possibleGame->id() == gameId) {
+            game = possibleGame;
+            break;
+        }
+        ++size;
+    }
+
+    if (!game) {
+        return;
+    }
+
+    QSqlQuery query;
+    query.prepare(QStringLiteral("DELETE FROM games WHERE id = ?"));
+    query.addBindValue(gameId);
+    query.exec();
+
+    QDir prefix{game->_prefixLocation};
+    prefix.removeRecursively();
+
+    this->_games.removeAt(size);
+    Q_EMIT gamesChanged();
+}
