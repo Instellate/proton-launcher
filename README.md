@@ -2,18 +2,12 @@
 A simplistic UI program to launch your Windows games on linux through proton.  
 This uses KDE components and has only been tested on KDE, it might not work across other Desktop Environments.
 
-## Build
+## Building and installing
 
-Install dependencies on arch
+Arch
 ```sh
-$ sudo pacman -S --needed gcc cmake ninja extra-cmake-modules qt6-base qqc2-desktop-style kirigami kirigami-addons kconfig ki18n kcoreaddons kiconthemes kcrash
-```
-
-Building and installation
-```sh
-$ cmake -B build -GNinja -DCMAKE_BUILD_TYPE=Release
-$ cmake --build build
-$ cmake --install build
+$ sudo pacman -S --needed git base-devel
+$ makepkg -si
 ```
 
 ## Q&A

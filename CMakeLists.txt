@@ -13,7 +13,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-cmake_minimum_required(VERSION 4.1)
+cmake_minimum_required(VERSION 3.22)
 project(proton-launcher VERSION "0.0.0")
 
 set(CMAKE_CXX_STANDARD 20)
