@@ -36,7 +36,7 @@ KSettings.ConfigurationView {
         },
         KSettings.ConfigurationModule {
             moduleId: "location"
-            text: i18nc("@action:button", "Location")
+            text: i18nc("Settings page related to various file locations for a game", "Location")
             icon.name: "tag-folder"
             page: () => root.location
             initialProperties: () => ({
@@ -62,7 +62,12 @@ KSettings.ConfigurationView {
             FormCard.FormButtonDelegate {
                 text: i18nc("@action:button", "Executable Location")
                 description: root.game.executableLocation
-                onClicked: Qt.openUrlExternally(new URL("file://" + root.game.executableLocation))
+                onClicked: {
+                    const file = root.game.executableLocation;
+                    const directory = file.split("/");
+                    directory.pop();
+                    Qt.openUrlExternally(new URL("file://" + directory.join("/")));
+                }
             }
         }
     }

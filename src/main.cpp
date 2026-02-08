@@ -52,7 +52,7 @@ int main(int argc, char *argv[]) {
             QStringLiteral("proton-launcher"),
             QStringLiteral("Proton Launcher"),
             QStringLiteral(PROTON_LAUNCHER_VERSION_STRING),
-            i18n("Game library to manage and run applicatios that requires Proton"),
+            i18n("A game launcher and library to manage and run applicatios that requires Proton"),
             KAboutLicense::GPL_V3,
             i18n("© 2026 Instellate"));
     about.addAuthor(
@@ -63,6 +63,9 @@ int main(int argc, char *argv[]) {
             QUrl(QStringLiteral("https://avatars.githubusercontent.com/u/63735043?v=4")));
     about.setBugAddress(
             QStringLiteral("https://github.com/Instellate/proton-launcher/issues").toUtf8());
+    about.setTranslator(
+            i18nc("NAME OF TRANSLATORS", "Your names"),
+            i18nc("EMAIL OF TRANSLATORS", "Your emails"));
 
     KAboutData::setApplicationData(about);
     QApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("xyz.instellate.proton-launcher")));

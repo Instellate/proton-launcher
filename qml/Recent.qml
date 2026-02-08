@@ -80,7 +80,7 @@ Kirigami.ScrollablePage {
                             anchors.verticalCenter: parent.verticalCenter
 
                             Controls.Label {
-                                text: i18nc("@label", "Last  Played")
+                                text: i18nc("@label", "Last Played")
                                 elide: Text.ElideRight
                             }
 

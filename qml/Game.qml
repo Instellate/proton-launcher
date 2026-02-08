@@ -58,7 +58,7 @@ Kirigami.Page {
 
             GameInfoCard {
                 title: i18nc("@label", "Last Played")
-                description: !root.game.lastPlayed ? i18n("Never played") : Qt.formatDateTime(root.game.lastPlayed, "MMM, d, yyyy")
+                description: !root.game.lastPlayed ? i18nc("Game has never been played before", "Never played") : Qt.formatDateTime(root.game.lastPlayed, "MMM, d, yyyy")
                 iconSource: "clock"
             }
 

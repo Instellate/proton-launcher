@@ -24,7 +24,7 @@ StatefulApp.StatefulWindow {
     width: 800
     height: 600
 
-    windowName: i18nc("@title:window", "Proton Launcher")
+    windowName: "Proton Launcher"
 
     globalDrawer: Kirigami.GlobalDrawer {
         isMenu: true
