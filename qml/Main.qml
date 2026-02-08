@@ -73,7 +73,5 @@ StatefulApp.StatefulWindow {
         }
     }
 
-    onClosing: {
-        GameManager.saveSettings();
-    }
+    onClosing: GameManager.saveSettings()
 }

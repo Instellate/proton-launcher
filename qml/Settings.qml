@@ -30,7 +30,7 @@ KSettings.ConfigurationView {
 
     readonly property Component general: FormCard.FormCardPage {
         FormCard.FormHeader {
-            title: "Proton"
+            title: i18nc("@title:section", "Game Launch")
         }
 
         FormCard.FormCard {
@@ -59,6 +59,14 @@ KSettings.ConfigurationView {
                         }
                     }
                 }
+            }
+
+            FormCard.FormTextFieldDelegate {
+                label: i18nc("@label", "Default Launch Arguments")
+                placeholderText: i18n("%command% will be substituded for the run command")
+                text: Config.defaultLaunchArguments
+
+                onTextChanged: Config.defaultLaunchArguments = text
             }
         }
 

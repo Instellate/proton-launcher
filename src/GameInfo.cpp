@@ -259,10 +259,6 @@ void GameInfo::start() {
 
     this->_consoleLog = QString();
 
-    QDir steamDir = QStandardPaths::writableLocation(QStandardPaths::HomeLocation);
-    steamDir.cd(QStringLiteral(".steam"));
-    steamDir.cd(QStringLiteral("steam"));
-
     const QString bashLocation = QStandardPaths::findExecutable(QStringLiteral("bash"));
     qDebug() << "Bash location:" << bashLocation;
 
@@ -300,8 +296,16 @@ void GameInfo::start() {
 
     QString command = QStringLiteral("\"${1}\" waitforexitandrun \"${2}\"");
 
+    QString launchArguments;
     if (!this->_launchArguments.isNull()) {
-        command = this->_launchArguments.toString().replace(QStringLiteral("%command%"), command);
+        launchArguments = this->_launchArguments.toString();
+    } else {
+        launchArguments = Config::defaultLaunchArguments();
+    }
+
+    if (!launchArguments.trimmed().isEmpty()) {
+        command =
+                launchArguments.replace(QStringLiteral("%command%"), command, Qt::CaseInsensitive);
     }
 
     QStringList arguments;

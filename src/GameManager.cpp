@@ -166,8 +166,7 @@ QVariantMap GameManager::getProtonInstallations() {
     QVariantMap proton;
 
     QDir steam = QStandardPaths::writableLocation(QStandardPaths::HomeLocation);
-    steam.cd(QStringLiteral(".steam"));
-    steam.cd(QStringLiteral("steam"));
+    steam.cd(QStringLiteral(".local/share/Steam"));
 
     QDir compatTools = steam.filePath(QStringLiteral("compatibilitytools.d"));
     for (const QFileInfo &possibleInstall: compatTools.entryInfoList(QDir::Dirs)) {
@@ -180,8 +179,7 @@ QVariantMap GameManager::getProtonInstallations() {
         proton.insert(possibleInstall.fileName(), protonFile.filePath());
     }
 
-    QDir steamCommon = steam.filePath(QStringLiteral("steamapps"));
-    steamCommon.cd(QStringLiteral("common"));
+    QDir steamCommon = steam.filePath(QStringLiteral("steamapps/common"));
 
     for (const QFileInfo &possibleInstall: steamCommon.entryInfoList(QDir::Dirs)) {
         QFileInfo protonFile(QDir(possibleInstall.filePath()).filePath(QStringLiteral("proton")));
