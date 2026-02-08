@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: https://github.com/Instellate/proton-launcher/issues\n"
-"POT-Creation-Date: 2026-02-08 13:53+0100\n"
+"POT-Creation-Date: 2026-02-08 14:18+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -216,7 +216,7 @@ msgstr ""
 
 #: src/main.cpp:55
 msgid ""
-"A game launcher and library to manage and run applicatios that requires "
+"A steam-like game launcher and library to manage and run games that requires "
 "Proton"
 msgstr ""
 
