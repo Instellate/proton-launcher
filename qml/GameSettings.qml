@@ -30,14 +30,18 @@ KSettings.ConfigurationView {
             text: i18nc("@action:button", "General")
             icon.name: "media-playback-start"
             page: () => Qt.createComponent("xyz.instellate.protonLauncher", "GameSettingsGeneralPage")
-            initialProperties: () => ({ game: root.game })
+            initialProperties: () => ({
+                        game: root.game
+                    })
         },
         KSettings.ConfigurationModule {
             moduleId: "location"
             text: i18nc("@action:button", "Location")
             icon.name: "tag-folder"
             page: () => root.location
-            initialProperties: () => ({ game: root.game })
+            initialProperties: () => ({
+                        game: root.game
+                    })
         }
     ]
 

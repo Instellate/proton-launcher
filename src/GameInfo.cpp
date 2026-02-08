@@ -291,7 +291,9 @@ void GameInfo::start() {
     environment.insert(
             QStringLiteral("STEAM_COMPAT_INSTALL_PATH"),
             QFileInfo(this->_executableLocation).absolutePath());
-    environment.insert(QStringLiteral("STEAM_COMPAT_TOOL_PATHS"), protonPath); // TODO: Install the Steam Linux Runtime and link to that
+    environment.insert(
+            QStringLiteral("STEAM_COMPAT_TOOL_PATHS"),
+            protonPath); // TODO: Install the Steam Linux Runtime and link to that
     environment.insert(QStringLiteral("STEAM_COMPAT_MOUNTS"), this->_prefixLocation);
 
     const QString executable = this->_executableLocation;

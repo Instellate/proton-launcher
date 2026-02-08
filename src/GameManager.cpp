@@ -199,11 +199,11 @@ void GameManager::saveSettings() {
     Config::self()->save();
 }
 
-void GameManager::removeGame(const QString &gameId) {
+void GameManager::removeGame(const QString &gameId, bool removeGameFolder) {
     qsizetype size = 0;
     const GameInfo *game = nullptr;
 
-    for (const GameInfo *possibleGame : this->_games) {
+    for (const GameInfo *possibleGame: this->_games) {
         if (possibleGame->id() == gameId) {
             game = possibleGame;
             break;
@@ -222,6 +222,12 @@ void GameManager::removeGame(const QString &gameId) {
 
     QDir prefix{game->_prefixLocation};
     prefix.removeRecursively();
+
+    if (removeGameFolder) {
+        QDir execPath = game->executableLocation();
+        execPath.cdUp();
+        execPath.removeRecursively();
+    }
 
     this->_games.removeAt(size);
     Q_EMIT gamesChanged();

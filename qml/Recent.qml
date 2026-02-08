@@ -62,7 +62,7 @@ Kirigami.ScrollablePage {
                     Kirigami.Action {
                         visible: card.game.isRunning
                         text: "Stop game"
-                        icon.source: "gtk-stop"
+                        icon.source: "dialog-cancel"
                         onTriggered: card.game.stop()
                     }
                 ]
@@ -173,12 +173,16 @@ Kirigami.ScrollablePage {
 
         function onGamesChanged() {
             itemModel.clear();
+
             for (const game of GameManager.games) {
-                itemModel.append({
-                    game,
-                    lastPlayed: Number(game.lastPlayed.value)
-                });
+                if (game.lastPlayed) {
+                    itemModel.append({
+                        game,
+                        lastPlayed: new Date(game.lastPlayed)
+                    });
+                }
             }
+            proxyModel.invalidate();
         }
     }
 }

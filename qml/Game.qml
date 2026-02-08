@@ -89,20 +89,25 @@ Kirigami.Page {
                     clip: true
                     anchors.fill: parent
 
-                    Controls.ScrollBar.vertical: Controls.ScrollBar {}
-                    Controls.ScrollBar.horizontal: Controls.ScrollBar {}
+                    Controls.ScrollBar.vertical: Controls.ScrollBar {
+                        id: vertical
+                    }
+                    Controls.ScrollBar.horizontal: Controls.ScrollBar {
+                        id: horizontal
+                    }
 
-                    contentWidth: consoleText.width
-                    contentHeight: consoleText.height
+                    contentWidth: consoleText.width + vertical.width
+                    contentHeight: consoleText.height + horizontal.height + Kirigami.Units.smallSpacing
                     contentY: contentHeight - height
 
-                    property bool atBottom: contentY >= (contentHeight - height - 1)
-                    property bool lessThan: contentHeight <= height + 1
+                    property bool atBottomY: contentY >= (contentHeight - horizontal.height - Kirigami.Units.smallSpacing - height - 1)
+                    property bool lessThan: (contentHeight - horizontal.height - Kirigami.Units.smallSpacing - height - 1) <= height + 1
 
                     onContentHeightChanged: {
                         if (lessThan) {
                             contentY = contentHeight - height;
-                        } else if (atBottom) {
+                            contentX = 0;
+                        } else if (contentY >= (contentHeight - height + 1)) {
                             contentY = contentHeight - height;
                         }
                     }
@@ -134,12 +139,10 @@ Kirigami.Page {
         x: Kirigami.Units.gridUnit * 0.5
 
         text: i18nc("@action", "Stop")
-        icon.source: "gtk-stop"
+        icon.source: "dialog-cancel"
         visible: root.game.isRunning
 
-        onClicked: {
-            root.game.stop();
-        }
+        onClicked: root.game.stop()
     }
 
     GameSettings {

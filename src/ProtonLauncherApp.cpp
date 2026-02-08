@@ -27,4 +27,3 @@ void ProtonLauncherApp::setupActions() {
     QAction *aboutKde = action(QStringLiteral("open_about_kde_page"));
     mainCollection()->removeAction(aboutKde);
 }
-

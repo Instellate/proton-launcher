@@ -20,7 +20,7 @@ import QtQuick.Layouts
 import QtQuick.Controls as Controls
 import org.kde.kirigami as Kirigami
 import org.kde.kirigamiaddons.delegates as Delegates
-import org.kde.kirigamiaddons.components as Components
+import org.kde.kirigamiaddons.components as Addons
 import "utils.js" as Utils
 
 Kirigami.ScrollablePage {
@@ -33,13 +33,13 @@ Kirigami.ScrollablePage {
     actions: [
         Kirigami.Action {
             id: openRecent
+
             text: i18nc("@action:opren-recent", "Recent")
             icon.name: "appointment-new"
             checkable: true
             checked: true
             onTriggered: {
                 itemView.currentIndex = -1;
-                openRecent.checked = true;
                 Utils.openPage(Qt.resolvedUrl("Recent.qml"));
             }
         },
@@ -52,49 +52,68 @@ Kirigami.ScrollablePage {
 
     contentItem: ListView {
         id: itemView
-        reuseItems: true
+        // reuseItems: true
 
         model: proxyModel
 
-        delegate: Delegates.RoundedItemDelegate {
+        delegate: MouseArea {
             id: itemDelegate
-            highlighted: ListView.isCurrentItem
 
             required property GameInfo game
             required property int index
 
-            contentItem: RowLayout {
-                spacing: Kirigami.Units.largeSpacing
-                Layout.leftMargin: Kirigami.Units.largeSpacing
+            implicitHeight: innerDelegate.implicitHeight
+            implicitWidth: innerDelegate.implicitWidth
+            width: innerDelegate.width
 
-                Components.Avatar {
-                    source: itemDelegate.game.iconLocation ? "file://" + itemDelegate.game.iconLocation : null // qmllint disable
-                    imageMode: Components.Avatar.AdaptiveImageOrInitals
-                    initialsMode: Components.Avatar.UseInitials
+            acceptedButtons: Qt.RightButton
 
-                    name: itemDelegate.game.name
-                    implicitWidth: Kirigami.Units.iconSizes.small
-                    implicitHeight: Kirigami.Units.iconSizes.small
+            Delegates.RoundedItemDelegate {
+                id: innerDelegate
+
+                highlighted: ListView.isCurrentItem
+                gridView: itemDelegate.GridView
+                listView: itemDelegate.ListView
+
+                contentItem: RowLayout {
+                    spacing: Kirigami.Units.largeSpacing
+                    Layout.leftMargin: Kirigami.Units.largeSpacing
+
+                    Addons.Avatar {
+                        source: itemDelegate.game.iconLocation ? "file://" + itemDelegate.game.iconLocation : null // qmllint disable
+                        imageMode: Addons.Avatar.AdaptiveImageOrInitals
+                        initialsMode: Addons.Avatar.UseInitials
+
+                        name: itemDelegate.game.name
+                        implicitWidth: Kirigami.Units.iconSizes.small
+                        implicitHeight: Kirigami.Units.iconSizes.small
+                    }
+
+                    Controls.Label {
+                        Layout.fillWidth: true
+                        Layout.alignment: Qt.AlignLeft
+                        text: itemDelegate.game.name
+                    }
                 }
 
-                Controls.Label {
-                    Layout.fillWidth: true
-                    Layout.alignment: Qt.AlignLeft
-                    text: itemDelegate.game.name
+                onClicked: {
+                    if (itemDelegate.ListView.view.currentIndex === itemDelegate.index) {
+                        return;
+                    }
+
+                    itemDelegate.ListView.view.currentIndex = itemDelegate.index;
+                    Utils.openPage(Qt.resolvedUrl("Game.qml"), {
+                        game: itemDelegate.game
+                    });
                 }
             }
 
-            onClicked: {
-                if (ListView.view.currentIndex === index) {
-                    return;
-                }
-
-                openRecent.checked = false;
-                ListView.view.currentIndex = index;
-                Utils.openPage(Qt.resolvedUrl("Game.qml"), {
-                    game: itemDelegate.game
-                });
+            GameContextMenu {
+                id: contextMenu
+                game: itemDelegate.game
             }
+
+            onClicked: contextMenu.open()
         }
 
         Component.onCompleted: {
@@ -143,6 +162,14 @@ Kirigami.ScrollablePage {
                     name: game.name
                 });
             }
+        }
+    }
+
+    Connections {
+        target: applicationWindow().pageStack
+
+        function onPagePushed(page) {
+            openRecent.checked = page instanceof Recent;
         }
     }
 

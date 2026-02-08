@@ -45,5 +45,5 @@ FormCard.FormCardDialog {
 
     onAccepted: {
         GameManager.addGame(nameField.text, executableLocationField.selectedFile, moveGameField.checked);
-    } 
+    }
 }

@@ -45,7 +45,7 @@ public:
 
     Q_INVOKABLE static void saveSettings();
 
-    Q_INVOKABLE void removeGame(const QString &gameId);
+    Q_INVOKABLE void removeGame(const QString &gameId, bool removeGameFolder);
 
 Q_SIGNALS:
     void gamesChanged();
