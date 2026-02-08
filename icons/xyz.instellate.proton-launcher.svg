@@ -11,6 +11,7 @@
    inkscape:version="1.4.3 (0d15f75042, 2025-12-25)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
   <sodipodi:namedview
@@ -22,28 +23,74 @@
      inkscape:pageopacity="0.0"
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
-     inkscape:zoom="16.229167"
-     inkscape:cx="24"
-     inkscape:cy="24"
+     inkscape:zoom="8.1145835"
+     inkscape:cx="-0.061617457"
+     inkscape:cy="28.898587"
      inkscape:window-width="1920"
      inkscape:window-height="1008"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg1" />
+     inkscape:current-layer="layer1" />
   <defs
-     id="defs1" />
+     id="defs1">
+    <linearGradient
+       id="swatch23"
+       inkscape:swatch="solid">
+      <stop
+         style="stop-color:#00fffc;stop-opacity:1;"
+         offset="0"
+         id="stop23" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3">
+      <stop
+         style="stop-color:#101f29;stop-opacity:1;"
+         offset="0"
+         id="stop5" />
+      <stop
+         style="stop-color:#0085ff;stop-opacity:1;"
+         offset="1"
+         id="stop6" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3"
+       id="linearGradient25"
+       x1="24"
+       y1="3.7612314"
+       x2="24"
+       y2="44.23877"
+       gradientUnits="userSpaceOnUse"
+       spreadMethod="pad" />
+  </defs>
   <g
      id="layer1"
-     style="fill:#ffffff">
-    <path
-       id="text1"
-       style="font-size:49.1272px;font-family:'Adwaita Sans';-inkscape-font-specification:'Adwaita Sans';writing-mode:lr-tb;direction:ltr;vector-effect:non-scaling-stroke;fill:#ffffff;stroke:none;stroke-width:4.09394;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:5;-inkscape-stroke:hairline"
-       d="M 6.6679688 7.0273438 L 6.6679688 11.300781 L 11.53125 11.300781 L 7.2578125 15.476562 L 7.2578125 40.972656 L 12.121094 40.972656 L 12.121094 28.25 L 17.648438 28.25 L 17.648438 23.974609 L 15.707031 23.974609 L 12.121094 27.660156 L 12.121094 11.300781 L 17.648438 11.300781 L 17.648438 7.0273438 L 6.6679688 7.0273438 z M 25.564453 8.3847656 L 25.564453 26.892578 L 28.480469 23.974609 L 28.480469 11.300781 L 25.564453 8.3847656 z " />
-    <path
-       style="font-size:45.2002px;font-family:Iceberg;-inkscape-font-specification:Iceberg;stroke:none;stroke-width:4.09394;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:5;fill:#ffffff"
-       d="M 39.806551,40.973438 H 19.173139 V 7.0265619 h 4.86359 V 36.699374 h 10.906232 v -4.224937 l 4.86359,-4.814462 z"
-       id="text2"
-       aria-label="L" />
+     style="fill:#000000"
+     inkscape:label="layer">
+    <circle
+       style="mix-blend-mode:normal;fill:url(#linearGradient25);fill-rule:nonzero;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:5"
+       id="path3"
+       cx="24"
+       cy="24"
+       inkscape:label="circle"
+       r="20.238768" />
+    <g
+       id="g2"
+       inkscape:label="letters"
+       transform="matrix(0.75898819,0,0,0.75898819,6.3631942,5.7842835)"
+       style="fill:#ffffff;fill-opacity:1">
+      <path
+         id="path1"
+         style="font-size:49.1272px;font-family:'Adwaita Sans';-inkscape-font-specification:'Adwaita Sans';writing-mode:lr-tb;direction:ltr;vector-effect:non-scaling-stroke;fill:#ffffff;stroke:none;stroke-width:4.09394;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:5;-inkscape-stroke:hairline;fill-opacity:1"
+         d="M 6.6679688,7.0273438 V 11.300781 H 11.53125 L 7.2578125,15.476562 V 40.972656 H 12.121094 V 28.25 h 5.527344 v -4.275391 h -1.941407 l -3.585937,3.685547 V 11.300781 h 5.527344 V 7.0273438 Z M 25.564453,8.3847656 V 26.892578 l 2.916016,-2.917969 V 11.300781 Z"
+         inkscape:label="P" />
+      <path
+         style="font-size:45.2002px;font-family:Iceberg;-inkscape-font-specification:Iceberg;fill:#ffffff;stroke:none;stroke-width:4.09394;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:5;fill-opacity:1"
+         d="M 39.806551,40.973438 H 19.173139 V 7.0265619 h 4.86359 V 36.699374 h 10.906232 v -4.224937 l 4.86359,-4.814462 z"
+         id="path2"
+         aria-label="L"
+         inkscape:label="L" />
+    </g>
   </g>
 </svg>
