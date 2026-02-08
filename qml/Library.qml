@@ -92,6 +92,8 @@ Kirigami.ScrollablePage {
                     Controls.Label {
                         Layout.fillWidth: true
                         Layout.alignment: Qt.AlignLeft
+                        wrapMode: Controls.Label.NoWrap
+                        elide: Controls.Label.ElideRight
                         text: itemDelegate.game.name
                     }
                 }

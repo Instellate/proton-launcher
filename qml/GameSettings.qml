@@ -16,6 +16,7 @@
 pragma ComponentBehavior: Bound
 
 import QtQuick
+import QtQuick.Dialogs
 import org.kde.kirigamiaddons.settings as KSettings
 import org.kde.kirigamiaddons.formcard as FormCard
 
@@ -49,24 +50,49 @@ KSettings.ConfigurationView {
         required property GameInfo game
 
         FormCard.FormHeader {
-            title: i18nc("@title", "Location")
+            title: i18nc("@title:section:open-prefix-folder", "Prefix Location")
         }
 
         FormCard.FormCard {
-            FormCard.FormButtonDelegate {
-                text: i18nc("@action:button", "Prefix Location")
+            FormCard.FormLinkDelegate {
+                text: i18nc("@action:button", "Prefix Folder")
                 description: root.game.prefixLocation
-                onClicked: Qt.openUrlExternally(new URL("file://" + root.game.prefixLocation))
+                url: "file://" + root.game.prefixLocation
             }
+        }
 
-            FormCard.FormButtonDelegate {
-                text: i18nc("@action:button", "Executable Location")
+        FormCard.FormHeader {
+            title: i18nc("@title:section", "Executable Location")
+        }
+
+        FormCard.FormCard {
+            FormCard.FormLinkDelegate {
+                text: i18nc("@action:button:open-executable-folder", "Executable File")
                 description: root.game.executableLocation
-                onClicked: {
+
+                url: {
                     const file = root.game.executableLocation;
                     const directory = file.split("/");
                     directory.pop();
-                    Qt.openUrlExternally(new URL("file://" + directory.join("/")));
+                    return "file://" + directory.join("/");
+                }
+            }
+
+            FormCard.FormButtonDelegate {
+                text: i18nc("@action:label", "Change Executable Location")
+                onClicked: fileDialog.open()
+            }
+
+            FileDialog {
+                id: fileDialog
+                fileMode: FileDialog.OpenFile
+                selectedFile: "file://" + root.game.executableLocation
+
+                onAccepted: {
+                    const fileUrl = new URL(selectedFile);
+                    if (fileUrl.protocol === "file:") {
+                        root.game.executableLocation = fileUrl.pathname;
+                    }
                 }
             }
         }
