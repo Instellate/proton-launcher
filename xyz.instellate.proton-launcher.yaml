@@ -1,0 +1,19 @@
+id: xyz.instellate.proton-launcher
+name: Proton Launcher
+runtime: org.kde.Platform
+runtime-version: "6.10"
+sdk: org.kde.Sdk
+desktop-file-name-suffix: " (Nightly)"
+command: proton-launcher
+finish-args:
+  - "--share=ipc"
+  - "--socket=fallback-x11"
+  - "--socket=wayland"
+
+modules:
+  - name: proton-launcher
+    buildsystem: cmake-ninja
+    sources:
+      - type: git
+        url: https://github.com/Instellate/proton-launcher.git
+        branch: main
