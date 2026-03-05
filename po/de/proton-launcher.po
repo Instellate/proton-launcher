@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/Instellate/proton-launcher/issues\n"
 "POT-Creation-Date: 2026-03-05 16:12+0100\n"
 "PO-Revision-Date: 2026-03-05 17:36+0000\n"
-"Last-Translator: yuki6942 <philippaltekoster+github@gmail.com>\n"
+"Last-Translator: Instellate <instellate@instellate.xyz>\n"
 "Language-Team: German <https://weblate.instellate.xyz/projects/proton-"
 "launcher/app/de/>\n"
 "Language: de\n"
@@ -236,7 +236,6 @@ msgid "Default Launch Arguments"
 msgstr "Standard-Startargumente"
 
 #: src/main.cpp:55
-#, fuzzy
 msgid ""
 "A steam-like game launcher and library to manage and run games that require "
 "Proton"
