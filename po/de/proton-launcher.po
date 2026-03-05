@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: proton-launcher\n"
 "Report-Msgid-Bugs-To: https://github.com/Instellate/proton-launcher/issues\n"
 "POT-Creation-Date: 2026-03-05 16:12+0100\n"
-"PO-Revision-Date: 2026-03-05 15:01+0000\n"
-"Last-Translator: yuki6942 <philippaltekoster+github@gmail.com>\n"
+"PO-Revision-Date: 2026-03-05 17:36+0000\n"
+"Last-Translator: Instellate <instellate@instellate.xyz>\n"
 "Language-Team: German <https://weblate.instellate.xyz/projects/proton-"
 "launcher/app/de/>\n"
 "Language: de\n"
@@ -139,9 +139,8 @@ msgid "Launch Arguments"
 msgstr "Startargumente"
 
 #: qml/GameSettingsGeneralPage.qml:89 qml/Settings.qml:66
-#, fuzzy
 msgid "%command% will be substituted with the run command"
-msgstr "%command% wird durch den Ausführungsbefehl ersetzt"
+msgstr "%command% wird durch den Ausführungsbefehl ersetzt."
 
 #: qml/GameSettings.qml:31 qml/Settings.qml:27
 msgctxt "@action:button"
@@ -210,13 +209,12 @@ msgstr "Zuletzt gespielte Spiele"
 #: qml/Recent.qml:58
 msgctxt "@action:button"
 msgid "Start game"
-msgstr ""
+msgstr "Spiel starten"
 
 #: qml/Recent.qml:64
-#, fuzzy
 msgctxt "@action:button"
 msgid "Stop game"
-msgstr "Stoppen"
+msgstr "Spiel beenden"
 
 #: qml/Recent.qml:138
 msgid "You haven't played any games yet"
@@ -238,7 +236,6 @@ msgid "Default Launch Arguments"
 msgstr "Standard-Startargumente"
 
 #: src/main.cpp:55
-#, fuzzy
 msgid ""
 "A steam-like game launcher and library to manage and run games that require "
 "Proton"

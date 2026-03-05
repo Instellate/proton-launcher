@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: https://github.com/Instellate/proton-launcher/issues\n"
 "POT-Creation-Date: 2026-03-05 16:12+0100\n"
-"PO-Revision-Date: 2026-03-05 15:01+0000\n"
+"PO-Revision-Date: 2026-03-05 17:33+0000\n"
 "Last-Translator: Flaze <flazepe@gmail.com>\n"
 "Language-Team: Japanese <https://weblate.instellate.xyz/projects/proton-"
 "launcher/app/ja/>\n"
@@ -140,7 +140,6 @@ msgid "Launch Arguments"
 msgstr "実行引数"
 
 #: qml/GameSettingsGeneralPage.qml:89 qml/Settings.qml:66
-#, fuzzy
 msgid "%command% will be substituted with the run command"
 msgstr "%command%は実行コマンドで代わります"
 
@@ -211,13 +210,12 @@ msgstr "最近にプレイしたゲーム"
 #: qml/Recent.qml:58
 msgctxt "@action:button"
 msgid "Start game"
-msgstr ""
+msgstr "ゲームを開始"
 
 #: qml/Recent.qml:64
-#, fuzzy
 msgctxt "@action:button"
 msgid "Stop game"
-msgstr "終了"
+msgstr "ゲームを終了"
 
 #: qml/Recent.qml:138
 msgid "You haven't played any games yet"
@@ -239,7 +237,6 @@ msgid "Default Launch Arguments"
 msgstr "デフォルト実行引数"
 
 #: src/main.cpp:55
-#, fuzzy
 msgid ""
 "A steam-like game launcher and library to manage and run games that require "
 "Proton"
@@ -261,4 +258,4 @@ msgstr "flazepe"
 #: src/main.cpp:68
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "me@flaz.ing"
+msgstr "contact@flaz.ing"
