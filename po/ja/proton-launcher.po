@@ -8,39 +8,41 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: https://github.com/Instellate/proton-launcher/issues\n"
 "POT-Creation-Date: 2026-02-25 20:35+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2026-03-05 13:20+0000\n"
+"Last-Translator: Flaze <flazepe@gmail.com>\n"
+"Language-Team: Japanese <https://weblate.instellate.xyz/projects/proton-"
+"launcher/app/ja/>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.16.1\n"
 
 #: qml/AddGameDialog.qml:22
 msgctxt "@title:window"
 msgid "Add Game"
-msgstr ""
+msgstr "ゲームを追加"
 
 #: qml/AddGameDialog.qml:28
 msgctxt "@label:textbox"
 msgid "Name"
-msgstr ""
+msgstr "名"
 
 #: qml/AddGameDialog.qml:34
 msgctxt "@label:file-location"
 msgid "Game Executable"
-msgstr ""
+msgstr "ゲーム実行ファイル"
 
 #: qml/AddGameDialog.qml:37
 msgctxt "@label:select-file"
 msgid "Select"
-msgstr ""
+msgstr "セレクト"
 
 #: qml/AddGameDialog.qml:43
 msgctxt "@label:checkbox"
 msgid "Move game folder to library"
-msgstr ""
+msgstr "ライブラリーにゲームを移動"
 
 #: qml/GameContextMenu.qml:35 qml/Game.qml:128
 msgctxt "@action"
