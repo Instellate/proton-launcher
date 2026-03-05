@@ -7,13 +7,16 @@ msgstr ""
 "Project-Id-Version: proton-launcher\n"
 "Report-Msgid-Bugs-To: https://github.com/Instellate/proton-launcher/issues\n"
 "POT-Creation-Date: 2026-02-25 20:35+0100\n"
-"PO-Revision-Date: 2026-02-25 00:00+0000\n"
-"Last-Translator: yuki6942 <contact@yuki6942.de>\n"
-"Language-Team: German\n"
+"PO-Revision-Date: 2026-03-05 15:01+0000\n"
+"Last-Translator: Instellate <instellate@instellate.xyz>\n"
+"Language-Team: German <https://weblate.instellate.xyz/projects/proton-"
+"launcher/app/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.16.1\n"
 
 #: qml/AddGameDialog.qml:22
 msgctxt "@title:window"
@@ -150,7 +153,6 @@ msgid "Location"
 msgstr "Speicherort"
 
 #: qml/GameSettings.qml:53
-#, fuzzy
 msgctxt "@title:section:open-prefix-folder"
 msgid "Prefix Location"
 msgstr "Präfix-Speicherort"
@@ -161,16 +163,14 @@ msgid "Prefix Folder"
 msgstr ""
 
 #: qml/GameSettings.qml:65
-#, fuzzy
 msgctxt "@title:section"
 msgid "Executable Location"
 msgstr "Speicherort der Ausführungsdatei"
 
 #: qml/GameSettings.qml:70
-#, fuzzy
 msgctxt "@action:button:open-executable-folder"
 msgid "Executable File"
-msgstr "Speicherort der Ausführungsdatei"
+msgstr "Ausführungsdatei"
 
 #: qml/GameSettings.qml:82
 #, fuzzy
@@ -186,7 +186,7 @@ msgstr "Bibliothek"
 #: qml/Library.qml:37
 msgctxt "@action:opren-recent"
 msgid "Recent"
-msgstr "Zuletzt gespielt"
+msgstr "Kürzlich"
 
 #: qml/Library.qml:47
 msgctxt "@action:add-game"
