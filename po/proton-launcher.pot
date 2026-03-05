@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: https://github.com/Instellate/proton-launcher/issues\n"
-"POT-Creation-Date: 2026-02-25 20:35+0100\n"
+"POT-Creation-Date: 2026-03-05 16:12+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -138,7 +138,7 @@ msgid "Launch Arguments"
 msgstr ""
 
 #: qml/GameSettingsGeneralPage.qml:89 qml/Settings.qml:66
-msgid "%command% will be substituded for the run command"
+msgid "%command% will be substituted with the run command"
 msgstr ""
 
 #: qml/GameSettings.qml:31 qml/Settings.qml:27
@@ -205,6 +205,16 @@ msgctxt "@title"
 msgid "Recently Played Games"
 msgstr ""
 
+#: qml/Recent.qml:58
+msgctxt "@action:button"
+msgid "Start game"
+msgstr ""
+
+#: qml/Recent.qml:64
+msgctxt "@action:button"
+msgid "Stop game"
+msgstr ""
+
 #: qml/Recent.qml:138
 msgid "You haven't played any games yet"
 msgstr ""
@@ -226,7 +236,7 @@ msgstr ""
 
 #: src/main.cpp:55
 msgid ""
-"A steam-like game launcher and library to manage and run games that requires "
+"A steam-like game launcher and library to manage and run games that require "
 "Proton"
 msgstr ""
 

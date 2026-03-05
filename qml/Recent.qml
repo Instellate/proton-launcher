@@ -55,13 +55,13 @@ Kirigami.ScrollablePage {
                 actions: [
                     Kirigami.Action {
                         visible: !card.game.isRunning
-                        text: "Start game"
+                        text: i18nc("@action:button", "Start game")
                         icon.source: "media-playback-start"
                         onTriggered: card.game.start()
                     },
                     Kirigami.Action {
                         visible: card.game.isRunning
-                        text: "Stop game"
+                        text: i18nc("@action:button", "Stop game")
                         icon.source: "dialog-cancel"
                         onTriggered: card.game.stop()
                     }

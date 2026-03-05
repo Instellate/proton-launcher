@@ -63,7 +63,7 @@ KSettings.ConfigurationView {
 
             FormCard.FormTextFieldDelegate {
                 label: i18nc("@label", "Default Launch Arguments")
-                placeholderText: i18n("%command% will be substituded for the run command")
+                placeholderText: i18n("%command% will be substituted with the run command")
                 text: Config.defaultLaunchArguments
 
                 onTextChanged: Config.defaultLaunchArguments = text
