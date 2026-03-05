@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/Instellate/proton-launcher/issues\n"
 "POT-Creation-Date: 2026-02-25 20:35+0100\n"
 "PO-Revision-Date: 2026-03-05 15:01+0000\n"
-"Last-Translator: Instellate <instellate@instellate.xyz>\n"
+"Last-Translator: yuki6942 <philippaltekoster+github@gmail.com>\n"
 "Language-Team: German <https://weblate.instellate.xyz/projects/proton-"
 "launcher/app/de/>\n"
 "Language: de\n"
@@ -160,7 +160,7 @@ msgstr "Präfix-Speicherort"
 #: qml/GameSettings.qml:58
 msgctxt "@action:button"
 msgid "Prefix Folder"
-msgstr ""
+msgstr "Präfixordner"
 
 #: qml/GameSettings.qml:65
 msgctxt "@title:section"
@@ -173,10 +173,9 @@ msgid "Executable File"
 msgstr "Ausführungsdatei"
 
 #: qml/GameSettings.qml:82
-#, fuzzy
 msgctxt "@action:label"
 msgid "Change Executable Location"
-msgstr "Speicherort der Ausführungsdatei"
+msgstr "Speicherort der ausführbaren Datei ändern"
 
 #: qml/Library.qml:28
 msgctxt "@title"
