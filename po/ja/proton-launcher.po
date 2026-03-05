@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: https://github.com/Instellate/proton-launcher/issues\n"
 "POT-Creation-Date: 2026-02-25 20:35+0100\n"
-"PO-Revision-Date: 2026-03-05 13:21+0000\n"
+"PO-Revision-Date: 2026-03-05 15:01+0000\n"
 "Last-Translator: Flaze <flazepe@gmail.com>\n"
 "Language-Team: Japanese <https://weblate.instellate.xyz/projects/proton-"
 "launcher/app/ja/>\n"
@@ -52,200 +52,200 @@ msgstr "プレイ"
 #: qml/GameContextMenu.qml:43 qml/Game.qml:141
 msgctxt "@action"
 msgid "Stop"
-msgstr ""
+msgstr "終了"
 
 #: qml/GameContextMenu.qml:51
 msgctxt "@action"
 msgid "Configure"
-msgstr ""
+msgstr "設定"
 
 #: qml/GameContextMenu.qml:58
 msgctxt "@action:inmenu"
 msgid "Delete"
-msgstr ""
+msgstr "解除"
 
 #: qml/GameContextMenu.qml:75
 msgctxt "@title:window"
 msgid "Delete Game"
-msgstr ""
+msgstr "ゲームを解除"
 
 #: qml/GameContextMenu.qml:78
 msgctxt "@action:description"
 msgid "Are you sure you want to remove this game?"
-msgstr ""
+msgstr "本当にゲームを解除してもよろしいですか。"
 
 #: qml/GameContextMenu.qml:83
 msgctxt "@action:label"
 msgid "Remove the game folder as well"
-msgstr ""
+msgstr "ゲームフォルダも解除する"
 
 #: qml/Game.qml:33
 msgctxt "@action:settings"
 msgid "Configure"
-msgstr ""
+msgstr "設定"
 
 #: qml/Game.qml:60 qml/Recent.qml:83
 msgctxt "@label"
 msgid "Last Played"
-msgstr ""
+msgstr "最後にプレイ"
 
 #: qml/Game.qml:61
 msgctxt "Game has never been played before"
 msgid "Never played"
-msgstr ""
+msgstr "プレイは決してしませんでした"
 
 #: qml/Game.qml:66 qml/Recent.qml:109
 msgctxt "@label"
 msgid "Amount Played"
-msgstr ""
+msgstr "総プレイ時間"
 
 #: qml/Game.qml:81
 msgctxt "@label"
 msgid "Console"
-msgstr ""
+msgstr "コンソール"
 
 #: qml/GameSettingsGeneralPage.qml:26
 msgctxt "@title:section"
 msgid "Metadata"
-msgstr ""
+msgstr "メタデータ"
 
 #: qml/GameSettingsGeneralPage.qml:31
 msgctxt "@label"
 msgid "Name"
-msgstr ""
+msgstr "名"
 
 #: qml/GameSettingsGeneralPage.qml:43
 msgctxt "@label"
 msgid "Game Banner"
-msgstr ""
+msgstr "ゲームバーナー"
 
 #: qml/GameSettingsGeneralPage.qml:52
 msgctxt "@label"
 msgid "Game Icon"
-msgstr ""
+msgstr "ゲームアイコン"
 
 #: qml/GameSettingsGeneralPage.qml:62
 msgctxt "@title:section"
 msgid "Launch"
-msgstr ""
+msgstr "実行"
 
 #: qml/GameSettingsGeneralPage.qml:67
 msgctxt "@label"
 msgid "Proton Version"
-msgstr ""
+msgstr "Protonバージョン"
 
 #: qml/GameSettingsGeneralPage.qml:88
 msgctxt "@label"
 msgid "Launch Arguments"
-msgstr ""
+msgstr "実行引数"
 
 #: qml/GameSettingsGeneralPage.qml:89 qml/Settings.qml:66
 msgid "%command% will be substituded for the run command"
-msgstr ""
+msgstr "%command%は実行コマンドで代わります"
 
 #: qml/GameSettings.qml:31 qml/Settings.qml:27
 msgctxt "@action:button"
 msgid "General"
-msgstr ""
+msgstr "一般"
 
 #: qml/GameSettings.qml:40
 msgctxt "Settings page related to various file locations for a game"
 msgid "Location"
-msgstr ""
+msgstr "場所"
 
 #: qml/GameSettings.qml:53
 msgctxt "@title:section:open-prefix-folder"
 msgid "Prefix Location"
-msgstr ""
+msgstr "プレフィックスの場所"
 
 #: qml/GameSettings.qml:58
 msgctxt "@action:button"
 msgid "Prefix Folder"
-msgstr ""
+msgstr "プレフィックスフォルダ"
 
 #: qml/GameSettings.qml:65
 msgctxt "@title:section"
 msgid "Executable Location"
-msgstr ""
+msgstr "実行ファイルの場所"
 
 #: qml/GameSettings.qml:70
 msgctxt "@action:button:open-executable-folder"
 msgid "Executable File"
-msgstr ""
+msgstr "実行ファイル"
 
 #: qml/GameSettings.qml:82
 msgctxt "@action:label"
 msgid "Change Executable Location"
-msgstr ""
+msgstr "実行ファイルの場所を変更"
 
 #: qml/Library.qml:28
 msgctxt "@title"
 msgid "Library"
-msgstr ""
+msgstr "ライブラリー"
 
 #: qml/Library.qml:37
 msgctxt "@action:opren-recent"
 msgid "Recent"
-msgstr ""
+msgstr "最近"
 
 #: qml/Library.qml:47
 msgctxt "@action:add-game"
 msgid "Add Game"
-msgstr ""
+msgstr "ゲームを追加"
 
 #: qml/Main.qml:42
 msgid "About Proton Launcher"
-msgstr ""
+msgstr "Proton Launcherについて"
 
 #: qml/Main.qml:50
 msgctxt "@title:window"
 msgid "About Proton Launcher"
-msgstr ""
+msgstr "Proton Launcherについて"
 
 #: qml/Recent.qml:25
 msgctxt "@title"
 msgid "Recently Played Games"
-msgstr ""
+msgstr "最近にプレイしたゲーム"
 
 #: qml/Recent.qml:138
 msgid "You haven't played any games yet"
-msgstr ""
+msgstr "あなたはまだ何もゲームをプレイしていませんでした"
 
 #: qml/Settings.qml:33
 msgctxt "@title:section"
 msgid "Game Launch"
-msgstr ""
+msgstr "ゲーム実行"
 
 #: qml/Settings.qml:38
 msgctxt "@label"
 msgid "Default Proton version"
-msgstr ""
+msgstr "Protonのデフォルトバージョン"
 
 #: qml/Settings.qml:65
 msgctxt "@label"
 msgid "Default Launch Arguments"
-msgstr ""
+msgstr "デフォルト実行引数"
 
 #: src/main.cpp:55
 msgid ""
 "A steam-like game launcher and library to manage and run games that requires "
 "Proton"
-msgstr ""
+msgstr "SteamのようなProtonゲームランチャーとライブラリー"
 
 #: src/main.cpp:57
 msgid "© 2026 Instellate"
-msgstr ""
+msgstr "© 2026 Instellate"
 
 #: src/main.cpp:60
 msgid "Maintainer"
-msgstr ""
+msgstr "管理者"
 
 #: src/main.cpp:67
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr ""
+msgstr "flazepe"
 
 #: src/main.cpp:68
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr ""
+msgstr "me@flaz.ing"
