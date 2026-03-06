@@ -44,6 +44,7 @@ find_package(Qt6 REQUIRED COMPONENTS
     QuickControls2
     Widgets
     Sql
+    Network
 )
 
 find_package(KF6 REQUIRED COMPONENTS
@@ -55,7 +56,10 @@ find_package(KF6 REQUIRED COMPONENTS
     IconThemes
     Config
     Crash
+    Archive
 )
+
+find_package(QCoro6 REQUIRED COMPONENTS Core Network)
 
 ecm_find_qmlmodule(org.kde.kirigami REQUIRED)
 ecm_find_qmlmodule(org.kde.kirigamiaddons.formcard REQUIRED)
@@ -68,6 +72,8 @@ ki18n_install(po)
 
 qt_add_resources(PROTON_LAUNCHER_RESOURCES ${CMAKE_CURRENT_SOURCE_DIR}/resources.qrc)
 
+qcoro_enable_coroutines()
+
 add_executable(proton-launcher)
 
 ecm_add_qml_module(proton-launcher URI xyz.instellate.protonLauncher)
@@ -78,6 +84,7 @@ target_sources(proton-launcher PRIVATE
     src/Database.cpp src/Database.h
     src/GameInfo.cpp src/GameInfo.h
     src/GameManager.cpp src/GameManager.cpp
+    src/ProtonDownloader.cpp src/ProtonDownloader.h
     ${PROTON_LAUNCHER_RESOURCES}
 )
 
@@ -93,6 +100,7 @@ ecm_target_qml_sources(proton-launcher
         qml/AddGameDialog.qml
         qml/Recent.qml
         qml/Settings.qml
+        qml/DownloadProtonGeDialog.qml
         qml/utils.js
 )
 
@@ -115,11 +123,15 @@ target_link_libraries(proton-launcher
     Qt::QuickControls2
     Qt::Widgets
     Qt::Sql
+    Qt::Network
+    QCoro::Core
+    QCoro::Network
     KF6::I18n
     KF6::CoreAddons
     KF6::IconThemes
     KF6::ConfigGui
     KF6::Crash
+    KF6::Archive
     KirigamiAddonsStatefulApp
 )
 
