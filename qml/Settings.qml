@@ -29,6 +29,8 @@ KSettings.ConfigurationView {
     ]
 
     readonly property Component general: FormCard.FormCardPage {
+        id: general
+
         FormCard.FormHeader {
             title: i18nc("@title:section", "Game Launch")
         }
@@ -67,6 +69,44 @@ KSettings.ConfigurationView {
                 text: Config.defaultLaunchArguments
 
                 onTextChanged: Config.defaultLaunchArguments = text
+            }
+
+            FormCard.FormButtonDelegate {
+                id: protonGeVersion
+
+                property var currentVersion: null
+
+                text: i18nc("@action:button", "Check ProtonGE Version")
+                onClicked: downloader.getProtonGeVersion()
+                enabled: !downloader.processing
+
+                description: currentVersion !== null ? i18nc("@action:description", "Current latest ProtonGE version: %1", currentVersion) : null
+            }
+
+            ProtonDownloader {
+                id: downloader
+
+                onFoundProtonGeVersion: function (version, isOutdated) {
+                    console.log(version);
+
+                    if (isOutdated) {
+                        downloadProtonGe.protonGeVersion = version;
+                        downloadProtonGe.open();
+                    } else {
+                        protonGeVersion.currentVersion = version;
+                    }
+                }
+            }
+
+            DownloadProtonGeDialog {
+                id: downloadProtonGe
+
+                protonGeVersion: null
+                parent: general
+
+                onAccepted: {
+                    console.log("User wants to download latest version");
+                }
             }
         }
 
