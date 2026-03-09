@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>xyz.instellate.proton-launcher</id>
+  <url type="homepage">https://github.com/Instellate/proton-launcher</url>
+  <developer_name>Instellate</developer_name>
+
+  <name>Proton Launcher</name>
+  <summary>A steam-like game launcher and library to manage and run games that requires Proton </summary>
+ 
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0-or-later</project_license>
+  <content_rating type="oars-1.1"/>
+
+  <description>
+    <p>
+      A steam-like game launcher and library to manage and run games that requires Proton
+    </p>
+  </description>
+
+  <launchable type="desktop-id">xyz.instellate.proton-launcher.desktop</launchable>
+  <screenshots>
+    <screenshot type="default">
+      <image>Add here a raw link to a screenshot that is in the repository https://github.com/Instellate/proton-launcher</image>
+    </screenshot>
+  </screenshots>
+</component>

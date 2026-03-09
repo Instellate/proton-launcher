@@ -15,19 +15,13 @@ finish-args:
   - --share=network
   - --share=ipc
   - --socket=wayland
-  - --socket=x11
+  - --socket=fallback-x11
   - --socket=pulseaudio # notification sound
   - --allow=devel # ubisoft connect and other launchers
   - --allow=multiarch
-  - --allow=per-app-dev-shm  # pressure-vessel
   - --device=all
-  - --talk-name=org.kde.StatusNotifierWatcher # system tray
-  - --env=PATH=/app/bin:/app/utils/bin:/usr/bin:/usr/lib/extensions/vulkan/MangoHud/bin:/usr/lib/extensions/vulkan/gamescope/bin # mangohud, gamescope
+  - --env=PATH=/app/bin:/usr/bin:/usr/lib/extensions/vulkan/MangoHud/bin # mangohud
   - --filesystem=home
-  - --filesystem=/media
-  - --filesystem=/mnt
-  - --filesystem=/run/media
-  - --filesystem=xdg-config/MangoHud:ro
 
 inherit-extensions:
   - org.freedesktop.Platform.GL32
@@ -60,9 +54,18 @@ modules:
           /app/lib32
           /app/lib/i386-linux-gnu
 
+  - name: proton-launcher-metainfo
+    buildsystem: simple
+    sources:
+      - type: file
+        path: xyz.instellate.proton-launcher.metainfo.xml
+    build-commands:
+      - install -Dm644 xyz.instellate.proton-launcher.metainfo.xml /app/share/metainfo/xyz.instellate.proton-launcher.metainfo.xml
+
   - name: proton-launcher
     buildsystem: cmake-ninja
     sources:
       - type: git
         url: https://github.com/Instellate/proton-launcher.git
         branch: main
+        commit: 18090cab8e2a27cdf7e35fc1945eba491fed5201
