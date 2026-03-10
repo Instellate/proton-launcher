@@ -57,12 +57,12 @@ find_package(KF6 REQUIRED COMPONENTS
     Crash
 )
 
-ecm_find_qmlmodule(org.kde.kirigami REQUIRED)
-ecm_find_qmlmodule(org.kde.kirigamiaddons.formcard REQUIRED)
-ecm_find_qmlmodule(org.kde.kirigamiaddons.settings REQUIRED)
-ecm_find_qmlmodule(org.kde.kirigamiaddons.delegates REQUIRED)
-ecm_find_qmlmodule(org.kde.kirigamiaddons.statefulapp REQUIRED)
-ecm_find_qmlmodule(org.kde.kirigamiaddons.components REQUIRED)
+ecm_find_qmlmodule(org.kde.kirigami)
+ecm_find_qmlmodule(org.kde.kirigamiaddons.formcard)
+ecm_find_qmlmodule(org.kde.kirigamiaddons.settings)
+ecm_find_qmlmodule(org.kde.kirigamiaddons.delegates)
+ecm_find_qmlmodule(org.kde.kirigamiaddons.statefulapp)
+ecm_find_qmlmodule(org.kde.kirigamiaddons.components)
 
 ki18n_install(po)
 

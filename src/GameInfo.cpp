@@ -274,13 +274,22 @@ void GameInfo::start() {
         qDebug() << "Using whatever proton version we can find:" << protonExecutable;
     }
     QString protonPath = QFileInfo(protonExecutable).absolutePath();
+    QString runnerBasePath = QFileInfo(protonPath).absolutePath();
 
     this->_gameProcess = new QProcess(this);
     QProcessEnvironment environment = QProcessEnvironment::systemEnvironment();
     environment.insert(QStringLiteral("WINEPREFIX"), this->_prefixLocation);
     environment.insert(QStringLiteral("STEAM_COMPAT_DATA_PATH"), this->_prefixLocation);
     environment.insert(QStringLiteral("STEAM_COMPAT_APP_ID"), this->_id);
-    environment.insert(QStringLiteral("STEAM_COMPAT_CLIENT_INSTALL_PATH"), QStringLiteral(""));
+    
+    // STEAM_COMPAT_CLIENT_INSTALL_PATH = path to Steam installation
+    QDir steamPath = QStandardPaths::writableLocation(QStandardPaths::HomeLocation);
+    steamPath.cd(QStringLiteral(".local/share/Steam"));
+    environment.insert(QStringLiteral("STEAM_COMPAT_CLIENT_INSTALL_PATH"), steamPath.absolutePath());
+    
+    // STEAM_EXTRA_COMPAT_TOOLS_PATHS = runner_base_path
+    environment.insert(QStringLiteral("STEAM_EXTRA_COMPAT_TOOLS_PATHS"), runnerBasePath);
+    
     environment.insert(
             QStringLiteral("STEAM_COMPAT_SHADER_PATH"),
             QDir(this->_prefixLocation).filePath(QStringLiteral("shadercache")));
@@ -289,12 +298,14 @@ void GameInfo::start() {
             QFileInfo(this->_executableLocation).absolutePath());
     environment.insert(
             QStringLiteral("STEAM_COMPAT_TOOL_PATHS"),
-            protonPath); // TODO: Install the Steam Linux Runtime and link to that
+            protonPath);
     environment.insert(QStringLiteral("STEAM_COMPAT_MOUNTS"), this->_prefixLocation);
 
     const QString executable = this->_executableLocation;
+    const QFileInfo executableInfo(executable);
 
-    QString command = QStringLiteral("\"${1}\" waitforexitandrun \"${2}\"");
+    // "run" instead of "waitforexitandrun" for Proton
+    QString command = QStringLiteral("\"${1}\" run \"${2}\"");
 
     QString launchArguments;
     if (!this->_launchArguments.isNull()) {
@@ -304,13 +315,11 @@ void GameInfo::start() {
     }
 
     if (!launchArguments.trimmed().isEmpty()) {
-        command =
-                launchArguments.replace(QStringLiteral("%command%"), command, Qt::CaseInsensitive);
+        command = launchArguments.replace(QStringLiteral("%command%"), command, Qt::CaseInsensitive);
     }
 
     QStringList arguments;
-    arguments << QStringLiteral("-c") << command << QStringLiteral("_") << protonExecutable
-              << executable;
+    arguments << QStringLiteral("-c") << command << QStringLiteral("_") << protonExecutable << executable;
     qDebug() << "Command:" << arguments;
 
     connect(this->_gameProcess, &QProcess::finished, this, &GameInfo::gameProcessFinished);
@@ -324,6 +333,8 @@ void GameInfo::start() {
             &GameInfo::readChannelAvailable);
 
     this->_gameProcess->setProcessEnvironment(environment);
+    // Sets working directory to executable's parent folder
+    this->_gameProcess->setWorkingDirectory(executableInfo.absolutePath());
     this->_gameProcess->start(bashLocation, arguments);
     qInfo() << "Started game" << this->_name << "with process id"
             << this->_gameProcess->processId();
