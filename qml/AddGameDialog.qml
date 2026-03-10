@@ -39,7 +39,8 @@ FormCard.FormCardDialog {
 
     FormCard.FormSwitchDelegate {
         id: moveGameField
-        checked: false
+        checked: GameManager.runsInFlatpak()
+        enabled: !GameManager.runsInFlatpak()
         text: i18nc("@label:checkbox", "Move game folder to library")
     }
 
