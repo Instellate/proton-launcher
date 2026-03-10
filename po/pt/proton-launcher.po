@@ -1,0 +1,260 @@
+# Portuguese translation of Proton Launcher
+# Copyright (C) 2026 Instellate
+# This file is distributed under the same license as the proton-launcher package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: proton-launcher\n"
+"Report-Msgid-Bugs-To: https://github.com/Instellate/proton-launcher/issues\n"
+"POT-Creation-Date: 2026-03-10 12:25-0300\n"
+"PO-Revision-Date: 2026-03-10 12:25-0300\n"
+"Last-Translator: Kyuyrii Byakko <kyuyriibyakko@gmail.com>\n"
+"Language-Team: Portuguese\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: qml/AddGameDialog.qml:22
+msgctxt "@title:window"
+msgid "Add Game"
+msgstr "Adicionar jogo"
+
+#: qml/AddGameDialog.qml:28
+msgctxt "@label:textbox"
+msgid "Name"
+msgstr "Nome"
+
+#: qml/AddGameDialog.qml:34
+msgctxt "@label:file-location"
+msgid "Game Executable"
+msgstr "Executável do jogo"
+
+#: qml/AddGameDialog.qml:37
+msgctxt "@label:select-file"
+msgid "Select"
+msgstr "Selecionar"
+
+#: qml/AddGameDialog.qml:43
+msgctxt "@label:checkbox"
+msgid "Move game folder to library"
+msgstr "Mover pasta do jogo para a biblioteca"
+
+#: qml/GameContextMenu.qml:35 qml/Game.qml:128
+msgctxt "@action"
+msgid "Play"
+msgstr "Iniciar"
+
+#: qml/GameContextMenu.qml:43 qml/Game.qml:141
+msgctxt "@action"
+msgid "Stop"
+msgstr "Parar"
+
+#: qml/GameContextMenu.qml:51
+msgctxt "@action"
+msgid "Configure"
+msgstr "Configurar"
+
+#: qml/GameContextMenu.qml:58
+msgctxt "@action:inmenu"
+msgid "Delete"
+msgstr "Deletar"
+
+#: qml/GameContextMenu.qml:75
+msgctxt "@title:window"
+msgid "Delete Game"
+msgstr "Deletar jogo"
+
+#: qml/GameContextMenu.qml:78
+msgctxt "@action:description"
+msgid "Are you sure you want to remove this game?"
+msgstr "Tem certeza que deseja remover este jogo?"
+
+#: qml/GameContextMenu.qml:83
+msgctxt "@action:label"
+msgid "Remove the game folder as well"
+msgstr "Também remover a pasta do jogo"
+
+#: qml/Game.qml:33
+msgctxt "@action:settings"
+msgid "Configure"
+msgstr "Configurar"
+
+#: qml/Game.qml:60 qml/Recent.qml:83
+msgctxt "@label"
+msgid "Last Played"
+msgstr "Última vez jogado"
+
+#: qml/Game.qml:61
+msgctxt "Game has never been played before"
+msgid "Never played"
+msgstr "Nunca jogado"
+
+#: qml/Game.qml:66 qml/Recent.qml:109
+msgctxt "@label"
+msgid "Amount Played"
+msgstr "Tempo jogado"
+
+#: qml/Game.qml:81
+msgctxt "@label"
+msgid "Console"
+msgstr "Console"
+
+#: qml/GameSettingsGeneralPage.qml:26
+msgctxt "@title:section"
+msgid "Metadata"
+msgstr "Metadados"
+
+#: qml/GameSettingsGeneralPage.qml:31
+msgctxt "@label"
+msgid "Name"
+msgstr "Nome"
+
+#: qml/GameSettingsGeneralPage.qml:43
+msgctxt "@label"
+msgid "Game Banner"
+msgstr "Arte do jogo"
+
+#: qml/GameSettingsGeneralPage.qml:52
+msgctxt "@label"
+msgid "Game Icon"
+msgstr "Ícone do jogo"
+
+#: qml/GameSettingsGeneralPage.qml:62
+msgctxt "@title:section"
+msgid "Launch"
+msgstr "Inicialização"
+
+#: qml/GameSettingsGeneralPage.qml:67
+msgctxt "@label"
+msgid "Proton Version"
+msgstr "Versão do Proton"
+
+#: qml/GameSettingsGeneralPage.qml:88
+msgctxt "@label"
+msgid "Launch Arguments"
+msgstr "Argumentos de inicialização"
+
+#: qml/GameSettingsGeneralPage.qml:89 qml/Settings.qml:66
+msgid "%command% will be substituted with the run command"
+msgstr "%command% será substituído pelo comando de execução"
+
+#: qml/GameSettings.qml:31 qml/Settings.qml:27
+msgctxt "@action:button"
+msgid "General"
+msgstr "Geral"
+
+#: qml/GameSettings.qml:40
+msgctxt "Settings page related to various file locations for a game"
+msgid "Location"
+msgstr "Localização"
+
+#: qml/GameSettings.qml:53
+msgctxt "@title:section:open-prefix-folder"
+msgid "Prefix Location"
+msgstr "Localização do prefixo"
+
+#: qml/GameSettings.qml:58
+msgctxt "@action:button"
+msgid "Prefix Folder"
+msgstr "Pasta prefixo"
+
+#: qml/GameSettings.qml:65
+msgctxt "@title:section"
+msgid "Executable Location"
+msgstr "Localização do executável"
+
+#: qml/GameSettings.qml:70
+msgctxt "@action:button:open-executable-folder"
+msgid "Executable File"
+msgstr "Arquivo executável"
+
+#: qml/GameSettings.qml:82
+msgctxt "@action:label"
+msgid "Change Executable Location"
+msgstr "Alterar localização do executável"
+
+#: qml/Library.qml:28
+msgctxt "@title"
+msgid "Library"
+msgstr "Biblioteca"
+
+#: qml/Library.qml:37
+msgctxt "@action:opren-recent"
+msgid "Recent"
+msgstr "Recente"
+
+#: qml/Library.qml:47
+msgctxt "@action:add-game"
+msgid "Add Game"
+msgstr "Adicionar jogo"
+
+#: qml/Main.qml:42
+msgid "About Proton Launcher"
+msgstr "Sobre o Proton Launcher"
+
+#: qml/Main.qml:50
+msgctxt "@title:window"
+msgid "About Proton Launcher"
+msgstr "Sobre o Proton Launcher"
+
+#: qml/Recent.qml:25
+msgctxt "@title"
+msgid "Recently Played Games"
+msgstr "Jogos iniciados recentemente"
+
+#: qml/Recent.qml:58
+msgctxt "@action:button"
+msgid "Start game"
+msgstr "Iniciar jogo"
+
+#: qml/Recent.qml:64
+msgctxt "@action:button"
+msgid "Stop game"
+msgstr "Parar jogo"
+
+#: qml/Recent.qml:138
+msgid "You haven't played any games yet"
+msgstr "Nenhum jogo iniciado ainda"
+
+#: qml/Settings.qml:33
+msgctxt "@title:section"
+msgid "Game Launch"
+msgstr "Inicialização de jogo"
+
+#: qml/Settings.qml:38
+msgctxt "@label"
+msgid "Default Proton version"
+msgstr "Versão padrão do Proton"
+
+#: qml/Settings.qml:65
+msgctxt "@label"
+msgid "Default Launch Arguments"
+msgstr "Argumentos de lançamento padrão"
+
+#: src/main.cpp:55
+msgid ""
+"A steam-like game launcher and library to manage and run games that require "
+"Proton"
+msgstr ""
+"Um launcher de jogos similar a Steam, para gerenciar e iniciar jogos que "
+"requerem o Proton"
+
+#: src/main.cpp:57
+msgid "© 2026 Instellate"
+msgstr "© 2026 Instellate"
+
+#: src/main.cpp:60
+msgid "Maintainer"
+msgstr "Mantenedor"
+
+#: src/main.cpp:67
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Kyuyrii Byakko"
+
+#: src/main.cpp:68
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "kyuyriibyakko@gmail.com"
+
