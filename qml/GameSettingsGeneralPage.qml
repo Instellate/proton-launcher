@@ -86,7 +86,7 @@ FormCard.FormCardPage {
 
         FormCard.FormTextFieldDelegate {
             label: i18nc("@label", "Launch Arguments")
-            placeholderText: i18n("%command% will be substituded for the run command")
+            placeholderText: i18n("%command% will be substituted with the run command")
             text: root.game.launchArguments
 
             onTextChanged: {

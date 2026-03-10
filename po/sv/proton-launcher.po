@@ -3,257 +3,261 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: https://github.com/Instellate/proton-launcher/issues\n"
 "POT-Creation-Date: 2026-03-05 16:12+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2026-03-05 17:33+0000\n"
+"Last-Translator: Instellate <instellate@instellate.xyz>\n"
+"Language-Team: Swedish <https://weblate.instellate.xyz/projects/proton-"
+"launcher/app/sv/>\n"
+"Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.16.1\n"
 
 #: qml/AddGameDialog.qml:22
 msgctxt "@title:window"
 msgid "Add Game"
-msgstr ""
+msgstr "Lägg till Spel"
 
 #: qml/AddGameDialog.qml:28
 msgctxt "@label:textbox"
 msgid "Name"
-msgstr ""
+msgstr "Namn"
 
 #: qml/AddGameDialog.qml:34
 msgctxt "@label:file-location"
 msgid "Game Executable"
-msgstr ""
+msgstr "Spelexekverbar fil"
 
 #: qml/AddGameDialog.qml:37
 msgctxt "@label:select-file"
 msgid "Select"
-msgstr ""
+msgstr "Välj"
 
 #: qml/AddGameDialog.qml:43
 msgctxt "@label:checkbox"
 msgid "Move game folder to library"
-msgstr ""
+msgstr "Flytta spel till biblotek"
 
 #: qml/GameContextMenu.qml:35 qml/Game.qml:128
 msgctxt "@action"
 msgid "Play"
-msgstr ""
+msgstr "Spela"
 
 #: qml/GameContextMenu.qml:43 qml/Game.qml:141
 msgctxt "@action"
 msgid "Stop"
-msgstr ""
+msgstr "Stoppa"
 
 #: qml/GameContextMenu.qml:51
 msgctxt "@action"
 msgid "Configure"
-msgstr ""
+msgstr "Konfigurera"
 
 #: qml/GameContextMenu.qml:58
 msgctxt "@action:inmenu"
 msgid "Delete"
-msgstr ""
+msgstr "Radera"
 
 #: qml/GameContextMenu.qml:75
 msgctxt "@title:window"
 msgid "Delete Game"
-msgstr ""
+msgstr "Radera Spel"
 
 #: qml/GameContextMenu.qml:78
 msgctxt "@action:description"
 msgid "Are you sure you want to remove this game?"
-msgstr ""
+msgstr "Är du säker på att du vill radera detta spel?"
 
 #: qml/GameContextMenu.qml:83
 msgctxt "@action:label"
 msgid "Remove the game folder as well"
-msgstr ""
+msgstr "Ta bort spel mappen också"
 
 #: qml/Game.qml:33
 msgctxt "@action:settings"
 msgid "Configure"
-msgstr ""
+msgstr "Konfigurera"
 
 #: qml/Game.qml:60 qml/Recent.qml:83
 msgctxt "@label"
 msgid "Last Played"
-msgstr ""
+msgstr "Senast Spelat"
 
 #: qml/Game.qml:61
 msgctxt "Game has never been played before"
 msgid "Never played"
-msgstr ""
+msgstr "Aldrig Spelat"
 
 #: qml/Game.qml:66 qml/Recent.qml:109
 msgctxt "@label"
 msgid "Amount Played"
-msgstr ""
+msgstr "Mängd Spelat"
 
 #: qml/Game.qml:81
 msgctxt "@label"
 msgid "Console"
-msgstr ""
+msgstr "Konsol"
 
 #: qml/GameSettingsGeneralPage.qml:26
 msgctxt "@title:section"
 msgid "Metadata"
-msgstr ""
+msgstr "Metadata"
 
 #: qml/GameSettingsGeneralPage.qml:31
 msgctxt "@label"
 msgid "Name"
-msgstr ""
+msgstr "Namn"
 
 #: qml/GameSettingsGeneralPage.qml:43
 msgctxt "@label"
 msgid "Game Banner"
-msgstr ""
+msgstr "Spel Banner"
 
 #: qml/GameSettingsGeneralPage.qml:52
 msgctxt "@label"
 msgid "Game Icon"
-msgstr ""
+msgstr "Spel Ikon"
 
 #: qml/GameSettingsGeneralPage.qml:62
 msgctxt "@title:section"
 msgid "Launch"
-msgstr ""
+msgstr "Starta"
 
 #: qml/GameSettingsGeneralPage.qml:67
 msgctxt "@label"
 msgid "Proton Version"
-msgstr ""
+msgstr "Proton Version"
 
 #: qml/GameSettingsGeneralPage.qml:88
 msgctxt "@label"
 msgid "Launch Arguments"
-msgstr ""
+msgstr "Start Argument"
 
 #: qml/GameSettingsGeneralPage.qml:89 qml/Settings.qml:66
 msgid "%command% will be substituted with the run command"
-msgstr ""
+msgstr "%command% kommer bli substituerad med start kommandot"
 
 #: qml/GameSettings.qml:31 qml/Settings.qml:27
 msgctxt "@action:button"
 msgid "General"
-msgstr ""
+msgstr "Generellt"
 
 #: qml/GameSettings.qml:40
 msgctxt "Settings page related to various file locations for a game"
 msgid "Location"
-msgstr ""
+msgstr "Plats"
 
 #: qml/GameSettings.qml:53
 msgctxt "@title:section:open-prefix-folder"
 msgid "Prefix Location"
-msgstr ""
+msgstr "Prefix Plats"
 
 #: qml/GameSettings.qml:58
 msgctxt "@action:button"
 msgid "Prefix Folder"
-msgstr ""
+msgstr "Prefix Mapp"
 
 #: qml/GameSettings.qml:65
 msgctxt "@title:section"
 msgid "Executable Location"
-msgstr ""
+msgstr "Exekverbarfil plats"
 
 #: qml/GameSettings.qml:70
 msgctxt "@action:button:open-executable-folder"
 msgid "Executable File"
-msgstr ""
+msgstr "Exekvirbarfil"
 
 #: qml/GameSettings.qml:82
 msgctxt "@action:label"
 msgid "Change Executable Location"
-msgstr ""
+msgstr "Ändra Exekverbarfil Plats"
 
 #: qml/Library.qml:28
 msgctxt "@title"
 msgid "Library"
-msgstr ""
+msgstr "Biblotek"
 
 #: qml/Library.qml:37
 msgctxt "@action:opren-recent"
 msgid "Recent"
-msgstr ""
+msgstr "Senast"
 
 #: qml/Library.qml:47
 msgctxt "@action:add-game"
 msgid "Add Game"
-msgstr ""
+msgstr "Lägg till Spel"
 
 #: qml/Main.qml:42
 msgid "About Proton Launcher"
-msgstr ""
+msgstr "Om Proton Launcher"
 
 #: qml/Main.qml:50
 msgctxt "@title:window"
 msgid "About Proton Launcher"
-msgstr ""
+msgstr "Om Proton Launcher"
 
 #: qml/Recent.qml:25
 msgctxt "@title"
 msgid "Recently Played Games"
-msgstr ""
+msgstr "Senaste Spelade Spel"
 
 #: qml/Recent.qml:58
 msgctxt "@action:button"
 msgid "Start game"
-msgstr ""
+msgstr "Starta spel"
 
 #: qml/Recent.qml:64
 msgctxt "@action:button"
 msgid "Stop game"
-msgstr ""
+msgstr "Stoppa spel"
 
 #: qml/Recent.qml:138
 msgid "You haven't played any games yet"
-msgstr ""
+msgstr "Du har inte spelat några spel än"
 
 #: qml/Settings.qml:33
 msgctxt "@title:section"
 msgid "Game Launch"
-msgstr ""
+msgstr "Spel startning"
 
 #: qml/Settings.qml:38
 msgctxt "@label"
 msgid "Default Proton version"
-msgstr ""
+msgstr "Standard Proton version"
 
 #: qml/Settings.qml:65
 msgctxt "@label"
 msgid "Default Launch Arguments"
-msgstr ""
+msgstr "Standard Start Argument"
 
 #: src/main.cpp:55
 msgid ""
 "A steam-like game launcher and library to manage and run games that require "
 "Proton"
 msgstr ""
+"Ett steam-likt spel startare och biblotek för att hantera och starta spel "
+"som kräver Proton"
 
 #: src/main.cpp:57
 msgid "© 2026 Instellate"
-msgstr ""
+msgstr "© 2026 Instellate"
 
 #: src/main.cpp:60
 msgid "Maintainer"
-msgstr ""
+msgstr "Underhållare"
 
 #: src/main.cpp:67
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr ""
+msgstr "Instellate"
 
 #: src/main.cpp:68
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr ""
+msgstr "instellate@instellate.xyz"

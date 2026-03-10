@@ -52,7 +52,7 @@ int main(int argc, char *argv[]) {
             QStringLiteral("proton-launcher"),
             QStringLiteral("Proton Launcher"),
             QStringLiteral(PROTON_LAUNCHER_VERSION_STRING),
-            i18n("A steam-like game launcher and library to manage and run games that requires Proton"),
+            i18n("A steam-like game launcher and library to manage and run games that require Proton"),
             KAboutLicense::GPL_V3,
             i18n("© 2026 Instellate"));
     about.addAuthor(
