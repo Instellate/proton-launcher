@@ -230,3 +230,7 @@ void GameManager::removeGame(const QString &gameId, bool removeGameFolder) {
     this->_games.removeAt(size);
     Q_EMIT gamesChanged();
 }
+
+bool GameManager::runsInFlatpak() {
+    return qEnvironmentVariableIsSet("FLATPAK_ID");
+}

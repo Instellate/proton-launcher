@@ -47,6 +47,8 @@ public:
 
     Q_INVOKABLE void removeGame(const QString &gameId, bool removeGameFolder);
 
+    Q_INVOKABLE static bool runsInFlatpak();
+
 Q_SIGNALS:
     void gamesChanged();
 
