@@ -25,6 +25,6 @@ FormCard.FormCardDialog {
     required property var protonGeVersion
 
     FormCard.FormHeader {
-        title: i18nc("@label:title", "Are you sure you want to download the latest ProtonGE version %1?", root.protonGeVersion)
+        title: i18nc("@label:title", "Are you sure you want to download %1?", root.protonGeVersion)
     }
 }

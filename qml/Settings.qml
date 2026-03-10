@@ -80,15 +80,27 @@ KSettings.ConfigurationView {
                 onClicked: downloader.getProtonGeVersion()
                 enabled: !downloader.processing
 
-                description: currentVersion !== null ? i18nc("@action:description", "Current latest ProtonGE version: %1", currentVersion) : null
+                description: {
+                    if (currentVersion !== null) {
+                        return i18nc("@action:description", "Current latest ProtonGE version: %1", currentVersion);
+                    }
+
+                    if (downloader.totalAmount !== 0) {
+                        return i18nc("@action:description:Amount downloaded", "%1 out of %2", Qt.locale().formattedDataSize(downloader.amountDownloaded), Qt.locale().formattedDataSize(downloader.totalAmount));
+                    }
+
+                    if (downloader.extracting) {
+                        return i18nc("@action:description:Extracting ProtonGE", "Extracting files from archive");
+                    }
+
+                    return null;
+                }
             }
 
             ProtonDownloader {
                 id: downloader
 
                 onFoundProtonGeVersion: function (version, isOutdated) {
-                    console.log(version);
-
                     if (isOutdated) {
                         downloadProtonGe.protonGeVersion = version;
                         downloadProtonGe.open();
@@ -105,7 +117,7 @@ KSettings.ConfigurationView {
                 parent: general
 
                 onAccepted: {
-                    console.log("User wants to download latest version");
+                    downloader.downloadProtonGe();
                 }
             }
         }

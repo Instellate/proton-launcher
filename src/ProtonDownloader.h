@@ -16,24 +16,46 @@
 #pragma once
 
 #include <QCoro/Task>
+#include <QNetworkAccessManager>
 #include <QObject>
 #include <QtQmlIntegration>
 
 class ProtonDownloader : public QObject {
     Q_OBJECT
     Q_PROPERTY(bool processing MEMBER _processing NOTIFY processingChanged)
+    Q_PROPERTY(bool extracting MEMBER _extracting NOTIFY extractingChanged)
+    Q_PROPERTY(qint64 amountDownloaded MEMBER _amountDownloaded NOTIFY amountDownloadedChanged)
+    Q_PROPERTY(qint64 totalAmount MEMBER _totalAmount NOTIFY totalAmountChanged)
     QML_ELEMENT
 
     bool _processing = false;
+    bool _extracting = false;
+    qint64 _amountDownloaded;
+    qint64 _totalAmount;
+
+    QString _assetsUrl;
+    QNetworkAccessManager *_networkManager;
 
     QCoro::Task<> getProtonGeVersionCoro();
+
+    QCoro::Task<> downloadProtonGeCoro();
+
+    void extractProtonGe(const QString &fileLocation);
 
 public:
     explicit ProtonDownloader(QObject *parent = nullptr);
 
     Q_INVOKABLE void getProtonGeVersion();
+    Q_INVOKABLE void downloadProtonGe();
 
 Q_SIGNALS:
     void processingChanged();
+    void amountDownloadedChanged();
+    void totalAmountChanged();
+    void extractingChanged();
+
     void foundProtonGeVersion(QString version, bool outdated);
+
+private Q_SLOTS:
+    void onDownloadProgress(qint64 bytesSent, qint64 bytesTotal);
 };
