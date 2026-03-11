@@ -15,6 +15,7 @@
 
 import QtQuick
 import QtQuick.Layouts
+import org.kde.ki18n
 import QtQuick.Controls as Controls
 import org.kde.kirigami as Kirigami
 import "utils.js" as Utils
@@ -30,7 +31,7 @@ Kirigami.Page {
 
     actions: [
         Kirigami.Action {
-            text: i18nc("@action:settings", "Configure")
+            text: KI18n.i18nc("@action:settings", "Configure")
             icon.name: "configure"
             onTriggered: settings.open()
         }
@@ -42,7 +43,7 @@ Kirigami.Page {
         spacing: Kirigami.Units.largeSpacing
 
         Image {
-            source: "file://" + game.bannerLocation
+            source: "file://" + root.game.bannerLocation
             fillMode: Image.PreserveAspectCrop
             clip: true
             smooth: true
@@ -57,13 +58,13 @@ Kirigami.Page {
             spacing: Kirigami.Units.gridUnit
 
             GameInfoCard {
-                title: i18nc("@label", "Last Played")
-                description: !root.game.lastPlayed ? i18nc("Game has never been played before", "Never played") : Qt.formatDateTime(root.game.lastPlayed, "MMM, d, yyyy")
+                title: KI18n.i18nc("@label", "Last Played")
+                description: !root.game.lastPlayed ? KI18n.i18nc("Game has never been played before", "Never played") : Qt.formatDateTime(root.game.lastPlayed, "MMM, d, yyyy")
                 iconSource: "clock"
             }
 
             GameInfoCard {
-                title: i18nc("@label", "Amount Played")
+                title: KI18n.i18nc("@label", "Amount Played")
                 description: Utils.formatDuration(root.game.playTime)
             }
         }
@@ -78,7 +79,7 @@ Kirigami.Page {
             Layout.bottomMargin: Kirigami.Units.gridUnit
 
             Controls.Label {
-                text: i18nc("@label", "Console")
+                text: KI18n.i18nc("@label", "Console")
             }
 
             Controls.Frame {
@@ -125,9 +126,9 @@ Kirigami.Page {
         y: Kirigami.Units.gridUnit * root.bannerLength - height - Kirigami.Units.gridUnit * 0.5
         x: Kirigami.Units.gridUnit * 0.5
 
-        text: i18nc("@action", "Play")
+        text: KI18n.i18nc("@action", "Play")
         icon.source: "media-playback-start"
-        enabled: !game.isRunning
+        enabled: !root.game.isRunning
 
         onClicked: {
             root.game.start();
@@ -138,7 +139,7 @@ Kirigami.Page {
         y: Kirigami.Units.gridUnit * root.bannerLength - height - Kirigami.Units.gridUnit * 0.5
         x: Kirigami.Units.gridUnit * 0.5
 
-        text: i18nc("@action", "Stop")
+        text: KI18n.i18nc("@action", "Stop")
         icon.source: "dialog-cancel"
         visible: root.game.isRunning
 

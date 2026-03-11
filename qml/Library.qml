@@ -17,6 +17,7 @@ pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQuick.Layouts
+import org.kde.ki18n
 import QtQuick.Controls as Controls
 import org.kde.kirigami as Kirigami
 import org.kde.kirigamiaddons.delegates as Delegates
@@ -25,7 +26,7 @@ import "utils.js" as Utils
 
 Kirigami.ScrollablePage {
     id: root
-    title: i18nc("@title", "Library")
+    title: KI18n.i18nc("@title", "Library")
 
     property Component addGameComponent: Qt.createComponent("xyz.instellate.protonLauncher", "AddGameDialog")
     property var addGame: addGameComponent.createObject(root)
@@ -34,7 +35,7 @@ Kirigami.ScrollablePage {
         Kirigami.Action {
             id: openRecent
 
-            text: i18nc("@action:opren-recent", "Recent")
+            text: KI18n.i18nc("@action:opren-recent", "Recent")
             icon.name: "appointment-new"
             checkable: true
             checked: true
@@ -44,7 +45,7 @@ Kirigami.ScrollablePage {
             }
         },
         Kirigami.Action {
-            text: i18nc("@action:add-game", "Add Game")
+            text: KI18n.i18nc("@action:add-game", "Add Game")
             icon.name: "list-add"
             onTriggered: root.addGame.open()
         }

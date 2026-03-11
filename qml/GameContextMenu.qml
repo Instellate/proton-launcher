@@ -16,6 +16,7 @@
 pragma ComponentBehavior: Bound
 
 import QtQuick
+import org.kde.ki18n
 import QtQuick.Controls as Controls
 import org.kde.kirigami as Kirigami
 import org.kde.kirigamiaddons.formcard as FormCard
@@ -32,7 +33,7 @@ Item {
 
         Addons.ConvergentContextMenu {
             Kirigami.Action {
-                text: i18nc("@action", "Play")
+                text: KI18n.i18nc("@action", "Play")
                 icon.source: "media-playback-start"
 
                 visible: !root.game.isRunning
@@ -40,7 +41,7 @@ Item {
             }
 
             Kirigami.Action {
-                text: i18nc("@action", "Stop")
+                text: KI18n.i18nc("@action", "Stop")
                 icon.source: "dialog-cancel"
 
                 visible: root.game.isRunning
@@ -48,14 +49,14 @@ Item {
             }
 
             Kirigami.Action {
-                text: i18nc("@action", "Configure")
+                text: KI18n.i18nc("@action", "Configure")
                 icon.source: "configure"
 
                 onTriggered: settings.open()
             }
 
             Kirigami.Action {
-                text: i18nc("@action:inmenu", "Delete")
+                text: KI18n.i18nc("@action:inmenu", "Delete")
                 icon.source: "delete"
 
                 onTriggered: deleteDialog.open()
@@ -72,15 +73,15 @@ Item {
 
     FormCard.FormCardDialog {
         id: deleteDialog
-        title: i18nc("@title:window", "Delete Game")
+        title: KI18n.i18nc("@title:window", "Delete Game")
 
         FormCard.FormHeader {
-            title: i18nc("@action:description", "Are you sure you want to remove this game?")
+            title: KI18n.i18nc("@action:description", "Are you sure you want to remove this game?")
         }
 
         FormCard.FormCheckDelegate {
             id: removeGameFolder
-            text: i18nc("@action:label", "Remove the game folder as well")
+            text: KI18n.i18nc("@action:label", "Remove the game folder as well")
 
             checked: false
         }

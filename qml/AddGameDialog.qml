@@ -14,34 +14,35 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>
 
 import QtCore
+import org.kde.ki18n
 import org.kde.kirigami as Kirigami
 import org.kde.kirigamiaddons.formcard as FormCard
 
 FormCard.FormCardDialog {
     id: root
-    title: i18nc("@title:window", "Add Game")
+    title: KI18n.i18nc("@title:window", "Add Game")
 
     standardButtons: Kirigami.Dialog.Ok | Kirigami.Dialog.Cancel
 
     FormCard.FormTextFieldDelegate {
         id: nameField
-        label: i18nc("@label:textbox", "Name")
+        label: KI18n.i18nc("@label:textbox", "Name")
         onAccepted: executableLocationField.forceActiveFocus()
     }
 
     FormCard.FormFileDelegate {
         id: executableLocationField
-        label: i18nc("@label:file-location", "Game Executable")
+        label: KI18n.i18nc("@label:file-location", "Game Executable")
         currentFolder: StandardPaths.writableLocation(StandardPaths.HomeLocation)
         onAccepted: moveGameField.forceActiveFocus()
-        acceptLabel: i18nc("@label:select-file", "Select")
+        acceptLabel: KI18n.i18nc("@label:select-file", "Select")
     }
 
     FormCard.FormSwitchDelegate {
         id: moveGameField
         checked: GameManager.runsInFlatpak()
         enabled: !GameManager.runsInFlatpak()
-        text: i18nc("@label:checkbox", "Move game folder to library")
+        text: KI18n.i18nc("@label:checkbox", "Move game folder to library")
     }
 
     onAccepted: {

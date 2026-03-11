@@ -127,6 +127,7 @@ target_link_libraries(proton-launcher
     QCoro::Core
     QCoro::Network
     KF6::I18n
+    KF6::I18nQml
     KF6::CoreAddons
     KF6::IconThemes
     KF6::ConfigGui

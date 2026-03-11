@@ -17,6 +17,7 @@ pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQuick.Dialogs
+import org.kde.ki18n
 import org.kde.kirigamiaddons.settings as KSettings
 import org.kde.kirigamiaddons.formcard as FormCard
 
@@ -28,7 +29,7 @@ KSettings.ConfigurationView {
     modules: [
         KSettings.ConfigurationModule {
             moduleId: "launch"
-            text: i18nc("@action:button", "General")
+            text: KI18n.i18nc("@action:button", "General")
             icon.name: "media-playback-start"
             page: () => Qt.createComponent("xyz.instellate.protonLauncher", "GameSettingsGeneralPage")
             initialProperties: () => ({
@@ -37,7 +38,7 @@ KSettings.ConfigurationView {
         },
         KSettings.ConfigurationModule {
             moduleId: "location"
-            text: i18nc("Settings page related to various file locations for a game", "Location")
+            text: KI18n.i18nc("Settings page related to various file locations for a game", "Location")
             icon.name: "tag-folder"
             page: () => root.location
             initialProperties: () => ({
@@ -50,24 +51,24 @@ KSettings.ConfigurationView {
         required property GameInfo game
 
         FormCard.FormHeader {
-            title: i18nc("@title:section:open-prefix-folder", "Prefix Location")
+            title: KI18n.i18nc("@title:section:open-prefix-folder", "Prefix Location")
         }
 
         FormCard.FormCard {
             FormCard.FormLinkDelegate {
-                text: i18nc("@action:button", "Prefix Folder")
+                text: KI18n.i18nc("@action:button", "Prefix Folder")
                 description: root.game.prefixLocation
                 url: "file://" + root.game.prefixLocation
             }
         }
 
         FormCard.FormHeader {
-            title: i18nc("@title:section", "Executable Location")
+            title: KI18n.i18nc("@title:section", "Executable Location")
         }
 
         FormCard.FormCard {
             FormCard.FormLinkDelegate {
-                text: i18nc("@action:button:open-executable-folder", "Executable File")
+                text: KI18n.i18nc("@action:button:open-executable-folder", "Executable File")
                 description: root.game.executableLocation
 
                 url: {
@@ -79,7 +80,7 @@ KSettings.ConfigurationView {
             }
 
             FormCard.FormButtonDelegate {
-                text: i18nc("@action:label", "Change Executable Location")
+                text: KI18n.i18nc("@action:label", "Change Executable Location")
                 onClicked: fileDialog.open()
             }
 

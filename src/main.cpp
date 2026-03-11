@@ -17,6 +17,8 @@
 #include <KConfig>
 #include <KCrash>
 #include <KIconTheme>
+#include <KLocalization>
+#include <KLocalizedQmlContext>
 #include <KLocalizedString>
 #include <KSharedConfig>
 #include <QApplication>
@@ -52,7 +54,8 @@ int main(int argc, char *argv[]) {
             QStringLiteral("proton-launcher"),
             QStringLiteral("Proton Launcher"),
             QStringLiteral(PROTON_LAUNCHER_VERSION_STRING),
-            i18n("A steam-like game launcher and library to manage and run games that require Proton"),
+            i18n("A steam-like game launcher and library to manage and run games that require "
+                 "Proton"),
             KAboutLicense::GPL_V3,
             i18n("© 2026 Instellate"));
     about.addAuthor(
@@ -73,7 +76,7 @@ int main(int argc, char *argv[]) {
     Database::initialize();
 
     QQmlApplicationEngine engine;
-    engine.rootContext()->setContextObject(new KLocalizedContext{&engine});
+    KLocalization::setupLocalizedContext(&engine);
 
     KCrash::initialize();
     QCommandLineParser parser;
