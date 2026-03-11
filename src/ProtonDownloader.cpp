@@ -15,6 +15,7 @@
 
 #include "ProtonDownloader.h"
 
+#include <KLocalizedString>
 #include <KTar>
 #include <QCoro/QCoroNetwork>
 #include <QNetworkReply>
@@ -111,14 +112,20 @@ QCoro::Task<> ProtonDownloader::downloadProtonGeCoro() {
                 const QString hasherResult =
                         QStringLiteral("sha256:") + QString::fromUtf8(hasher->result().toHex());
                 if (hasherResult != digest) {
-                    qFatal() << "Expected digest" << digest << "but got" << hasherResult
-                             << "instead";
+                    this->_error =
+                            i18nc("Sha256 checksum failure",
+                                  "The archive Sha256 checksum doesn't match expected checksum.");
+                    this->_processing = false;
+
+                    Q_EMIT errorChanged();
+                    Q_EMIT processingChanged();
+                    return;
                 }
 
                 file->flush();
                 file->close();
-
                 downloadReply->deleteLater();
+
                 this->_amountDownloaded = 0;
                 this->_totalAmount = 0;
 
@@ -143,8 +150,8 @@ void ProtonDownloader::extractProtonGe(const QString &fileLocation) {
 
     const KArchiveDirectory *archiveDirectory = tar.directory();
 
-    QDir steam = QStandardPaths::writableLocation(QStandardPaths::HomeLocation);
-    steam.cd(QStringLiteral(".local/share/Steam"));
+    QDir steam = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation);
+    steam.cd(QStringLiteral("Steam"));
 
     if (!steam.exists(QStringLiteral("compatibilitytools.d"))) {
         steam.mkdir(QStringLiteral("compatibilitytools.d"));
@@ -177,7 +184,11 @@ ProtonDownloader::ProtonDownloader(QObject *parent) : QObject(parent) {
 
 void ProtonDownloader::getProtonGeVersion() {
     this->_processing = true;
+    this->_error = QVariant(),
+
     Q_EMIT processingChanged();
+    Q_EMIT errorChanged();
+
     getProtonGeVersionCoro().then(
             [this] {
                 this->_processing = false;
@@ -193,6 +204,9 @@ void ProtonDownloader::getProtonGeVersion() {
 }
 
 void ProtonDownloader::downloadProtonGe() {
+    this->_error = QVariant();
+    Q_EMIT errorChanged();
+
     downloadProtonGeCoro();
 }
 

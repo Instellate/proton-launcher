@@ -165,8 +165,8 @@ void GameManager::addGame(
 QVariantMap GameManager::getProtonInstallations() {
     QVariantMap proton;
 
-    QDir steam = QStandardPaths::writableLocation(QStandardPaths::HomeLocation);
-    steam.cd(QStringLiteral(".local/share/Steam"));
+    QDir steam = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation);
+    steam.cd(QStringLiteral("Steam"));
 
     QDir compatTools = steam.filePath(QStringLiteral("compatibilitytools.d"));
     for (const QFileInfo &possibleInstall: compatTools.entryInfoList(QDir::Dirs)) {

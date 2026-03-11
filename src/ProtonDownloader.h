@@ -26,12 +26,14 @@ class ProtonDownloader : public QObject {
     Q_PROPERTY(bool extracting MEMBER _extracting NOTIFY extractingChanged)
     Q_PROPERTY(qint64 amountDownloaded MEMBER _amountDownloaded NOTIFY amountDownloadedChanged)
     Q_PROPERTY(qint64 totalAmount MEMBER _totalAmount NOTIFY totalAmountChanged)
+    Q_PROPERTY(QVariant error MEMBER _error NOTIFY errorChanged)
     QML_ELEMENT
 
     bool _processing = false;
     bool _extracting = false;
     qint64 _amountDownloaded;
     qint64 _totalAmount;
+    QVariant _error;
 
     QString _assetsUrl;
     QNetworkAccessManager *_networkManager;
@@ -53,6 +55,7 @@ Q_SIGNALS:
     void amountDownloadedChanged();
     void totalAmountChanged();
     void extractingChanged();
+    void errorChanged();
 
     void foundProtonGeVersion(QString version, bool outdated);
 
