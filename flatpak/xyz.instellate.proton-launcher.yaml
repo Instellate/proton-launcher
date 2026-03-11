@@ -53,6 +53,8 @@ modules:
         contents: |
           /app/lib32
           /app/lib/i386-linux-gnu
+    download-if: have-intel-gpu
+    autoprune-unless: have-intel-gpu
 
   - name: proton-launcher-metainfo
     buildsystem: simple
@@ -68,4 +70,3 @@ modules:
       - type: git
         url: https://github.com/Instellate/proton-launcher.git
         branch: main
-        commit: 18090cab8e2a27cdf7e35fc1945eba491fed5201
