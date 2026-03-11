@@ -8,8 +8,9 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: https://github.com/Instellate/proton-launcher/issues\n"
 "POT-Creation-Date: 2026-03-11 08:18+0100\n"
-"PO-Revision-Date: 2026-03-05 17:33+0000\n"
-"Last-Translator: Instellate <instellate@instellate.xyz>\n"
+"PO-Revision-Date: 2026-03-11 09:33+0000\n"
+"Last-Translator: Weblate Admin "
+"<instellate@users.noreply.weblate.instellate.xyz>\n"
 "Language-Team: Swedish <https://weblate.instellate.xyz/projects/proton-"
 "launcher/app/sv/>\n"
 "Language: sv\n"
@@ -47,13 +48,12 @@ msgstr "Flytta spel till biblotek"
 #: qml/DownloadProtonDialog.qml:21
 msgctxt "@title:window"
 msgid "Download ProtonGE"
-msgstr ""
+msgstr "Ladda ner ProtonGE"
 
 #: qml/DownloadProtonDialog.qml:28
-#, fuzzy
 msgctxt "@label:title"
 msgid "Are you sure you want to download %1?"
-msgstr "Är du säker på att du vill radera detta spel?"
+msgstr "Är du säker på att du vill ladda ner %?"
 
 #: qml/GameContextMenu.qml:35 qml/Game.qml:128
 msgctxt "@action"
@@ -250,23 +250,22 @@ msgstr "Standard Start Argument"
 #: qml/Settings.qml:73
 msgctxt "@action:description:Amount downloaded"
 msgid "%1 out of %2 downloaded"
-msgstr ""
+msgstr "%1 ut av %2 nedladdat"
 
 #: qml/Settings.qml:77
 msgctxt "@action:description:Extracting ProtonGE"
 msgid "Extracting files from archive"
-msgstr ""
+msgstr "Extraherar filer from arkivet"
 
 #: qml/Settings.qml:81
 msgctxt "@action:description"
 msgid "Already on latest version %1"
-msgstr ""
+msgstr "Redan på senaste version %1"
 
 #: qml/Settings.qml:87
-#, fuzzy
 msgctxt "@action:button"
 msgid "Download latest ProtonGE version"
-msgstr "Standard Proton version"
+msgstr "Ladda ner senaste ProtonGE version"
 
 #: src/main.cpp:55
 msgid ""
@@ -297,4 +296,4 @@ msgstr "instellate@instellate.xyz"
 #: src/ProtonDownloader.cpp:117
 msgctxt "Sha256 checksum failure"
 msgid "The archive Sha256 checksum doesn't match expected checksum"
-msgstr ""
+msgstr "Arkivets Sha256 kontrollsumma matchar inte förväntad kontrollsumma"
