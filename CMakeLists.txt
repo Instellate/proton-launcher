@@ -61,9 +61,6 @@ find_package(KF6 REQUIRED COMPONENTS
 
 find_package(QCoro6 REQUIRED COMPONENTS Core Network)
 
-get_target_property(QCORO_INCLUDE_DIRS QCoro6::Core INTERFACE_INCLUDE_DIRECTORIES)
-message(STATUS ${QCORO_INCLUDE_DIRS})
-
 ecm_find_qmlmodule(org.kde.kirigami REQUIRED)
 ecm_find_qmlmodule(org.kde.kirigamiaddons.formcard REQUIRED)
 ecm_find_qmlmodule(org.kde.kirigamiaddons.settings REQUIRED)
