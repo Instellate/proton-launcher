@@ -61,6 +61,9 @@ find_package(KF6 REQUIRED COMPONENTS
 
 find_package(QCoro6 REQUIRED COMPONENTS Core Network)
 
+get_target_property(QCORO_INCLUDE_DIRS QCoro6::Core INTERFACE_INCLUDE_DIRECTORIES)
+message(STATUS ${QCORO_INCLUDE_DIRS})
+
 ecm_find_qmlmodule(org.kde.kirigami REQUIRED)
 ecm_find_qmlmodule(org.kde.kirigamiaddons.formcard REQUIRED)
 ecm_find_qmlmodule(org.kde.kirigamiaddons.settings REQUIRED)
@@ -138,6 +141,7 @@ target_link_libraries(proton-launcher
 target_include_directories(proton-launcher PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
 target_compile_options(proton-launcher PRIVATE -Wall -Wextra)
+kde_target_enable_exceptions(proton-launcher PRIVATE)
 
 install(TARGETS proton-launcher ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 install(PROGRAMS xyz.instellate.proton-launcher.desktop DESTINATION ${KDE_INSTALL_APPDIR})

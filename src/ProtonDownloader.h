@@ -15,7 +15,7 @@
 
 #pragma once
 
-#include <QCoro/Task>
+#include <QCoro/QCoroTask>
 #include <QNetworkAccessManager>
 #include <QObject>
 #include <QtQmlIntegration>
