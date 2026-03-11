@@ -20,31 +20,18 @@ import org.kde.kirigamiaddons.formcard as FormCard
 KSettings.ConfigurationView {
     id: root
 
-    modules: [
-        KSettings.ConfigurationModule {
-            moduleId: "General"
-            page: () => root.general
-            text: i18nc("@action:button", "General")
-        }
-    ]
-
     readonly property Component general: FormCard.FormCardPage {
         id: general
 
         FormCard.FormHeader {
             title: i18nc("@title:section", "Game Launch")
         }
-
         FormCard.FormCard {
             FormCard.FormComboBoxDelegate {
+                model: proxyModel
                 text: i18nc("@label", "Default Proton version")
                 textRole: "name"
                 valueRole: "value"
-                model: proxyModel
-
-                onActivated: {
-                    Config.defaultProtonVersion = currentValue;
-                }
 
                 Component.onCompleted: {
                     const protonInstalls = GameManager.getProtonInstallations();
@@ -61,8 +48,10 @@ KSettings.ConfigurationView {
                         }
                     }
                 }
+                onActivated: {
+                    Config.defaultProtonVersion = currentValue;
+                }
             }
-
             FormCard.FormTextFieldDelegate {
                 label: i18nc("@label", "Default Launch Arguments")
                 placeholderText: i18n("%command% will be substituted with the run command")
@@ -70,17 +59,16 @@ KSettings.ConfigurationView {
 
                 onTextChanged: Config.defaultLaunchArguments = text
             }
-
             FormCard.FormButtonDelegate {
                 id: protonGeVersion
 
                 property var currentVersion: null
 
-                text: i18nc("@action:button", "Download latest ProtonGE version")
-                onClicked: downloader.getProtonGeVersion()
-                enabled: !downloader.processing
-
                 description: {
+                    if (downloader.error !== undefined) {
+                        return downloader.error;
+                    }
+
                     if (downloader.totalAmount !== 0) {
                         return i18nc("@action:description:Amount downloaded", "%1 out of %2 downloaded", Qt.locale().formattedDataSize(downloader.amountDownloaded), Qt.locale().formattedDataSize(downloader.totalAmount));
                     }
@@ -95,8 +83,11 @@ KSettings.ConfigurationView {
 
                     return null;
                 }
-            }
+                enabled: !downloader.processing
+                text: i18nc("@action:button", "Download latest ProtonGE version")
 
+                onClicked: downloader.getProtonGeVersion()
+            }
             ProtonDownloader {
                 id: downloader
 
@@ -111,26 +102,26 @@ KSettings.ConfigurationView {
                     }
                 }
             }
-
             DownloadProtonDialog {
                 id: downloadProtonGe
 
-                protonGeVersion: null
                 parent: general
+                protonGeVersion: null
 
                 onAccepted: {
                     downloader.downloadProtonGe();
                 }
             }
         }
-
         ListModel {
             id: protonVersionsModel
-        }
 
+        }
         SortFilterProxyModel {
             id: proxyModel
+
             model: protonVersionsModel
+
             sorters: [
                 RoleSorter {
                     roleName: "name"
@@ -138,4 +129,12 @@ KSettings.ConfigurationView {
             ]
         }
     }
+
+    modules: [
+        KSettings.ConfigurationModule {
+            moduleId: "General"
+            page: () => root.general
+            text: i18nc("@action:button", "General")
+        }
+    ]
 }
