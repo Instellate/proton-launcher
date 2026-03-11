@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: proton-launcher\n"
 "Report-Msgid-Bugs-To: https://github.com/Instellate/proton-launcher/issues\n"
-"POT-Creation-Date: 2026-03-05 16:12+0100\n"
+"POT-Creation-Date: 2026-03-11 08:18+0100\n"
 "PO-Revision-Date: 2026-03-05 17:36+0000\n"
 "Last-Translator: Instellate <instellate@instellate.xyz>\n"
 "Language-Team: German <https://weblate.instellate.xyz/projects/proton-"
@@ -38,10 +38,21 @@ msgctxt "@label:select-file"
 msgid "Select"
 msgstr "Auswählen"
 
-#: qml/AddGameDialog.qml:43
+#: qml/AddGameDialog.qml:44
 msgctxt "@label:checkbox"
 msgid "Move game folder to library"
 msgstr "Spielordner in Bibliothek verschieben"
+
+#: qml/DownloadProtonDialog.qml:21
+msgctxt "@title:window"
+msgid "Download ProtonGE"
+msgstr ""
+
+#: qml/DownloadProtonDialog.qml:28
+#, fuzzy
+msgctxt "@label:title"
+msgid "Are you sure you want to download %1?"
+msgstr "Möchtest du dieses Spiel wirklich entfernen?"
 
 #: qml/GameContextMenu.qml:35 qml/Game.qml:128
 msgctxt "@action"
@@ -138,11 +149,11 @@ msgctxt "@label"
 msgid "Launch Arguments"
 msgstr "Startargumente"
 
-#: qml/GameSettingsGeneralPage.qml:89 qml/Settings.qml:66
+#: qml/GameSettingsGeneralPage.qml:89 qml/Settings.qml:57
 msgid "%command% will be substituted with the run command"
 msgstr "%command% wird durch den Ausführungsbefehl ersetzt."
 
-#: qml/GameSettings.qml:31 qml/Settings.qml:27
+#: qml/GameSettings.qml:31 qml/Settings.qml:137
 msgctxt "@action:button"
 msgid "General"
 msgstr "Allgemein"
@@ -220,20 +231,41 @@ msgstr "Spiel beenden"
 msgid "You haven't played any games yet"
 msgstr "Du hast noch keine Spiele gespielt"
 
-#: qml/Settings.qml:33
+#: qml/Settings.qml:27
 msgctxt "@title:section"
 msgid "Game Launch"
 msgstr "Spielstart"
 
-#: qml/Settings.qml:38
+#: qml/Settings.qml:32
 msgctxt "@label"
 msgid "Default Proton version"
 msgstr "Standard-Proton-Version"
 
-#: qml/Settings.qml:65
+#: qml/Settings.qml:56
 msgctxt "@label"
 msgid "Default Launch Arguments"
 msgstr "Standard-Startargumente"
+
+#: qml/Settings.qml:73
+msgctxt "@action:description:Amount downloaded"
+msgid "%1 out of %2 downloaded"
+msgstr ""
+
+#: qml/Settings.qml:77
+msgctxt "@action:description:Extracting ProtonGE"
+msgid "Extracting files from archive"
+msgstr ""
+
+#: qml/Settings.qml:81
+msgctxt "@action:description"
+msgid "Already on latest version %1"
+msgstr ""
+
+#: qml/Settings.qml:87
+#, fuzzy
+msgctxt "@action:button"
+msgid "Download latest ProtonGE version"
+msgstr "Standard-Proton-Version"
 
 #: src/main.cpp:55
 msgid ""
@@ -260,6 +292,11 @@ msgstr "yuki6942"
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "contact@yuki6942.de"
+
+#: src/ProtonDownloader.cpp:117
+msgctxt "Sha256 checksum failure"
+msgid "The archive Sha256 checksum doesn't match expected checksum"
+msgstr ""
 
 #~ msgctxt "@title"
 #~ msgid "Location"

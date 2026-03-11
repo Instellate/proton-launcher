@@ -112,9 +112,12 @@ QCoro::Task<> ProtonDownloader::downloadProtonGeCoro() {
                 const QString hasherResult =
                         QStringLiteral("sha256:") + QString::fromUtf8(hasher->result().toHex());
                 if (hasherResult != digest) {
+                    qWarning() << "Expected checksum" << digest << "but instead got"
+                               << hasherResult;
+
                     this->_error =
                             i18nc("Sha256 checksum failure",
-                                  "The archive Sha256 checksum doesn't match expected checksum.");
+                                  "The archive Sha256 checksum doesn't match expected checksum");
                     this->_processing = false;
 
                     Q_EMIT errorChanged();
