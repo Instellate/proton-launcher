@@ -84,8 +84,7 @@ QCoro::Task<> ProtonDownloader::downloadProtonGeCoro() {
 
     const QDir tmpLocation(QStandardPaths::writableLocation(QStandardPaths::TempLocation));
     const QString fileLocation = tmpLocation.filePath(assetName);
-    // ReSharper disable once CppDFAMemoryLeak
-    auto *file = new QFile(tmpLocation.filePath(assetName));
+    QSharedPointer<QFile> file(new QFile(tmpLocation.filePath(assetName)));
 
     if (!file->open(QIODevice::Truncate | QIODevice::WriteOnly)) {
         qFatal() << "Cannot open file" << tmpLocation.filePath(assetName);
@@ -101,9 +100,9 @@ QCoro::Task<> ProtonDownloader::downloadProtonGeCoro() {
             &ProtonDownloader::onDownloadProgress);
 
     connect(downloadReply, &QNetworkReply::readyRead, [downloadReply, file, hasher] {
-        const QByteArray bytes = downloadReply->readAll();
-        file->write(bytes);
-        hasher->addData(bytes);
+        const QByteArray partialBytes = downloadReply->readAll();
+        file->write(partialBytes);
+        hasher->addData(partialBytes);
     });
 
     connect(downloadReply,
@@ -118,7 +117,6 @@ QCoro::Task<> ProtonDownloader::downloadProtonGeCoro() {
 
                 file->flush();
                 file->close();
-                file->deleteLater();
 
                 downloadReply->deleteLater();
                 this->_amountDownloaded = 0;
@@ -151,8 +149,8 @@ void ProtonDownloader::extractProtonGe(const QString &fileLocation) {
     if (!steam.exists(QStringLiteral("compatibilitytools.d"))) {
         steam.mkdir(QStringLiteral("compatibilitytools.d"));
     }
-    const QDir compatTools = steam.filePath(QStringLiteral("compatibilitytools.d"));
 
+    const QDir compatTools = steam.filePath(QStringLiteral("compatibilitytools.d"));
     if (!archiveDirectory->copyTo(compatTools.path())) {
         qFatal() << "Couldn't copy archive to" << compatTools;
     }

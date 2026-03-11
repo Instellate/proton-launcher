@@ -76,21 +76,21 @@ KSettings.ConfigurationView {
 
                 property var currentVersion: null
 
-                text: i18nc("@action:button", "Check ProtonGE Version")
+                text: i18nc("@action:button", "Download latest ProtonGE version")
                 onClicked: downloader.getProtonGeVersion()
                 enabled: !downloader.processing
 
                 description: {
-                    if (currentVersion !== null) {
-                        return i18nc("@action:description", "Current latest ProtonGE version: %1", currentVersion);
-                    }
-
                     if (downloader.totalAmount !== 0) {
-                        return i18nc("@action:description:Amount downloaded", "%1 out of %2", Qt.locale().formattedDataSize(downloader.amountDownloaded), Qt.locale().formattedDataSize(downloader.totalAmount));
+                        return i18nc("@action:description:Amount downloaded", "%1 out of %2 downloaded", Qt.locale().formattedDataSize(downloader.amountDownloaded), Qt.locale().formattedDataSize(downloader.totalAmount));
                     }
 
                     if (downloader.extracting) {
                         return i18nc("@action:description:Extracting ProtonGE", "Extracting files from archive");
+                    }
+
+                    if (currentVersion !== null) {
+                        return i18nc("@action:description", "Already on latest version %1", currentVersion);
                     }
 
                     return null;
@@ -102,6 +102,8 @@ KSettings.ConfigurationView {
 
                 onFoundProtonGeVersion: function (version, isOutdated) {
                     if (isOutdated) {
+                        protonGeVersion.currentVersion = null;
+
                         downloadProtonGe.protonGeVersion = version;
                         downloadProtonGe.open();
                     } else {
@@ -110,7 +112,7 @@ KSettings.ConfigurationView {
                 }
             }
 
-            DownloadProtonGeDialog {
+            DownloadProtonDialog {
                 id: downloadProtonGe
 
                 protonGeVersion: null
