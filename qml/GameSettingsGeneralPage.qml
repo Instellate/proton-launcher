@@ -15,6 +15,7 @@
 
 import QtQml
 import QtCore
+import org.kde.ki18n
 import org.kde.kirigamiaddons.formcard as FormCard
 
 FormCard.FormCardPage {
@@ -23,12 +24,12 @@ FormCard.FormCardPage {
     required property GameInfo game
 
     FormCard.FormHeader {
-        title: i18nc("@title:section", "Metadata")
+        title: KI18n.i18nc("@title:section", "Metadata")
     }
 
     FormCard.FormCard {
         FormCard.FormTextFieldDelegate {
-            label: i18nc("@label", "Name")
+            label: KI18n.i18nc("@label", "Name")
             text: root.game.name
 
             onTextChanged: {
@@ -40,7 +41,7 @@ FormCard.FormCardPage {
         }
 
         FormCard.FormFileDelegate {
-            label: i18nc("@label", "Game Banner")
+            label: KI18n.i18nc("@label", "Game Banner")
             currentFolder: root.game.bannerLocation === null ? StandardPaths.writableLocation(StandardPaths.PicturesLocation) : new URL("file://" + root.game.bannerLocation)
 
             onAccepted: {
@@ -49,7 +50,7 @@ FormCard.FormCardPage {
         }
 
         FormCard.FormFileDelegate {
-            label: i18nc("@label", "Game Icon")
+            label: KI18n.i18nc("@label", "Game Icon")
             currentFolder: root.game.iconLocation === null ? StandardPaths.writableLocation(StandardPaths.PicturesLocation) : new URL("file://" + root.game.iconLocation)
 
             onAccepted: {
@@ -59,12 +60,12 @@ FormCard.FormCardPage {
     }
 
     FormCard.FormHeader {
-        title: i18nc("@title:section", "Launch")
+        title: KI18n.i18nc("@title:section", "Launch")
     }
 
     FormCard.FormCard {
         FormCard.FormComboBoxDelegate {
-            text: i18nc("@label", "Proton Version")
+            text: KI18n.i18nc("@label", "Proton Version")
             textRole: "name"
             valueRole: "value"
             model: proxyModel
@@ -85,8 +86,8 @@ FormCard.FormCardPage {
         }
 
         FormCard.FormTextFieldDelegate {
-            label: i18nc("@label", "Launch Arguments")
-            placeholderText: i18n("%command% will be substituted with the run command")
+            label: KI18n.i18nc("@label", "Launch Arguments")
+            placeholderText: KI18n.i18n("%command% will be substituted with the run command")
             text: root.game.launchArguments
 
             onTextChanged: {

@@ -13,18 +13,19 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>
 
+import org.kde.ki18n
 import org.kde.kirigami as Kirigami
 import org.kde.kirigamiaddons.formcard as FormCard
 
 FormCard.FormCardDialog {
     id: root
-    title: i18nc("@title:window", "Download ProtonGE")
+    title: KI18n.i18nc("@title:window", "Download ProtonGE")
 
     standardButtons: Kirigami.Dialog.Ok | Kirigami.Dialog.Cancel
 
     required property var protonGeVersion
 
     FormCard.FormHeader {
-        title: i18nc("@label:title", "Are you sure you want to download %1?", root.protonGeVersion)
+        title: KI18n.i18nc("@label:title", "Are you sure you want to download %1?", root.protonGeVersion)
     }
 }

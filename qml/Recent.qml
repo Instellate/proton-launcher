@@ -16,13 +16,14 @@
 pragma ComponentBehavior: Bound
 
 import QtQuick
+import org.kde.ki18n
 import QtQuick.Controls as Controls
 import org.kde.kirigami as Kirigami
 import "utils.js" as Utils
 
 Kirigami.ScrollablePage {
     id: root
-    title: i18nc("@title", "Recently Played Games")
+    title: KI18n.i18nc("@title", "Recently Played Games")
 
     Flow {
         spacing: Kirigami.Units.largeSpacing
@@ -55,13 +56,13 @@ Kirigami.ScrollablePage {
                 actions: [
                     Kirigami.Action {
                         visible: !card.game.isRunning
-                        text: i18nc("@action:button", "Start game")
+                        text: KI18n.i18nc("@action:button", "Start game")
                         icon.source: "media-playback-start"
                         onTriggered: card.game.start()
                     },
                     Kirigami.Action {
                         visible: card.game.isRunning
-                        text: i18nc("@action:button", "Stop game")
+                        text: KI18n.i18nc("@action:button", "Stop game")
                         icon.source: "dialog-cancel"
                         onTriggered: card.game.stop()
                     }
@@ -80,7 +81,7 @@ Kirigami.ScrollablePage {
                             anchors.verticalCenter: parent.verticalCenter
 
                             Controls.Label {
-                                text: i18nc("@label", "Last Played")
+                                text: KI18n.i18nc("@label", "Last Played")
                                 elide: Text.ElideRight
                             }
 
@@ -106,7 +107,7 @@ Kirigami.ScrollablePage {
                             anchors.verticalCenter: parent.verticalCenter
 
                             Controls.Label {
-                                text: i18nc("@label", "Amount Played")
+                                text: KI18n.i18nc("@label", "Amount Played")
                                 elide: Text.ElideRight
                             }
 
@@ -135,7 +136,7 @@ Kirigami.ScrollablePage {
 
     Controls.Label {
         visible: itemModel.count == 0
-        text: i18n("You haven't played any games yet")
+        text: KI18n.i18n("You haven't played any games yet")
         font.pixelSize: Kirigami.Units.gridUnit
 
         anchors.centerIn: parent

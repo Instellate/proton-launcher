@@ -14,6 +14,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>
 
 import QtQml
+import org.kde.ki18n
 import org.kde.kirigamiaddons.settings as KSettings
 import org.kde.kirigamiaddons.formcard as FormCard
 
@@ -24,12 +25,12 @@ KSettings.ConfigurationView {
         id: general
 
         FormCard.FormHeader {
-            title: i18nc("@title:section", "Game Launch")
+            title: KI18n.i18nc("@title:section", "Game Launch")
         }
         FormCard.FormCard {
             FormCard.FormComboBoxDelegate {
                 model: proxyModel
-                text: i18nc("@label", "Default Proton version")
+                text: KI18n.i18nc("@label", "Default Proton version")
                 textRole: "name"
                 valueRole: "value"
 
@@ -53,8 +54,8 @@ KSettings.ConfigurationView {
                 }
             }
             FormCard.FormTextFieldDelegate {
-                label: i18nc("@label", "Default Launch Arguments")
-                placeholderText: i18n("%command% will be substituted with the run command")
+                label: KI18n.i18nc("@label", "Default Launch Arguments")
+                placeholderText: KI18n.i18n("%command% will be substituted with the run command")
                 text: Config.defaultLaunchArguments
 
                 onTextChanged: Config.defaultLaunchArguments = text
@@ -70,21 +71,21 @@ KSettings.ConfigurationView {
                     }
 
                     if (downloader.totalAmount !== 0) {
-                        return i18nc("@action:description:Amount downloaded", "%1 out of %2 downloaded", Qt.locale().formattedDataSize(downloader.amountDownloaded), Qt.locale().formattedDataSize(downloader.totalAmount));
+                        return KI18n.i18nc("@action:description:Amount downloaded", "%1 out of %2 downloaded", Qt.locale().formattedDataSize(downloader.amountDownloaded), Qt.locale().formattedDataSize(downloader.totalAmount));
                     }
 
                     if (downloader.extracting) {
-                        return i18nc("@action:description:Extracting ProtonGE", "Extracting files from archive");
+                        return KI18n.i18nc("@action:description:Extracting ProtonGE", "Extracting files from archive");
                     }
 
                     if (currentVersion !== null) {
-                        return i18nc("@action:description", "Already on latest version %1", currentVersion);
+                        return KI18n.i18nc("@action:description", "Already on latest version %1", currentVersion);
                     }
 
                     return null;
                 }
                 enabled: !downloader.processing
-                text: i18nc("@action:button", "Download latest ProtonGE version")
+                text: KI18n.i18nc("@action:button", "Download latest ProtonGE version")
 
                 onClicked: downloader.getProtonGeVersion()
             }
@@ -134,7 +135,7 @@ KSettings.ConfigurationView {
         KSettings.ConfigurationModule {
             moduleId: "General"
             page: () => root.general
-            text: i18nc("@action:button", "General")
+            text: KI18n.i18nc("@action:button", "General")
         }
     ]
 }

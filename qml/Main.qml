@@ -14,6 +14,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>
 
 import QtQuick
+import org.kde.ki18n
 import org.kde.kirigami as Kirigami
 import org.kde.kirigamiaddons.statefulapp as StatefulApp
 import org.kde.kirigamiaddons.formcard as FormCard
@@ -39,7 +40,7 @@ StatefulApp.StatefulWindow {
                 separator: true
             },
             Kirigami.Action {
-                text: i18n("About Proton Launcher")
+                text: KI18n.i18n("About Proton Launcher")
                 icon.name: "help-about"
                 onTriggered: {
                     root.pageStack.pushDialogLayer(aboutPage, {
@@ -47,7 +48,7 @@ StatefulApp.StatefulWindow {
                     }, {
                         width: Kirigami.Units.gridUnit * 30,
                         height: Kirigami.Units.gridUnit * 30,
-                        title: i18nc("@title:window", "About Proton Launcher")
+                        title: KI18n.i18nc("@title:window", "About Proton Launcher")
                     });
                 }
             },
