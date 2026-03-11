@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: https://github.com/Instellate/proton-launcher/issues\n"
-"POT-Creation-Date: 2026-03-05 16:12+0100\n"
+"POT-Creation-Date: 2026-03-11 08:18+0100\n"
 "PO-Revision-Date: 2026-03-05 17:33+0000\n"
 "Last-Translator: Flaze <flazepe@gmail.com>\n"
 "Language-Team: Japanese <https://weblate.instellate.xyz/projects/proton-"
@@ -39,10 +39,21 @@ msgctxt "@label:select-file"
 msgid "Select"
 msgstr "セレクト"
 
-#: qml/AddGameDialog.qml:43
+#: qml/AddGameDialog.qml:44
 msgctxt "@label:checkbox"
 msgid "Move game folder to library"
 msgstr "ライブラリーにゲームを移動"
+
+#: qml/DownloadProtonDialog.qml:21
+msgctxt "@title:window"
+msgid "Download ProtonGE"
+msgstr ""
+
+#: qml/DownloadProtonDialog.qml:28
+#, fuzzy
+msgctxt "@label:title"
+msgid "Are you sure you want to download %1?"
+msgstr "本当にゲームを解除してもよろしいですか。"
 
 #: qml/GameContextMenu.qml:35 qml/Game.qml:128
 msgctxt "@action"
@@ -139,11 +150,11 @@ msgctxt "@label"
 msgid "Launch Arguments"
 msgstr "実行引数"
 
-#: qml/GameSettingsGeneralPage.qml:89 qml/Settings.qml:66
+#: qml/GameSettingsGeneralPage.qml:89 qml/Settings.qml:57
 msgid "%command% will be substituted with the run command"
 msgstr "%command%は実行コマンドで代わります"
 
-#: qml/GameSettings.qml:31 qml/Settings.qml:27
+#: qml/GameSettings.qml:31 qml/Settings.qml:137
 msgctxt "@action:button"
 msgid "General"
 msgstr "一般"
@@ -221,20 +232,41 @@ msgstr "ゲームを終了"
 msgid "You haven't played any games yet"
 msgstr "あなたはまだ何もゲームをプレイしていませんでした"
 
-#: qml/Settings.qml:33
+#: qml/Settings.qml:27
 msgctxt "@title:section"
 msgid "Game Launch"
 msgstr "ゲーム実行"
 
-#: qml/Settings.qml:38
+#: qml/Settings.qml:32
 msgctxt "@label"
 msgid "Default Proton version"
 msgstr "Protonのデフォルトバージョン"
 
-#: qml/Settings.qml:65
+#: qml/Settings.qml:56
 msgctxt "@label"
 msgid "Default Launch Arguments"
 msgstr "デフォルト実行引数"
+
+#: qml/Settings.qml:73
+msgctxt "@action:description:Amount downloaded"
+msgid "%1 out of %2 downloaded"
+msgstr ""
+
+#: qml/Settings.qml:77
+msgctxt "@action:description:Extracting ProtonGE"
+msgid "Extracting files from archive"
+msgstr ""
+
+#: qml/Settings.qml:81
+msgctxt "@action:description"
+msgid "Already on latest version %1"
+msgstr ""
+
+#: qml/Settings.qml:87
+#, fuzzy
+msgctxt "@action:button"
+msgid "Download latest ProtonGE version"
+msgstr "Protonのデフォルトバージョン"
 
 #: src/main.cpp:55
 msgid ""
@@ -259,3 +291,8 @@ msgstr "flazepe"
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "contact@flaz.ing"
+
+#: src/ProtonDownloader.cpp:117
+msgctxt "Sha256 checksum failure"
+msgid "The archive Sha256 checksum doesn't match expected checksum"
+msgstr ""
