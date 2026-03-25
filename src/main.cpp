@@ -49,7 +49,7 @@ int main(int argc, char *argv[]) {
         QQuickStyle::setStyle(QStringLiteral("org.kde.desktop"));
     }
 
-    QApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("xyz.instellate.protonLauncher")));
+    QApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("xyz.instellate.proton-launcher")));
 
     KAboutData about(
             QStringLiteral("proton-launcher"),
