@@ -18,6 +18,7 @@ import org.kde.ki18n
 import org.kde.kirigami as Kirigami
 import org.kde.kirigamiaddons.statefulapp as StatefulApp
 import org.kde.kirigamiaddons.formcard as FormCard
+import "utils.js" as Utils
 
 StatefulApp.StatefulWindow {
     id: root
@@ -75,4 +76,24 @@ StatefulApp.StatefulWindow {
     }
 
     onClosing: GameManager.saveSettings()
+
+    function openRecent() {
+        Utils.openPage(Qt.resolvedUrl("Recent.qml"));
+
+        root.showNormal();
+        root.raise();
+        root.requestActivate();
+    }
+
+    function openGame(game) {
+        Utils.openPage(Qt.resolvedUrl("Game.qml"), {
+            game,
+        });
+
+        game.start();
+
+        root.showNormal();
+        root.raise();
+        root.requestActivate();
+    }
 }

@@ -1,5 +1,5 @@
 # Maintainer: Instellate
-pkgname='proton-launcher'
+pkgname='proton-launcher-qt'
 pkgver='0.0.0'
 pkgrel=1
 pkgdesc='A program that manages a library of your games and launches them through proton'

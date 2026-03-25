@@ -144,8 +144,8 @@ void GameInfo::setBannerLocation(const QVariant &banner) {
         qFatal() << "Expected string when setting banner location";
     }
 
-    QDir gallery = QStandardPaths::writableLocation(QStandardPaths::HomeLocation);
-    gallery = gallery.filePath(QStringLiteral(".proton-launcher"));
+    QDir gallery = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation);
+    gallery = gallery.filePath(QStringLiteral("proton-launcher"));
     gallery = gallery.filePath(QStringLiteral("gallery"));
 
     if (!gallery.exists(this->_id)) {
@@ -221,8 +221,8 @@ void GameInfo::setIconLocation(const QVariant &icon) {
         qFatal() << "Expected string when setting launch arguments";
     }
 
-    QDir gallery = QStandardPaths::writableLocation(QStandardPaths::HomeLocation);
-    gallery = gallery.filePath(QStringLiteral(".proton-launcher"));
+    QDir gallery = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation);
+    gallery = gallery.filePath(QStringLiteral("proton-launcher"));
     gallery = gallery.filePath(QStringLiteral("gallery"));
 
     if (!gallery.exists(this->_id)) {
@@ -324,6 +324,7 @@ void GameInfo::start() {
             &GameInfo::readChannelAvailable);
 
     this->_gameProcess->setProcessEnvironment(environment);
+    this->_gameProcess->setWorkingDirectory(QFileInfo(executable).absolutePath());
     this->_gameProcess->start(bashLocation, arguments);
     qInfo() << "Started game" << this->_name << "with process id"
             << this->_gameProcess->processId();
