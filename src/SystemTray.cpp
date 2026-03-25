@@ -52,7 +52,8 @@ SystemTray::SystemTray(QQmlApplicationEngine *engine, QObject *parent) : QObject
     connect(this->_recentAction, &QAction::triggered, this, &SystemTray::recentTriggered);
 
     this->_notifierItem =
-            new KStatusNotifierItem(QStringLiteral("xyz.instellate.protonLauncher"), this);
+            new KStatusNotifierItem(QStringLiteral("xyz.instellate.proton-launcher"), this);
+    this->_notifierItem->setIconByName(QStringLiteral("xyz.instellate.proton-launcher"));
     this->_notifierItem->setContextMenu(this->_notifierItemMenu);
     connect(this->_notifierItem,
             &KStatusNotifierItem::activateRequested,
@@ -63,22 +64,19 @@ SystemTray::SystemTray(QQmlApplicationEngine *engine, QObject *parent) : QObject
 void SystemTray::recentTriggered() const {
     QObject *rootObject = this->_qmlEngine->rootObjects().first();
 
-    const QMetaObject *metaObject = rootObject->metaObject();
-    metaObject->invokeMethod(rootObject, "openRecent");
+    QMetaObject::invokeMethod(rootObject, "openRecent");
 }
 
 void SystemTray::gameTriggered(const GameInfo *game) const {
     QObject *rootObject = this->_qmlEngine->rootObjects().first();
 
-    const QMetaObject *metaObject = rootObject->metaObject();
-    metaObject->invokeMethod(rootObject, "openGame", QVariant::fromValue(game));
+    QMetaObject::invokeMethod(rootObject, "openGame", QVariant::fromValue(game));
 }
 
 void SystemTray::activateRequested() const {
     QObject *rootObject = this->_qmlEngine->rootObjects().first();
 
-    const QMetaObject *metaObject = rootObject->metaObject();
-    metaObject->invokeMethod(rootObject, "showNormal");
-    metaObject->invokeMethod(rootObject, "raise");
-    metaObject->invokeMethod(rootObject, "requestActivate");
+    QMetaObject::invokeMethod(rootObject, "showNormal");
+    QMetaObject::invokeMethod(rootObject, "raise");
+    QMetaObject::invokeMethod(rootObject, "requestActivate");
 }
