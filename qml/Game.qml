@@ -113,9 +113,16 @@ Kirigami.Page {
                         }
                     }
 
-                    Controls.Label {
+                    Controls.TextArea {
                         id: consoleText
                         text: root.game.consoleLog
+
+                        readOnly: true
+                        selectByMouse: true
+
+                        background: Rectangle {
+                            color: palette.window
+                        }
                     }
                 }
             }
