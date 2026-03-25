@@ -66,7 +66,7 @@ KSettings.ConfigurationView {
                 property var currentVersion: null
 
                 description: {
-                    if (downloader.error !== undefined) {
+                    if (downloader.error !== null) {
                         return downloader.error;
                     }
 
@@ -82,7 +82,7 @@ KSettings.ConfigurationView {
                         return KI18n.i18nc("@action:description", "Already on latest version %1", currentVersion);
                     }
 
-                    return null;
+                    return "";
                 }
                 enabled: !downloader.processing
                 text: KI18n.i18nc("@action:button", "Download latest ProtonGE version")
