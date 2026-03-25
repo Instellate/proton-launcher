@@ -35,7 +35,7 @@ Kirigami.ScrollablePage {
         Kirigami.Action {
             id: openRecent
 
-            text: KI18n.i18nc("@action:opren-recent", "Recent")
+            text: KI18n.i18nc("@action:open-recent", "Recent")
             icon.name: "appointment-new"
             checkable: true
             checked: true
@@ -75,6 +75,7 @@ Kirigami.ScrollablePage {
                 highlighted: ListView.isCurrentItem
                 gridView: itemDelegate.GridView
                 listView: itemDelegate.ListView
+                checked: itemDelegate.ListView.view.currentIndex === itemDelegate.index
 
                 contentItem: RowLayout {
                     spacing: Kirigami.Units.largeSpacing
@@ -172,7 +173,24 @@ Kirigami.ScrollablePage {
         target: applicationWindow().pageStack
 
         function onPagePushed(page) {
+            if (page instanceof Game) {
+                for (let i = 0; i < proxyModel.rowCount(); ++i) {
+                    const index = proxyModel.index(i, 0);
+                    const data = proxyModel.data(index);
+
+                    if (data.id !== page.game.id) {
+                        continue;
+                    }
+
+                    itemView.currentIndex = i;
+                    break;
+                }
+            }
+
             openRecent.checked = page instanceof Recent;
+            if (page instanceof Recent) {
+                itemView.currentIndex = -1;
+            }
         }
     }
 

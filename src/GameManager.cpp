@@ -23,11 +23,11 @@
 #include "config.h"
 
 QDir getPrefixPath() {
-    const QString storageLocation = QStringLiteral(".proton-launcher");
+    const QString storageLocation = QStringLiteral("proton-launcher");
     const QString games = QStringLiteral("games");
     const QString prefixes = QStringLiteral("prefixes");
 
-    QDir prefixPath = QStandardPaths::writableLocation(QStandardPaths::HomeLocation);
+    QDir prefixPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation);
     prefixPath.cd(storageLocation);
     prefixPath.cd(prefixes);
     return prefixes;
@@ -104,11 +104,11 @@ void GameManager::addGame(
         qFatal() << "Didn't get a file";
     }
 
-    const QString storageLocation = QStringLiteral(".proton-launcher");
+    const QString storageLocation = QStringLiteral("proton-launcher");
     const QString games = QStringLiteral("games");
     const QString prefixes = QStringLiteral("prefixes");
 
-    QDir protonPath = QStandardPaths::writableLocation(QStandardPaths::HomeLocation);
+    QDir protonPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation);
     if (!protonPath.exists(storageLocation)) {
         if (!protonPath.mkdir(storageLocation)) {
             qFatal() << "Couldn't create" << protonPath.filePath(storageLocation);

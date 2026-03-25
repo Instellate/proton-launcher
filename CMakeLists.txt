@@ -57,6 +57,7 @@ find_package(KF6 REQUIRED COMPONENTS
     Config
     Crash
     Archive
+    StatusNotifierItem
 )
 
 find_package(QCoro6 REQUIRED COMPONENTS Core Network)
@@ -85,6 +86,7 @@ target_sources(proton-launcher PRIVATE
     src/GameInfo.cpp src/GameInfo.h
     src/GameManager.cpp src/GameManager.cpp
     src/ProtonDownloader.cpp src/ProtonDownloader.h
+    src/SystemTray.cpp src/SystemTray.h
     ${PROTON_LAUNCHER_RESOURCES}
 )
 
@@ -133,6 +135,7 @@ target_link_libraries(proton-launcher
     KF6::ConfigGui
     KF6::Crash
     KF6::Archive
+    KF6::StatusNotifierItem
     KirigamiAddonsStatefulApp
 )
 

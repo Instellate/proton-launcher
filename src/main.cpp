@@ -30,6 +30,7 @@
 #include <QString>
 
 #include "Database.h"
+#include "SystemTray.h"
 #include "config.h"
 #include "proton-launcher-version.h"
 
@@ -88,6 +89,8 @@ int main(int argc, char *argv[]) {
     if (engine.rootObjects().isEmpty()) {
         return -1;
     }
+
+    SystemTray tray(&engine);
 
     return QApplication::exec();
 }

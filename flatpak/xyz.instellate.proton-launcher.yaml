@@ -16,11 +16,11 @@ finish-args:
   - --share=ipc
   - --socket=wayland
   - --socket=fallback-x11
-  - --socket=pulseaudio # notification sound
-  - --allow=devel # ubisoft connect and other launchers
+  - --socket=pulseaudio
+  - --allow=devel
   - --allow=multiarch
   - --device=all
-  - --env=PATH=/app/bin:/usr/bin:/usr/lib/extensions/vulkan/MangoHud/bin # mangohud
+  - --env=PATH=/app/bin:/usr/bin:/usr/lib/extensions/vulkan/MangoHud/bin
   - --filesystem=home
 
 inherit-extensions:
