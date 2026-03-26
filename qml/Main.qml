@@ -87,7 +87,7 @@ StatefulApp.StatefulWindow {
 
     function openGame(game) {
         Utils.openPage(Qt.resolvedUrl("Game.qml"), {
-            game,
+            game
         });
 
         game.start();

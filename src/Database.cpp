@@ -52,7 +52,7 @@ void Database::initialize() {
 
     QDir migrationsDir(QStringLiteral(":/resources/migrations"));
     QFileInfoList migrations = migrationsDir.entryInfoList();
-    for (const QFileInfo &migration: migrations) {
+    for (const QFileInfo &migration : migrations) {
         QString migrationName = migration.fileName();
 
         if (set.contains(migrationName)) {
@@ -65,7 +65,7 @@ void Database::initialize() {
         }
 
         QString migrationContent = QString::fromUtf8(migrationFile.readAll());
-        for (const QString &migrationString: migrationContent.split(QStringLiteral(";"))) {
+        for (const QString &migrationString : migrationContent.split(QStringLiteral(";"))) {
             QSqlQuery migrationQuery(migrationString);
             if (!migrationQuery.exec()) {
                 qDebug() << migrationQuery.lastError();

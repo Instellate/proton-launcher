@@ -116,7 +116,6 @@ KSettings.ConfigurationView {
         }
         ListModel {
             id: protonVersionsModel
-
         }
         SortFilterProxyModel {
             id: proxyModel

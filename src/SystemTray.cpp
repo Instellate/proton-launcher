@@ -24,24 +24,27 @@ SystemTray::SystemTray(QQmlApplicationEngine *engine, QObject *parent) : QObject
     this->_qmlEngine = engine;
     this->_notifierItemMenu = new QMenu();
 
-    const auto *gameManager = this->_qmlEngine->singletonInstance<const GameManager *>(
-            QStringLiteral("xyz.instellate.protonLauncher"), QStringLiteral("GameManager"));
-    QList<GameInfo *> games = gameManager->games();
+    GameManager *gameManager = getGameManager();
+    connect(gameManager, &GameManager::gamesChanged, this, &SystemTray::gamesChanged);
+
+    QList<const GameInfo *> games = gameManager->games().toList<QList<const GameInfo *>>();
 
     qsizetype count = 0;
-    for (const GameInfo *game: games) {
+    for (const GameInfo *game : games) {
         if (++count >= 5) {
             break;
         }
 
-        // ReSharper disable once CppDFAMemoryLeak
         QAction *gameAction = new QAction(game->name(), this);
 
-        this->_notifierItemMenu->addAction(gameAction);
         connect(gameAction, &QAction::triggered, [this, game] { gameTriggered(game); });
+        this->_gameActions.emplace_back(gameAction);
     }
+    this->_notifierItemMenu->addActions(this->_gameActions);
 
-    this->_notifierItemMenu->addSeparator();
+    if (count > 0) {
+        this->_gamesSeperator = this->_notifierItemMenu->addSeparator();
+    }
 
     this->_recentAction = new QAction(
             i18nc("@system-tray:action:Opens recent games page", "Recent"),
@@ -79,4 +82,44 @@ void SystemTray::activateRequested() const {
     QMetaObject::invokeMethod(rootObject, "showNormal");
     QMetaObject::invokeMethod(rootObject, "raise");
     QMetaObject::invokeMethod(rootObject, "requestActivate");
+}
+
+void SystemTray::gamesChanged() {
+    GameManager *gameManager = getGameManager();
+
+    for (QAction *action : this->_gameActions) {
+        this->_notifierItemMenu->removeAction(action);
+        delete action;
+    }
+    this->_gameActions.clear();
+
+    if (this->_gamesSeperator) {
+        this->_notifierItemMenu->removeAction(this->_gamesSeperator);
+        this->_gamesSeperator = nullptr;
+    }
+
+    QList<const GameInfo *> games = gameManager->games().toList<QList<const GameInfo *>>();
+    if (games.size() <= 0) {
+        return;
+    }
+
+    qsizetype count = 0;
+    for (const GameInfo *game : games) {
+        if (++count >= 5) {
+            break;
+        }
+
+        QAction *gameAction = new QAction(game->name(), this);
+
+        connect(gameAction, &QAction::triggered, [this, game] { gameTriggered(game); });
+        this->_gameActions.emplace_back(gameAction);
+    }
+
+    this->_notifierItemMenu->insertActions(this->_recentAction, this->_gameActions);
+    this->_gamesSeperator = this->_notifierItemMenu->insertSeparator(this->_recentAction);
+}
+
+GameManager *SystemTray::getGameManager() const {
+    return this->_qmlEngine->singletonInstance<GameManager *>(
+            QStringLiteral("xyz.instellate.protonLauncher"), QStringLiteral("GameManager"));
 }

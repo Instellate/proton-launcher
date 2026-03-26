@@ -16,13 +16,14 @@
 #pragma once
 
 #include <QObject>
+#include <QQmlListProperty>
 #include <QtQmlIntegration>
 
 #include "GameInfo.h"
 
 class GameManager final : public QObject {
     Q_OBJECT
-    Q_PROPERTY(QList<GameInfo *> games READ games NOTIFY gamesChanged)
+    Q_PROPERTY(QQmlListProperty<GameInfo> games READ games NOTIFY gamesChanged)
     Q_PROPERTY(QVariant currentGameRunning READ currentGameRunning NOTIFY currentGameRunningChanged)
     QML_ELEMENT
     QML_SINGLETON
@@ -36,7 +37,7 @@ public:
 
     ~GameManager() override;
 
-    [[nodiscard]] QList<GameInfo *> games() const;
+    [[nodiscard]] QQmlListProperty<GameInfo> games();
     [[nodiscard]] QVariant currentGameRunning() const;
 
     Q_INVOKABLE void addGame(const QString &name, const QUrl &executableLocation, bool moveGame);
@@ -53,4 +54,7 @@ Q_SIGNALS:
     void gamesChanged();
 
     void currentGameRunningChanged();
+
+private Q_SLOTS:
+    void lastPlayedChanged();
 };

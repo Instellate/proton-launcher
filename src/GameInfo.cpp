@@ -154,7 +154,7 @@ void GameInfo::setBannerLocation(const QVariant &banner) {
     gallery.cd(this->_id);
 
     const QStringList oldBanners = gallery.entryList({QStringLiteral("banner.*")});
-    for (const QString &oldBanner: oldBanners) {
+    for (const QString &oldBanner : oldBanners) {
         QFile file(oldBanner);
         file.remove();
     }
@@ -231,7 +231,7 @@ void GameInfo::setIconLocation(const QVariant &icon) {
     gallery.cd(this->_id);
 
     const QStringList oldIcons = gallery.entryList({QStringLiteral("icon.*")});
-    for (const QString &oldIcon: oldIcons) {
+    for (const QString &oldIcon : oldIcons) {
         QFile file(oldIcon);
         file.remove();
     }
@@ -359,6 +359,17 @@ void GameInfo::stop() {
 
         process.waitForFinished();
     });
+}
+
+std::partial_ordering GameInfo::operator<=>(const GameInfo &rhs) const {
+    if (this->_lastPlayed.isNull() || rhs._lastPlayed.isNull()) {
+        return std::partial_ordering::unordered;
+    }
+
+    const QDateTime lhsLastPlayed = this->_lastPlayed.toDateTime();
+    const QDateTime rhsLastPlayed = rhs._lastPlayed.toDateTime();
+
+    return lhsLastPlayed <=> rhsLastPlayed;
 }
 
 void GameInfo::gameProcessFinished() {

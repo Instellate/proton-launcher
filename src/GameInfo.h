@@ -88,6 +88,8 @@ public:
     Q_INVOKABLE void start();
     Q_INVOKABLE void stop();
 
+    std::partial_ordering operator<=>(const GameInfo &rhs) const;
+
 Q_SIGNALS:
     void idChanged();
     void nameChanged();
