@@ -65,7 +65,7 @@ QCoro::Task<> ProtonDownloader::downloadProtonGeCoro() {
     QString assetName;
     QString digest;
 
-    for (const QJsonValueConstRef assetValue: assets) {
+    for (const QJsonValueConstRef assetValue : assets) {
         const QJsonObject assetObj = assetValue.toObject();
 
         const QString possibleUrl = assetObj[QStringLiteral("browser_download_url")].toString();

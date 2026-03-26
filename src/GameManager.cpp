@@ -15,7 +15,6 @@
 
 #include "GameManager.h"
 
-#include <QSqlDatabase>
 #include <QSqlError>
 #include <QSqlQuery>
 #include <qobject.h>
@@ -38,14 +37,15 @@ GameManager::GameManager(QObject *parent) : QObject(parent) {
     QSqlQuery query(QStringLiteral("SELECT * FROM games ORDER BY last_played DESC"));
 
     while (query.next()) {
-        this->_games.emplace_back(new GameInfo(this, query));
-    }
+        GameInfo *game = new GameInfo(this, query);
+        connect(game, &GameInfo::lastPlayedChanged, this, &GameManager::lastPlayedChanged);
 
-    gamesChanged();
+        this->_games.emplace_back(game);
+    }
 }
 
 GameManager::~GameManager() {
-    for (const GameInfo *game: this->_games) {
+    for (const GameInfo *game : this->_games) {
         if (!game->_updated) {
             continue;
         }
@@ -81,8 +81,8 @@ GameManager::~GameManager() {
     }
 }
 
-QList<GameInfo *> GameManager::games() const {
-    return this->_games;
+QQmlListProperty<GameInfo> GameManager::games() {
+    return QQmlListProperty(this, &this->_games);
 }
 
 QVariant GameManager::currentGameRunning() const {
@@ -169,7 +169,7 @@ QVariantMap GameManager::getProtonInstallations() {
     steam.cd(QStringLiteral("Steam"));
 
     QDir compatTools = steam.filePath(QStringLiteral("compatibilitytools.d"));
-    for (const QFileInfo &possibleInstall: compatTools.entryInfoList(QDir::Dirs)) {
+    for (const QFileInfo &possibleInstall : compatTools.entryInfoList(QDir::Dirs)) {
         QFileInfo protonFile(QDir(possibleInstall.filePath()).filePath(QStringLiteral("proton")));
 
         if (!protonFile.exists() || !protonFile.isExecutable()) {
@@ -181,7 +181,7 @@ QVariantMap GameManager::getProtonInstallations() {
 
     QDir steamCommon = steam.filePath(QStringLiteral("steamapps/common"));
 
-    for (const QFileInfo &possibleInstall: steamCommon.entryInfoList(QDir::Dirs)) {
+    for (const QFileInfo &possibleInstall : steamCommon.entryInfoList(QDir::Dirs)) {
         QFileInfo protonFile(QDir(possibleInstall.filePath()).filePath(QStringLiteral("proton")));
         if (!protonFile.exists() || !protonFile.isExecutable()) {
             continue;
@@ -201,7 +201,7 @@ void GameManager::removeGame(const QString &gameId, bool removeGameFolder) {
     qsizetype size = 0;
     const GameInfo *game = nullptr;
 
-    for (const GameInfo *possibleGame: this->_games) {
+    for (const GameInfo *possibleGame : this->_games) {
         if (possibleGame->id() == gameId) {
             game = possibleGame;
             break;
@@ -229,8 +229,16 @@ void GameManager::removeGame(const QString &gameId, bool removeGameFolder) {
 
     this->_games.removeAt(size);
     Q_EMIT gamesChanged();
+
+    delete game;
 }
 
 bool GameManager::runsInFlatpak() {
     return qEnvironmentVariableIsSet("FLATPAK_ID");
+}
+
+void GameManager::lastPlayedChanged() {
+    std::ranges::stable_sort(
+            this->_games, [](const GameInfo *lhs, const GameInfo *rhs) { return *lhs > *rhs; });
+    Q_EMIT gamesChanged();
 }

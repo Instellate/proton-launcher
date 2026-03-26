@@ -21,8 +21,6 @@
 #include <QObject>
 #include <QQmlApplicationEngine>
 
-class GameInfo;
-
 class SystemTray : public QObject {
     Q_OBJECT
 
@@ -31,17 +29,22 @@ class SystemTray : public QObject {
     KStatusNotifierItem *_notifierItem;
     QMenu *_notifierItemMenu;
 
-    QAction *_quitAction;
     QAction *_recentAction;
+    QAction *_gamesSeperator = nullptr;
+    QList<QAction *> _gameActions;
 
 public:
     explicit SystemTray(QQmlApplicationEngine *engine, QObject *parent = nullptr);
 
-private Q_SLOT:
-
+private Q_SLOTS:
     void recentTriggered() const;
 
-    void gameTriggered(const GameInfo *game) const;
+    void gameTriggered(const class GameInfo *game) const;
 
     void activateRequested() const;
+
+    void gamesChanged();
+
+private:
+    class GameManager *getGameManager() const;
 };
