@@ -58,6 +58,8 @@ SystemTray::SystemTray(QQmlApplicationEngine *engine, QObject *parent) : QObject
             new KStatusNotifierItem(QStringLiteral("xyz.instellate.proton-launcher"), this);
     this->_notifierItem->setIconByName(QStringLiteral("xyz.instellate.proton-launcher"));
     this->_notifierItem->setContextMenu(this->_notifierItemMenu);
+    this->_notifierItem->setStatus(KStatusNotifierItem::Active);
+
     connect(this->_notifierItem,
             &KStatusNotifierItem::activateRequested,
             this,
