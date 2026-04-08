@@ -130,8 +130,13 @@ Kirigami.Page {
     }
 
     Controls.Button {
-        y: Kirigami.Units.gridUnit * root.bannerLength - height - Kirigami.Units.gridUnit * 0.5
-        x: Kirigami.Units.gridUnit * 0.5
+        anchors {
+            left: parent.left
+            top: parent.top
+
+            leftMargin: Kirigami.Units.gridUnit * 0.5
+            topMargin: Kirigami.Units.gridUnit * root.bannerLength - height - Kirigami.Units.gridUnit * 0.5
+        }
 
         text: KI18n.i18nc("@action", "Play")
         icon.source: "media-playback-start"
@@ -143,8 +148,13 @@ Kirigami.Page {
     }
 
     Controls.Button {
-        y: Kirigami.Units.gridUnit * root.bannerLength - height - Kirigami.Units.gridUnit * 0.5
-        x: Kirigami.Units.gridUnit * 0.5
+        anchors {
+            left: parent.left
+            top: parent.top
+
+            leftMargin: Kirigami.Units.gridUnit * 0.5
+            topMargin: Kirigami.Units.gridUnit * root.bannerLength - height - Kirigami.Units.gridUnit * 0.5
+        }
 
         text: KI18n.i18nc("@action", "Stop")
         icon.source: "dialog-cancel"

@@ -39,6 +39,7 @@ Kirigami.ScrollablePage {
             icon.name: "appointment-new"
             checkable: true
             checked: true
+
             onTriggered: {
                 itemView.currentIndex = -1;
                 Utils.openPage(Qt.resolvedUrl("Recent.qml"));
