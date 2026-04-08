@@ -16,6 +16,7 @@
 #include <KAboutData>
 #include <KConfig>
 #include <KCrash>
+#include <KDBusService>
 #include <KIconTheme>
 #include <KLocalization>
 #include <KLocalizedQmlContext>
@@ -85,12 +86,14 @@ int main(int argc, char *argv[]) {
     parser.process(app);
     about.processCommandLine(&parser);
 
+    KDBusService service(KDBusService::Unique);
+
     engine.loadFromModule("xyz.instellate.protonLauncher", "Main");
     if (engine.rootObjects().isEmpty()) {
         return -1;
     }
 
-    SystemTray tray(&engine);
+    SystemTray tray(&engine, &service);
 
     return QApplication::exec();
 }
