@@ -58,6 +58,7 @@ find_package(KF6 REQUIRED COMPONENTS
     Crash
     Archive
     StatusNotifierItem
+    DBusAddons
 )
 
 find_package(QCoro6 REQUIRED COMPONENTS Core Network)
@@ -136,6 +137,7 @@ target_link_libraries(proton-launcher
     KF6::Crash
     KF6::Archive
     KF6::StatusNotifierItem
+    KF6::DBusAddons
     KirigamiAddonsStatefulApp
 )
 

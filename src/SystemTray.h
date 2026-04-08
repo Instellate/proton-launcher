@@ -15,6 +15,7 @@
 
 #pragma once
 
+#include <KDBusService>
 #include <KStatusNotifierItem>
 #include <QAction>
 #include <QMenu>
@@ -34,7 +35,8 @@ class SystemTray : public QObject {
     QList<QAction *> _gameActions;
 
 public:
-    explicit SystemTray(QQmlApplicationEngine *engine, QObject *parent = nullptr);
+    SystemTray(
+            QQmlApplicationEngine *engine, const KDBusService *service, QObject *parent = nullptr);
 
 private Q_SLOTS:
     void recentTriggered() const;

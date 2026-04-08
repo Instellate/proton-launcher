@@ -20,7 +20,9 @@
 
 #include "GameManager.h"
 
-SystemTray::SystemTray(QQmlApplicationEngine *engine, QObject *parent) : QObject(parent) {
+SystemTray::SystemTray(
+        QQmlApplicationEngine *engine, const KDBusService *service, QObject *parent) :
+    QObject(parent) {
     this->_qmlEngine = engine;
     this->_notifierItemMenu = new QMenu();
 
@@ -64,6 +66,7 @@ SystemTray::SystemTray(QQmlApplicationEngine *engine, QObject *parent) : QObject
             &KStatusNotifierItem::activateRequested,
             this,
             &SystemTray::activateRequested);
+    connect(service, &KDBusService::activateRequested, this, &SystemTray::activateRequested);
 }
 
 void SystemTray::recentTriggered() const {

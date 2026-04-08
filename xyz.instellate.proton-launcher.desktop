@@ -5,3 +5,4 @@ Icon=xyz.instellate.proton-launcher
 Type=Application
 Terminal=false
 Categories=Game
+X-DBUS-StartupType=Unique
