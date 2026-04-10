@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: proton-launcher\n"
 "Report-Msgid-Bugs-To: https://github.com/Instellate/proton-launcher/issues\n"
-"POT-Creation-Date: 2026-03-11 10:14+0100\n"
+"POT-Creation-Date: 2026-04-10 09:42+0200\n"
 "PO-Revision-Date: 2026-03-05 17:36+0000\n"
 "Last-Translator: Instellate <instellate@instellate.xyz>\n"
 "Language-Team: German <https://weblate.instellate.xyz/projects/proton-"
@@ -54,12 +54,12 @@ msgctxt "@label:title"
 msgid "Are you sure you want to download %1?"
 msgstr "Möchtest du dieses Spiel wirklich entfernen?"
 
-#: qml/GameContextMenu.qml:36 qml/Game.qml:129
+#: qml/GameContextMenu.qml:36 qml/Game.qml:141
 msgctxt "@action"
 msgid "Play"
 msgstr "Spielen"
 
-#: qml/GameContextMenu.qml:44 qml/Game.qml:142
+#: qml/GameContextMenu.qml:44 qml/Game.qml:159
 msgctxt "@action"
 msgid "Stop"
 msgstr "Stoppen"
@@ -124,36 +124,36 @@ msgctxt "@label"
 msgid "Name"
 msgstr "Name"
 
-#: qml/GameSettingsGeneralPage.qml:44
+#: qml/GameSettingsGeneralPage.qml:46
 msgctxt "@label"
 msgid "Game Banner"
 msgstr "Spielbanner"
 
-#: qml/GameSettingsGeneralPage.qml:53
+#: qml/GameSettingsGeneralPage.qml:58
 msgctxt "@label"
 msgid "Game Icon"
 msgstr "Spielsymbol"
 
-#: qml/GameSettingsGeneralPage.qml:63
+#: qml/GameSettingsGeneralPage.qml:69
 msgctxt "@title:section"
 msgid "Launch"
 msgstr "Starten"
 
-#: qml/GameSettingsGeneralPage.qml:68
+#: qml/GameSettingsGeneralPage.qml:74
 msgctxt "@label"
 msgid "Proton Version"
 msgstr "Proton-Version"
 
-#: qml/GameSettingsGeneralPage.qml:89
+#: qml/GameSettingsGeneralPage.qml:95
 msgctxt "@label"
 msgid "Launch Arguments"
 msgstr "Startargumente"
 
-#: qml/GameSettingsGeneralPage.qml:90 qml/Settings.qml:58
+#: qml/GameSettingsGeneralPage.qml:96 qml/Settings.qml:58
 msgid "%command% will be substituted with the run command"
 msgstr "%command% wird durch den Ausführungsbefehl ersetzt."
 
-#: qml/GameSettings.qml:32 qml/Settings.qml:138
+#: qml/GameSettings.qml:32 qml/Settings.qml:137
 msgctxt "@action:button"
 msgid "General"
 msgstr "Allgemein"
@@ -194,20 +194,21 @@ msgid "Library"
 msgstr "Bibliothek"
 
 #: qml/Library.qml:38
-msgctxt "@action:opren-recent"
+#, fuzzy
+msgctxt "@action:open-recent"
 msgid "Recent"
 msgstr "Kürzlich"
 
-#: qml/Library.qml:48
+#: qml/Library.qml:49
 msgctxt "@action:add-game"
 msgid "Add Game"
 msgstr "Spiel hinzufügen"
 
-#: qml/Main.qml:43
+#: qml/Main.qml:44
 msgid "About Proton Launcher"
 msgstr "Über Proton Launcher"
 
-#: qml/Main.qml:51
+#: qml/Main.qml:52
 msgctxt "@title:window"
 msgid "About Proton Launcher"
 msgstr "Über Proton Launcher"
@@ -227,7 +228,7 @@ msgctxt "@action:button"
 msgid "Stop game"
 msgstr "Spiel beenden"
 
-#: qml/Recent.qml:139
+#: qml/Recent.qml:150
 msgid "You haven't played any games yet"
 msgstr "Du hast noch keine Spiele gespielt"
 
@@ -267,7 +268,7 @@ msgctxt "@action:button"
 msgid "Download latest ProtonGE version"
 msgstr "Standard-Proton-Version"
 
-#: src/main.cpp:57
+#: src/main.cpp:59
 msgid ""
 "A steam-like game launcher and library to manage and run games that require "
 "Proton"
@@ -275,20 +276,20 @@ msgstr ""
 "Ein Steam-ähnlicher Launcher und eine Bibliothek zum Verwalten und Ausführen "
 "von Spielen, die Proton benötigen"
 
-#: src/main.cpp:60
+#: src/main.cpp:62
 msgid "© 2026 Instellate"
 msgstr "© 2026 Instellate"
 
-#: src/main.cpp:63
+#: src/main.cpp:65
 msgid "Maintainer"
 msgstr "Entwickler"
 
-#: src/main.cpp:70
+#: src/main.cpp:72
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr "yuki6942"
 
-#: src/main.cpp:71
+#: src/main.cpp:73
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "contact@yuki6942.de"
@@ -297,6 +298,12 @@ msgstr "contact@yuki6942.de"
 msgctxt "Sha256 checksum failure"
 msgid "The archive Sha256 checksum doesn't match expected checksum"
 msgstr ""
+
+#: src/SystemTray.cpp:52
+#, fuzzy
+msgctxt "@system-tray:action:Opens recent games page"
+msgid "Recent"
+msgstr "Kürzlich"
 
 #~ msgctxt "@title"
 #~ msgid "Location"
