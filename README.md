@@ -16,21 +16,19 @@ Tested Desktop Environmnets:
 
 This currently requires having steam installed on your system. But there are plans to add supoport to run games without the need for having a local steam installation.
 
-## Building and installing
-
-Arch
+## Installation
+The application is currently available through the [AUR](https://aur.archlinux.org/packages/proton-launcher-qt).
 ```sh
-$ sudo pacman -S --needed git base-devel
-$ git clone https://github.com/Instellate/proton-launcher
-$ proton-launcher
-$ makepkg -si
+$ paru -S proton-launcher-qt # Or your preferred AUR supported package handler
 ```
+
+Flatpak publications will come later when I have fully tested it on flatpak.
 
 ## Q&A
 - Why did you make this?
-  - Steam takes too long to start and I don't like Lutris.
+  - Steam requires an online connection and takes too long to start. I don't either like how lutris works and the AI related drama surrounding it.
 - Are there any translations?
-  - The project is configured to support translations. But there are no languages that has been translated yet. Translations files are available at `./po`
+  - Yes, currently German, Swedish and Japanese has translations. If you want to help with translations, create an issue for the language you want to help with and I'll give you access to the translation tools.
 - This doesn't work on (insert desktop environment), please fix.
   - I won't, this is made with KDE specific components. 
     If you want to add support to your desktop environment feel free to PR.
