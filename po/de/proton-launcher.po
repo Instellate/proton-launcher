@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: proton-launcher\n"
 "Report-Msgid-Bugs-To: https://github.com/Instellate/proton-launcher/issues\n"
 "POT-Creation-Date: 2026-04-10 09:42+0200\n"
-"PO-Revision-Date: 2026-03-05 17:36+0000\n"
-"Last-Translator: Instellate <instellate@instellate.xyz>\n"
+"PO-Revision-Date: 2026-04-10 07:59+0000\n"
+"Last-Translator: yuki6942 <philippaltekoster+github@gmail.com>\n"
 "Language-Team: German <https://weblate.instellate.xyz/projects/proton-"
 "launcher/app/de/>\n"
 "Language: de\n"
@@ -46,13 +46,12 @@ msgstr "Spielordner in Bibliothek verschieben"
 #: qml/DownloadProtonDialog.qml:22
 msgctxt "@title:window"
 msgid "Download ProtonGE"
-msgstr ""
+msgstr "ProtonGE herunterladen"
 
 #: qml/DownloadProtonDialog.qml:29
-#, fuzzy
 msgctxt "@label:title"
 msgid "Are you sure you want to download %1?"
-msgstr "Möchtest du dieses Spiel wirklich entfernen?"
+msgstr "Möchtest du %1 wirklich herunterladen?"
 
 #: qml/GameContextMenu.qml:36 qml/Game.qml:141
 msgctxt "@action"
@@ -194,7 +193,6 @@ msgid "Library"
 msgstr "Bibliothek"
 
 #: qml/Library.qml:38
-#, fuzzy
 msgctxt "@action:open-recent"
 msgid "Recent"
 msgstr "Kürzlich"
@@ -250,23 +248,22 @@ msgstr "Standard-Startargumente"
 #: qml/Settings.qml:74
 msgctxt "@action:description:Amount downloaded"
 msgid "%1 out of %2 downloaded"
-msgstr ""
+msgstr "%1 von %2 heruntergeladen"
 
 #: qml/Settings.qml:78
 msgctxt "@action:description:Extracting ProtonGE"
 msgid "Extracting files from archive"
-msgstr ""
+msgstr "Dateien aus einem Archiv extrahieren"
 
 #: qml/Settings.qml:82
 msgctxt "@action:description"
 msgid "Already on latest version %1"
-msgstr ""
+msgstr "Bereits auf der neuesten Version %1"
 
 #: qml/Settings.qml:88
-#, fuzzy
 msgctxt "@action:button"
 msgid "Download latest ProtonGE version"
-msgstr "Standard-Proton-Version"
+msgstr "Aktuelle ProtonGE-Version herunterladen"
 
 #: src/main.cpp:59
 msgid ""
@@ -298,9 +295,10 @@ msgstr "contact@yuki6942.de"
 msgctxt "Sha256 checksum failure"
 msgid "The archive Sha256 checksum doesn't match expected checksum"
 msgstr ""
+"Die SHA-256-Prüfsumme des Archivs stimmt nicht mit der erwarteten Prüfsumme "
+"überein"
 
 #: src/SystemTray.cpp:52
-#, fuzzy
 msgctxt "@system-tray:action:Opens recent games page"
 msgid "Recent"
 msgstr "Kürzlich"
