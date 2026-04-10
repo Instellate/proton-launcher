@@ -249,6 +249,7 @@ void GameInfo::setIconLocation(const QVariant &icon) {
 
     this->_iconLocation = galleryPath;
     this->_updated = true;
+
     Q_EMIT iconLocationChanged();
 }
 

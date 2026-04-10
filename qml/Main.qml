@@ -90,7 +90,9 @@ StatefulApp.StatefulWindow {
             game
         });
 
-        game.start();
+        if (!game.isRunning) {
+            game.start();
+        } 
 
         root.showNormal();
         root.raise();

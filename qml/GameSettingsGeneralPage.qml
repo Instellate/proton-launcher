@@ -41,8 +41,11 @@ FormCard.FormCardPage {
         }
 
         FormCard.FormFileDelegate {
+            id: gameBannerDelegate
+
             label: KI18n.i18nc("@label", "Game Banner")
-            currentFolder: root.game.bannerLocation === null ? StandardPaths.writableLocation(StandardPaths.PicturesLocation) : new URL("file://" + root.game.bannerLocation)
+            currentFolder: !root.game.bannerLocation ? StandardPaths.writableLocation(StandardPaths.PicturesLocation) : new URL("file://" + root.game.bannerLocation)
+            nameFilters: ["Images (*.png *.jpg *.jpeg *.webp *.svg)"]
 
             onAccepted: {
                 root.game.bannerLocation = this.selectedFile;
@@ -50,8 +53,11 @@ FormCard.FormCardPage {
         }
 
         FormCard.FormFileDelegate {
+            id: gameIconDelegate
+
             label: KI18n.i18nc("@label", "Game Icon")
-            currentFolder: root.game.iconLocation === null ? StandardPaths.writableLocation(StandardPaths.PicturesLocation) : new URL("file://" + root.game.iconLocation)
+            currentFolder: !root.game.iconLocation ? StandardPaths.writableLocation(StandardPaths.PicturesLocation) : new URL("file://" + root.game.iconLocation)
+            nameFilters: ["Images (*.png *.jpg *.jpeg *.webp *.svg)"]
 
             onAccepted: {
                 root.game.iconLocation = this.selectedFile;
@@ -116,6 +122,27 @@ FormCard.FormCardPage {
                 roleName: "name"
             }
         ]
+    }
+
+    // This for some reason does not update the game location properly
+    Connections {
+        target: root.game
+
+        function onIconLocationChanged() {
+            if (!root.game.iconLocation) {
+                return;
+            }
+            
+            gameIconDelegate.selectedFile = new URL("file://" + root.game.iconLocation);
+        }
+
+        function onBannerLocationChanged() {
+            if (!root.game.bannerLocation) {
+                return;
+            }
+
+            gameBannerDelegate.selectedFile = new URL("file://" + root.game.bannerLocation);
+        }
     }
 
     Component.onCompleted: {
