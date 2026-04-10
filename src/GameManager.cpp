@@ -37,7 +37,7 @@ GameManager::GameManager(QObject *parent) : QObject(parent) {
     QSqlQuery query(QStringLiteral("SELECT * FROM games ORDER BY last_played DESC"));
 
     while (query.next()) {
-        GameInfo *game = new GameInfo(this, query);
+        auto *game = new GameInfo(this, query);
         connect(game, &GameInfo::lastPlayedChanged, this, &GameManager::lastPlayedChanged);
 
         this->_games.emplace_back(game);
@@ -82,7 +82,7 @@ GameManager::~GameManager() {
 }
 
 QQmlListProperty<GameInfo> GameManager::games() {
-    return QQmlListProperty(this, &this->_games);
+    return {this, &this->_games};
 }
 
 QVariant GameManager::currentGameRunning() const {
@@ -165,11 +165,28 @@ void GameManager::addGame(
 QVariantMap GameManager::getProtonInstallations() {
     QVariantMap proton;
 
-    QDir steam = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation);
-    steam.cd(QStringLiteral("Steam"));
+    QFileInfoList protonInstallations;
+    QStringList dataLocations =
+            QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation);
 
-    QDir compatTools = steam.filePath(QStringLiteral("compatibilitytools.d"));
-    for (const QFileInfo &possibleInstall : compatTools.entryInfoList(QDir::Dirs)) {
+    for (const QDir dataLocation : dataLocations) {
+        QDir steamData;
+        if (dataLocation.exists(QStringLiteral("Steam"))) {
+            steamData = dataLocation.filePath(QStringLiteral("Steam"));
+        } else if (dataLocation.exists(QStringLiteral("steam"))) {
+            steamData = dataLocation.filePath(QStringLiteral("steam"));
+        } else {
+            continue;
+        }
+
+        QDir compatTools = steamData.filePath(QStringLiteral("compatibilitytools.d"));
+        protonInstallations.append(compatTools.entryInfoList(QDir::Dirs));
+    }
+
+    QDir userSteamData = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation);
+    userSteamData.cd(QStringLiteral("Steam"));
+
+    for (const QFileInfo &possibleInstall : protonInstallations) {
         QFileInfo protonFile(QDir(possibleInstall.filePath()).filePath(QStringLiteral("proton")));
 
         if (!protonFile.exists() || !protonFile.isExecutable()) {
@@ -179,9 +196,8 @@ QVariantMap GameManager::getProtonInstallations() {
         proton.insert(possibleInstall.fileName(), protonFile.filePath());
     }
 
-    QDir steamCommon = steam.filePath(QStringLiteral("steamapps/common"));
-
-    for (const QFileInfo &possibleInstall : steamCommon.entryInfoList(QDir::Dirs)) {
+    const QDir steamAppCommon = userSteamData.filePath(QStringLiteral("steamapps/common"));
+    for (const QFileInfo &possibleInstall : steamAppCommon.entryInfoList(QDir::Dirs)) {
         QFileInfo protonFile(QDir(possibleInstall.filePath()).filePath(QStringLiteral("proton")));
         if (!protonFile.exists() || !protonFile.isExecutable()) {
             continue;
