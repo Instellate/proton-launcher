@@ -130,6 +130,17 @@ Kirigami.ScrollablePage {
                         }
                     }
                 }
+
+                TapHandler {
+                    acceptedButtons: Qt.RightButton
+
+                    onTapped: gameContextMenu.open()
+                }
+
+                GameContextMenu {
+                    id: gameContextMenu
+                    game: card.game
+                }
             }
         }
     }
