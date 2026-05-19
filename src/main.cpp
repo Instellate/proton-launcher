@@ -81,8 +81,16 @@ int main(int argc, char *argv[]) {
     KLocalization::setupLocalizedContext(&engine);
 
     KCrash::initialize();
+
     QCommandLineParser parser;
+
+    QCommandLineOption disableTrayOpt(
+            QStringList() << QStringLiteral("t") << QStringLiteral("disable-tray"));
+    disableTrayOpt.setDescription(QStringLiteral("Disables the system tray"));
+    parser.addOption(disableTrayOpt);
+
     about.setupCommandLine(&parser);
+
     parser.process(app);
     about.processCommandLine(&parser);
 
@@ -93,7 +101,9 @@ int main(int argc, char *argv[]) {
         return -1;
     }
 
-    SystemTray tray(&engine, &service);
+    if (!parser.isSet(disableTrayOpt)) {
+        new SystemTray(&engine, &service);
+    }
 
     return QApplication::exec();
 }

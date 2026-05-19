@@ -60,6 +60,25 @@ KSettings.ConfigurationView {
                 description: root.game.prefixLocation
                 url: "file://" + root.game.prefixLocation
             }
+
+            FormCard.FormButtonDelegate {
+                text: KI18n.i18nc("@action:label", "Change Prefix Location")
+                onClicked: prefixFileDialog.open()
+            }
+
+            FileDialog {
+                id: prefixFileDialog
+
+                fileMode: FileDialog.OpenFile
+                selectedFile: "file://" + root.game.prefixLocation
+
+                onAccepted: {
+                    const fileUrl = new URL(prefixFileDialog.selectedFile);
+                    if (fileUrl.protocol === "file:") {
+                        root.game.prefixLocation = fileUrl.pathname;
+                    }
+                }
+            }
         }
 
         FormCard.FormHeader {
@@ -81,16 +100,16 @@ KSettings.ConfigurationView {
 
             FormCard.FormButtonDelegate {
                 text: KI18n.i18nc("@action:label", "Change Executable Location")
-                onClicked: fileDialog.open()
+                onClicked: execFileDialog.open()
             }
 
             FileDialog {
-                id: fileDialog
+                id: execFileDialog
                 fileMode: FileDialog.OpenFile
                 selectedFile: "file://" + root.game.executableLocation
 
                 onAccepted: {
-                    const fileUrl = new URL(selectedFile);
+                    const fileUrl = new URL(execFileDialog.selectedFile);
                     if (fileUrl.protocol === "file:") {
                         root.game.executableLocation = fileUrl.pathname;
                     }

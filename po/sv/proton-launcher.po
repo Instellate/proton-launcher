@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: https://github.com/Instellate/proton-launcher/issues\n"
-"POT-Creation-Date: 2026-04-10 09:42+0200\n"
+"POT-Creation-Date: 2026-05-19 09:49+0200\n"
 "PO-Revision-Date: 2026-04-10 07:59+0000\n"
 "Last-Translator: Instellate <thecrazyrobots@gmail.com>\n"
 "Language-Team: Swedish <https://weblate.instellate.xyz/projects/proton-"
@@ -149,11 +149,11 @@ msgctxt "@label"
 msgid "Launch Arguments"
 msgstr "Start Argument"
 
-#: qml/GameSettingsGeneralPage.qml:96 qml/Settings.qml:58
+#: qml/GameSettingsGeneralPage.qml:96 qml/Settings.qml:62
 msgid "%command% will be substituted with the run command"
 msgstr "%command% kommer bli substituerad med start kommandot"
 
-#: qml/GameSettings.qml:32 qml/Settings.qml:137
+#: qml/GameSettings.qml:32 qml/Settings.qml:184
 msgctxt "@action:button"
 msgid "General"
 msgstr "Generellt"
@@ -173,17 +173,23 @@ msgctxt "@action:button"
 msgid "Prefix Folder"
 msgstr "Prefix Mapp"
 
-#: qml/GameSettings.qml:66
+#: qml/GameSettings.qml:65
+#, fuzzy
+msgctxt "@action:label"
+msgid "Change Prefix Location"
+msgstr "Prefix Plats"
+
+#: qml/GameSettings.qml:85
 msgctxt "@title:section"
 msgid "Executable Location"
 msgstr "Exekverbarfil plats"
 
-#: qml/GameSettings.qml:71
+#: qml/GameSettings.qml:90
 msgctxt "@action:button:open-executable-folder"
 msgid "Executable File"
 msgstr "Exekvirbarfil"
 
-#: qml/GameSettings.qml:83
+#: qml/GameSettings.qml:102
 msgctxt "@action:label"
 msgid "Change Executable Location"
 msgstr "Ändra Exekverbarfil Plats"
@@ -231,40 +237,56 @@ msgstr "Stoppa spel"
 msgid "You haven't played any games yet"
 msgstr "Du har inte spelat några spel än"
 
-#: qml/Settings.qml:28
+#: qml/Settings.qml:30
 msgctxt "@title:section"
 msgid "Game Launch"
 msgstr "Spel startning"
 
-#: qml/Settings.qml:33
+#: qml/Settings.qml:36
 msgctxt "@label"
 msgid "Default Proton version"
 msgstr "Standard Proton version"
 
-#: qml/Settings.qml:57
+#: qml/Settings.qml:61
 msgctxt "@label"
 msgid "Default Launch Arguments"
 msgstr "Standard Start Argument"
 
-#: qml/Settings.qml:74
+#: qml/Settings.qml:79
 msgctxt "@action:description:Amount downloaded"
 msgid "%1 out of %2 downloaded"
 msgstr "%1 ut av %2 nedladdat"
 
-#: qml/Settings.qml:78
+#: qml/Settings.qml:83
 msgctxt "@action:description:Extracting ProtonGE"
 msgid "Extracting files from archive"
 msgstr "Extraherar filer from arkivet"
 
-#: qml/Settings.qml:82
+#: qml/Settings.qml:87
 msgctxt "@action:description"
 msgid "Already on latest version %1"
 msgstr "Redan på senaste version %1"
 
-#: qml/Settings.qml:88
+#: qml/Settings.qml:93
 msgctxt "@action:button"
 msgid "Download latest ProtonGE version"
 msgstr "Ladda ner senaste ProtonGE version"
+
+#: qml/Settings.qml:126
+#, fuzzy
+msgctxt "@title:section"
+msgid "Proton Installations"
+msgstr "Proton Version"
+
+#: qml/Settings.qml:134
+msgctxt "@action:add-proton-installation"
+msgid "Add a new folder containing Proton installations"
+msgstr ""
+
+#: qml/Settings.qml:147
+msgctxt "@action:remove-proton-installation"
+msgid "Press a path to remove it"
+msgstr ""
 
 #: src/main.cpp:59
 msgid ""

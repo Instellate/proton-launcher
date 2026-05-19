@@ -183,6 +183,11 @@ QVariantMap GameManager::getProtonInstallations() {
         protonInstallations.append(compatTools.entryInfoList(QDir::Dirs));
     }
 
+    const QStringList additionalPaths = Config::protonInstallationPaths();
+    for (const QString &additionalPath : additionalPaths) {
+        protonInstallations.append(QDir(additionalPath).entryInfoList(QDir::Dirs));
+    }
+
     QDir userSteamData = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation);
     userSteamData.cd(QStringLiteral("Steam"));
 
@@ -213,7 +218,7 @@ void GameManager::saveSettings() {
     Config::self()->save();
 }
 
-void GameManager::removeGame(const QString &gameId, bool removeGameFolder) {
+void GameManager::removeGame(const QString &gameId, const bool removeGameFolder) {
     qsizetype size = 0;
     const GameInfo *game = nullptr;
 

@@ -13,7 +13,9 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>
 
+import QtCore
 import QtQml
+import QtQuick
 import org.kde.ki18n
 import org.kde.kirigamiaddons.settings as KSettings
 import org.kde.kirigamiaddons.formcard as FormCard
@@ -27,6 +29,7 @@ KSettings.ConfigurationView {
         FormCard.FormHeader {
             title: KI18n.i18nc("@title:section", "Game Launch")
         }
+
         FormCard.FormCard {
             FormCard.FormComboBoxDelegate {
                 model: proxyModel
@@ -53,6 +56,7 @@ KSettings.ConfigurationView {
                     Config.defaultProtonVersion = currentValue;
                 }
             }
+
             FormCard.FormTextFieldDelegate {
                 label: KI18n.i18nc("@label", "Default Launch Arguments")
                 placeholderText: KI18n.i18n("%command% will be substituted with the run command")
@@ -60,6 +64,7 @@ KSettings.ConfigurationView {
 
                 onTextChanged: Config.defaultLaunchArguments = text
             }
+
             FormCard.FormButtonDelegate {
                 id: protonGeVersion
 
@@ -89,6 +94,7 @@ KSettings.ConfigurationView {
 
                 onClicked: downloader.getProtonGeVersion()
             }
+
             ProtonDownloader {
                 id: downloader
 
@@ -103,6 +109,7 @@ KSettings.ConfigurationView {
                     }
                 }
             }
+
             DownloadProtonDialog {
                 id: downloadProtonGe
 
@@ -114,9 +121,49 @@ KSettings.ConfigurationView {
                 }
             }
         }
+
+        FormCard.FormHeader {
+            title: KI18n.i18nc("@title:section", "Proton Installations")
+            
+        }
+
+        FormCard.FormCard {
+            FormCard.FormFolderDelegate {
+                id: addProtonInstallation
+
+                label: KI18n.i18nc("@action:add-proton-installation", "Add a new folder containing Proton installations")
+                currentFolder: StandardPaths.writableLocation(StandardPaths.HomeLocation)
+
+                onAccepted: {
+                    const fileUrl = new URL(addProtonInstallation.selectedFolder);
+                    if (fileUrl.protocol === "file:") {
+                        Config.protonInstallationPaths.push(fileUrl.pathname);
+                    }
+                }
+            }
+
+            FormCard.FormSectionText {
+                visible: Config.protonInstallationPaths.length > 0
+                text: KI18n.i18nc("@action:remove-proton-installation", "Press a path to remove it")
+            }
+
+            Repeater {
+                model: Config.protonInstallationPaths
+
+                FormCard.FormButtonDelegate {
+                    required property string modelData
+                    required property int index
+
+                    text: modelData
+                    onClicked: Config.protonInstallationPaths.splice(index, 1)
+                }
+            }
+        }
+
         ListModel {
             id: protonVersionsModel
         }
+
         SortFilterProxyModel {
             id: proxyModel
 

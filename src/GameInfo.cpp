@@ -274,7 +274,7 @@ void GameInfo::start() {
         protonExecutable = GameManager::getProtonInstallations().first().toString();
         qDebug() << "Using whatever proton version we can find:" << protonExecutable;
     }
-    QString protonPath = QFileInfo(protonExecutable).absolutePath();
+    const QString protonPath = QFileInfo(protonExecutable).absolutePath();
 
     this->_gameProcess = new QProcess(this);
     QProcessEnvironment environment = QProcessEnvironment::systemEnvironment();

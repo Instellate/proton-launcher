@@ -32,7 +32,7 @@ void Database::initialize() {
     }
 
     genericConfig.cd(QStringLiteral("proton-launcher"));
-    QString databasePath = genericConfig.filePath(QStringLiteral("proton-launcher.db"));
+    const QString databasePath = genericConfig.filePath(QStringLiteral("proton-launcher.db"));
     auto database = QSqlDatabase::addDatabase(QStringLiteral("QSQLITE"));
 
     database.setDatabaseName(databasePath);
@@ -50,7 +50,7 @@ void Database::initialize() {
         set.insert(id);
     }
 
-    QDir migrationsDir(QStringLiteral(":/resources/migrations"));
+    const QDir migrationsDir(QStringLiteral(":/resources/migrations"));
     QFileInfoList migrations = migrationsDir.entryInfoList();
     for (const QFileInfo &migration : migrations) {
         QString migrationName = migration.fileName();

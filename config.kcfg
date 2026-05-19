@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
@@ -7,8 +7,13 @@
         <entry name="DefaultProtonVersion" type="String">
             <label>The default proton version used unless specified otherwise.</label>
         </entry>
+
         <entry name="DefaultLaunchArguments" type="String">
             <label>The default launch arguments used for a game unless specified otherwise.</label>
+        </entry>
+
+        <entry name="ProtonInstallationPaths" type="PathList">
+            <label>Additional paths used when looking for Proton installations.</label>
         </entry>
     </group>
 </kcfg>
